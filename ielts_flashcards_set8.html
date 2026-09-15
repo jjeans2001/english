@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 8</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'chemistry', name:'เคมี-วัสดุศาสตร์', color:'#2E6B6B', light:'#DCE9E9'},
+  {id:'compsci', name:'วิทยาการคอมพิวเตอร์-การเขียนโปรแกรม', color:'#3F5C8A', light:'#DEE5EF'},
+  {id:'geography', name:'ภูมิศาสตร์-การทำแผนที่', color:'#4A7A5C', light:'#E1EDE3'},
+  {id:'music', name:'ทฤษฎีดนตรี-การแสดง', color:'#8A4A6B', light:'#EDE0E7'},
+  {id:'nutrition', name:'โภชนาการ-อาหารศาสตร์', color:'#6B8A3F', light:'#E7EDDC'},
+  {id:'insurance', name:'ประกันภัย-การบริหารความเสี่ยง', color:'#5C4A3F', light:'#E7E2DC'},
+];
+
+const vocab = [
+
+// ============ CHEMISTRY & MATERIALS SCIENCE (25) ============
+{cat:'chemistry',w:'compound',pos:'n.',en:'a substance made of two or more elements chemically joined together',th:'สารประกอบ',use:'ใช้กับ chemical, form a',ex:['Water is a chemical compound.','Scientists formed a new compound.','This organic compound is widely used in the production of plastics.']},
+{cat:'chemistry',w:'element',pos:'n.',en:'a pure chemical substance consisting of one type of atom',th:'ธาตุ',use:'ใช้กับ chemical, periodic table',ex:['Oxygen is a chemical element.','The periodic table lists all elements.','Each element has a unique number of protons in its atomic nucleus.']},
+{cat:'chemistry',w:'reaction',pos:'n.',en:'a process in which substances interact to form new substances',th:'ปฏิกิริยาเคมี',use:'ใช้กับ chemical, trigger',ex:['The chemical reaction produced heat.','Light can trigger a reaction.','The reaction between the two chemicals released a large amount of energy.']},
+{cat:'chemistry',w:'solvent',pos:'n.',en:'a substance that dissolves another substance to form a solution',th:'ตัวทำละลาย',use:'ใช้กับ organic, use as',ex:['Water is a common solvent.','They used an organic solvent.','The paint requires a strong solvent to remove it completely from surfaces.']},
+{cat:'chemistry',w:'solute',pos:'n.',en:'a substance that is dissolved in a solvent to form a solution',th:'ตัวถูกละลาย',use:'ใช้กับ dissolve, concentration of',ex:['Salt is the solute in seawater.','The solute dissolved completely.','Increasing the concentration of solute changes the solution’s properties.']},
+{cat:'chemistry',w:'concentration',pos:'n.',en:'the amount of a substance present in a given volume of solution',th:'ความเข้มข้น',use:'ใช้กับ measure, high',ex:['They measured the solution’s concentration.','A high concentration can be dangerous.','Scientists carefully adjusted the concentration to achieve the desired reaction.']},
+{cat:'chemistry',w:'atom',pos:'n.',en:'the smallest unit of a chemical element that retains its properties',th:'อะตอม',use:'ใช้กับ structure of, split',ex:['Every atom has a nucleus.','Scientists learned to split the atom.','The structure of an atom includes protons, neutrons, and electrons.']},
+{cat:'chemistry',w:'chemical bond',pos:'phrase',en:'the force that holds atoms together within a molecule',th:'พันธะเคมี',use:'ใช้กับ form, break',ex:['Atoms form a chemical bond.','Heat can break a chemical bond.','A strong chemical bond makes the compound highly stable.']},
+{cat:'chemistry',w:'acid',pos:'n.',en:'a substance that reacts with a base and typically has a sour taste and low pH',th:'กรด',use:'ใช้กับ strong, neutralize',ex:['Lemon juice contains acid.','They neutralized the acid.','Strong acid can cause severe burns if it comes into contact with skin.']},
+{cat:'chemistry',w:'alkali',pos:'n.',en:'a substance with a pH greater than 7 that neutralizes acids',th:'ด่าง',use:'ใช้กับ strong, react with',ex:['Soap is a mild alkali.','The alkali reacted with the acid.','Mixing a strong alkali with acid produces a neutralization reaction.']},
+{cat:'chemistry',w:'pH level',pos:'phrase',en:'a measure of how acidic or alkaline a solution is',th:'ระดับพีเอช',use:'ใช้กับ measure, neutral',ex:['They measured the pH level.','A neutral pH level is 7.','Farmers regularly test the soil’s pH level to ensure healthy crop growth.']},
+{cat:'chemistry',w:'corrosion',pos:'n.',en:'the gradual destruction of a material, especially metal, caused by chemical reactions',th:'การกัดกร่อน',use:'ใช้กับ prevent, cause',ex:['Rust is a form of corrosion.','Paint helps prevent corrosion.','Saltwater significantly accelerates corrosion in metal structures.']},
+{cat:'chemistry',w:'alloy',pos:'n.',en:'a metal made by combining two or more metallic elements',th:'โลหะผสม',use:'ใช้กับ create, strong',ex:['Bronze is an alloy of copper and tin.','Engineers created a stronger alloy.','This lightweight alloy is widely used in aircraft manufacturing.']},
+{cat:'chemistry',w:'polymer',pos:'n.',en:'a large molecule made up of many repeated smaller units',th:'พอลิเมอร์',use:'ใช้กับ synthetic, develop',ex:['Plastic is made from polymers.','Scientists developed a new polymer.','This synthetic polymer is both flexible and resistant to heat.']},
+{cat:'chemistry',w:'composite material',pos:'phrase',en:'a material made by combining two or more distinct substances to create improved properties',th:'วัสดุผสม',use:'ใช้กับ develop, lightweight',ex:['The frame uses a composite material.','Engineers developed a lightweight composite material.','Composite materials combine the strength of one substance with the flexibility of another.']},
+{cat:'chemistry',w:'conductivity',pos:'n.',en:'the ability of a material to allow electricity or heat to pass through it',th:'สภาพนำไฟฟ้า/นำความร้อน',use:'ใช้กับ electrical, high',ex:['Copper has high electrical conductivity.','They measured the material’s conductivity.','Scientists are researching materials with even higher thermal conductivity.']},
+{cat:'chemistry',w:'insulation',pos:'n.',en:'a material used to prevent the transfer of heat, electricity, or sound',th:'ฉนวน',use:'ใช้กับ thermal, install',ex:['The walls have thermal insulation.','They installed better insulation.','Proper insulation significantly reduces a building’s overall energy consumption.']},
+{cat:'chemistry',w:'density',pos:'n.',en:'the mass of a substance per unit volume',th:'ความหนาแน่น',use:'ใช้กับ measure, high',ex:['Gold has a high density.','Scientists measured the material’s density.','Materials with low density are often preferred for aircraft construction.']},
+{cat:'chemistry',w:'viscosity',pos:'n.',en:'the thickness or resistance of a liquid to flow',th:'ความหนืด',use:'ใช้กับ measure, high',ex:['Honey has a high viscosity.','Engineers measured the oil’s viscosity.','Temperature significantly affects the viscosity of most liquids.']},
+{cat:'chemistry',w:'crystalline',pos:'adj.',en:'having the regular, repeating structure of a crystal',th:'เป็นผลึก',use:'ใช้กับ structure, form',ex:['Salt has a crystalline structure.','The mineral forms crystalline shapes.','The material’s crystalline structure gives it remarkable strength.']},
+{cat:'chemistry',w:'oxidation',pos:'n.',en:'a chemical reaction in which a substance combines with oxygen',th:'ปฏิกิริยาออกซิเดชัน',use:'ใช้กับ cause, prevent',ex:['Oxidation causes metal to rust.','They coated the metal to prevent oxidation.','Oxidation gradually weakens the structural strength of exposed metal.']},
+{cat:'chemistry',w:'reactive',pos:'adj.',en:'likely to react chemically with other substances',th:'ว่องไวต่อปฏิกิริยา',use:'ใช้กับ highly, chemically',ex:['Sodium is highly reactive.','The gas is chemically reactive.','Highly reactive substances must be stored under strict safety conditions.']},
+{cat:'chemistry',w:'tensile strength',pos:'phrase',en:'the maximum stress a material can withstand while being stretched before breaking',th:'ความแข็งแรงต่อแรงดึง',use:'ใช้กับ test, high',ex:['Engineers tested the tensile strength.','The cable has high tensile strength.','Materials with greater tensile strength are essential for suspension bridges.']},
+{cat:'chemistry',w:'malleable',pos:'adj.',en:'(of a material) able to be shaped or bent without breaking',th:'สามารถตีให้เป็นแผ่นได้/ยืดหยุ่น',use:'ใช้กับ metal, highly',ex:['Gold is a highly malleable metal.','The material remains malleable when heated.','Malleable metals can be hammered into thin sheets without cracking.']},
+{cat:'chemistry',w:'brittle',pos:'adj.',en:'hard but easily broken or shattered',th:'เปราะ/แตกหักง่าย',use:'ตรงข้ามกับ malleable',ex:['Glass is brittle when cold.','The old plastic became brittle.','Brittle materials tend to crack suddenly rather than bend under stress.']},
+
+// ============ COMPUTER SCIENCE & PROGRAMMING (25) ============
+{cat:'compsci',w:'software',pos:'n.',en:'programs and instructions that run on a computer',th:'ซอฟต์แวร์',use:'ใช้กับ install, update',ex:['They installed new software.','The software needs an update.','The company develops software used by millions of people worldwide.']},
+{cat:'compsci',w:'hardware',pos:'n.',en:'the physical components of a computer system',th:'ฮาร์ดแวร์',use:'ใช้กับ upgrade, faulty',ex:['They upgraded the hardware.','Faulty hardware caused the crash.','Modern hardware allows software to run significantly faster than before.']},
+{cat:'compsci',w:'code',pos:'n./v.',en:'instructions written in a programming language; to write such instructions',th:'โค้ดโปรแกรม/เขียนโค้ด',use:'ใช้กับ write, review',ex:['She writes code every day.','They reviewed the code carefully.','Clean, well-organized code is much easier for other developers to maintain.']},
+{cat:'compsci',w:'debug',pos:'v.',en:'to find and fix errors in computer code',th:'แก้ไขข้อผิดพลาดในโปรแกรม',use:'ใช้กับ code, spend hours',ex:['He debugged the program.','They spent hours debugging the code.','Debugging complex software can take far longer than writing it in the first place.']},
+{cat:'compsci',w:'compile',pos:'v.',en:'to convert programming code into a form a computer can execute',th:'คอมไพล์ (แปลงโค้ดเป็นภาษาเครื่อง)',use:'ใช้กับ program, fail to',ex:['The program failed to compile.','They compiled the new code.','A single missing symbol can cause the entire program to fail to compile.']},
+{cat:'compsci',w:'function',pos:'n.',en:'a block of code designed to perform a specific task',th:'ฟังก์ชัน (ในโปรแกรม)',use:'ใช้กับ call, define',ex:['The program calls a function.','She defined a new function.','Breaking code into small functions makes it much easier to test and reuse.']},
+{cat:'compsci',w:'database',pos:'n.',en:'an organized collection of data stored and accessed electronically',th:'ฐานข้อมูล',use:'ใช้กับ store in, query',ex:['Customer records are stored in a database.','They queried the database.','A well-designed database allows information to be retrieved quickly and reliably.']},
+{cat:'compsci',w:'server',pos:'n.',en:'a computer or system that provides data or services to other computers',th:'เซิร์ฟเวอร์',use:'ใช้กับ crash, host on',ex:['The server crashed overnight.','The website is hosted on a server.','High traffic overwhelmed the server, causing the website to go offline.']},
+{cat:'compsci',w:'open-source',pos:'adj.',en:'(of software) with its source code freely available for anyone to use or modify',th:'โอเพนซอร์ส (โค้ดเปิดเผยให้ใช้และแก้ไขได้)',use:'ใช้กับ software, project',ex:['The project is open-source.','Many developers contribute to open-source software.','Open-source software allows anyone to review, modify, and improve the code.']},
+{cat:'compsci',w:'framework',pos:'n.',en:'a pre-built structure of code that provides a foundation for developing software',th:'เฟรมเวิร์ก (โครงสร้างพื้นฐานสำหรับพัฒนาซอฟต์แวร์)',use:'ใช้กับ use, popular',ex:['Developers use a popular framework.','The framework speeds up development.','Choosing the right framework can significantly speed up software development.']},
+{cat:'compsci',w:'programming language',pos:'phrase',en:'a formal language used to write instructions that a computer can execute',th:'ภาษาโปรแกรม',use:'ใช้กับ learn, popular',ex:['She learned a new programming language.','Python is a popular programming language.','Each programming language has its own strengths depending on the task.']},
+{cat:'compsci',w:'backend',pos:'n.',en:'the part of a software system that handles data processing, usually invisible to users',th:'ระบบหลังบ้าน (ส่วนประมวลผลข้อมูล)',use:'ใช้กับ develop, manage',ex:['He develops the backend.','The backend manages all user data.','The backend handles requests from the app before sending back a response.']},
+{cat:'compsci',w:'frontend',pos:'n.',en:'the part of a software system that users interact with directly',th:'ส่วนหน้าบ้าน (ส่วนติดต่อผู้ใช้)',use:'ใช้กับ design, build',ex:['She designs the frontend.','They built a clean frontend.','A well-designed frontend makes the app easier and more enjoyable to use.']},
+{cat:'compsci',w:'API',pos:'n.',en:'a set of rules that allows different software applications to communicate with each other',th:'เอพีไอ (ส่วนต่อประสานโปรแกรมประยุกต์)',use:'ใช้กับ integrate, use',ex:['The app uses a weather API.','Developers integrate the API.','The company published an API so other developers could connect to its platform.']},
+{cat:'compsci',w:'version control',pos:'phrase',en:'a system that tracks and manages changes to code over time',th:'ระบบควบคุมเวอร์ชัน',use:'ใช้กับ use, system',ex:['Teams use version control.','The version control system tracks changes.','Version control allows multiple developers to work on the same project without conflicts.']},
+{cat:'compsci',w:'bug',pos:'n.',en:'an error or flaw in software that causes it to behave unexpectedly',th:'ข้อผิดพลาดในซอฟต์แวร์',use:'ใช้กับ fix, find',ex:['They found a software bug.','The team fixed the bug quickly.','A single small bug can sometimes cause an entire application to crash.']},
+{cat:'compsci',w:'patch',pos:'n.',en:'a piece of software designed to fix or update a program',th:'แพตช์ (โปรแกรมแก้ไข/อัปเดต)',use:'ใช้กับ release, install',ex:['The company released a patch.','Users installed the security patch.','The security patch fixed a serious vulnerability in the software.']},
+{cat:'compsci',w:'source code',pos:'phrase',en:'the original text of a computer program, written by a programmer',th:'ซอร์สโค้ด',use:'ใช้กับ access, modify',ex:['Developers access the source code.','They modified the source code.','Reviewing the source code helped engineers identify the security flaw.']},
+{cat:'compsci',w:'software development',pos:'phrase',en:'the process of designing, creating, and maintaining computer programs',th:'การพัฒนาซอฟต์แวร์',use:'ใช้กับ process, career in',ex:['She has a career in software development.','Software development takes time.','Agile software development allows teams to release updates more frequently.']},
+{cat:'compsci',w:'iteration',pos:'n.',en:'a single cycle of repeated development or testing, refining a product over time',th:'รอบการพัฒนา/การทำซ้ำ',use:'ใช้กับ each, complete',ex:['Each iteration improved the product.','They completed several iterations.','The team refined the design through multiple rounds of testing and iteration.']},
+{cat:'compsci',w:'software engineer',pos:'phrase',en:'a professional who designs, builds, and maintains computer software',th:'วิศวกรซอฟต์แวร์',use:'ใช้กับ work as, hire',ex:['She works as a software engineer.','The company hired more software engineers.','Software engineers work closely with designers to build reliable applications.']},
+{cat:'compsci',w:'cloud computing',pos:'phrase',en:'the delivery of computing services, such as storage, over the internet',th:'การประมวลผลแบบคลาวด์',use:'ใช้กับ rely on, adopt',ex:['Companies rely on cloud computing.','They adopted cloud computing services.','Cloud computing allows businesses to scale their systems without owning physical servers.']},
+{cat:'compsci',w:'firmware',pos:'n.',en:'permanent software programmed into a hardware device’s memory',th:'เฟิร์มแวร์',use:'ใช้กับ update, install',ex:['They updated the device’s firmware.','Firmware controls basic hardware functions.','Manufacturers regularly release firmware updates to fix bugs and improve performance.']},
+{cat:'compsci',w:'runtime',pos:'n.',en:'the period during which a program is running',th:'ช่วงเวลาที่โปรแกรมกำลังทำงาน',use:'ใช้กับ error, reduce',ex:['The program crashed at runtime.','They reduced the runtime significantly.','A runtime error occurred because the program tried to divide by zero.']},
+{cat:'compsci',w:'compiler',pos:'n.',en:'a program that translates code written in one language into another, usually machine code',th:'ตัวแปลโปรแกรม',use:'ใช้กับ use, error from',ex:['The compiler translates the code.','An error from the compiler stopped the build.','The compiler checks the code for errors before converting it into an executable program.']},
+
+// ============ GEOGRAPHY & CARTOGRAPHY (25) ============
+{cat:'geography',w:'topography',pos:'n.',en:'the physical features of an area, including its shape and elevation',th:'ภูมิประเทศ',use:'ใช้กับ study, rugged',ex:['Scientists study the region’s topography.','The topography is rugged and mountainous.','Detailed topography maps help engineers plan roads through difficult terrain.']},
+{cat:'geography',w:'terrain',pos:'n.',en:'the physical features of a stretch of land',th:'ภูมิประเทศ/พื้นที่',use:'ใช้กับ rugged, difficult',ex:['The terrain was rugged.','Hikers faced difficult terrain.','Off-road vehicles are designed to handle rough and uneven terrain.']},
+{cat:'geography',w:'elevation',pos:'n.',en:'the height of a place above sea level',th:'ระดับความสูง',use:'ใช้กับ high, measure',ex:['The city sits at a high elevation.','They measured the mountain’s elevation.','Plants adapt differently depending on the elevation of their environment.']},
+{cat:'geography',w:'latitude',pos:'n.',en:'the distance of a place north or south of the equator, measured in degrees',th:'เส้นละติจูด',use:'ใช้กับ measure, high',ex:['The ship’s latitude was recorded.','High latitude regions are cold.','Sailors once used the stars to estimate their latitude at sea.']},
+{cat:'geography',w:'longitude',pos:'n.',en:'the distance of a place east or west of a standard reference meridian, measured in degrees',th:'เส้นลองจิจูด',use:'ใช้กับ measure, determine',ex:['They calculated the ship’s longitude.','Longitude determines time zones.','Accurate measurement of longitude was historically a major navigational challenge.']},
+{cat:'geography',w:'equator',pos:'n.',en:'an imaginary line around the Earth, equally distant from both poles',th:'เส้นศูนย์สูตร',use:'ใช้กับ near the, cross',ex:['The country lies near the equator.','The ship crossed the equator.','Countries near the equator generally experience hot, humid climates year-round.']},
+{cat:'geography',w:'hemisphere',pos:'n.',en:'one half of the Earth, usually divided by the equator or a meridian',th:'ซีกโลก',use:'ใช้กับ northern, southern',ex:['Winter comes early in the northern hemisphere.','They studied the southern hemisphere.','Seasons in the northern and southern hemisphere occur at opposite times of year.']},
+{cat:'geography',w:'cartography',pos:'n.',en:'the science and practice of making maps',th:'การทำแผนที่',use:'ใช้กับ study, modern',ex:['She studies cartography.','Modern cartography relies on satellites.','Advances in cartography have made maps dramatically more accurate over time.']},
+{cat:'geography',w:'contour line',pos:'phrase',en:'a line on a map connecting points of equal elevation',th:'เส้นชั้นความสูง',use:'ใช้กับ read, mark',ex:['Hikers read the contour lines.','The map marks contour lines clearly.','Closely spaced contour lines indicate a particularly steep section of terrain.']},
+{cat:'geography',w:'scale',pos:'n.',en:'the ratio between distances on a map and actual distances on the ground',th:'มาตราส่วนแผนที่',use:'ใช้กับ map, large',ex:['The map has a small scale.','They used a large-scale map.','Understanding the map’s scale is essential for accurately estimating real distances.']},
+{cat:'geography',w:'projection',pos:'n.',en:'a method of representing the curved surface of the Earth on a flat map',th:'การฉายภาพแผนที่',use:'ใช้กับ map, distort',ex:['The map uses a different projection.','Every projection distorts something.','No single map projection can perfectly represent both accurate size and shape.']},
+{cat:'geography',w:'plateau',pos:'n.',en:'an area of relatively flat, elevated land',th:'ที่ราบสูง',use:'ใช้กับ vast, form a',ex:['They crossed a vast plateau.','Erosion helped form the plateau.','The plateau offers dramatic views of the surrounding lowlands.']},
+{cat:'geography',w:'peninsula',pos:'n.',en:'a piece of land almost surrounded by water, connected to the mainland',th:'คาบสมุทร',use:'ใช้กับ narrow, extend',ex:['Florida is a peninsula.','The peninsula extends into the sea.','The peninsula’s coastline stretches for hundreds of kilometers.']},
+{cat:'geography',w:'archipelago',pos:'n.',en:'a group of many islands scattered in a body of water',th:'หมู่เกาะ',use:'ใช้กับ visit, form a',ex:['They visited the archipelago.','Volcanic activity formed the archipelago.','The archipelago consists of thousands of small, scattered islands.']},
+{cat:'geography',w:'isthmus',pos:'n.',en:'a narrow strip of land connecting two larger landmasses',th:'คอคอด',use:'ใช้กับ narrow, cross',ex:['They crossed the narrow isthmus.','The isthmus links two continents.','The canal was built across a narrow isthmus to connect the two oceans.']},
+{cat:'geography',w:'delta',pos:'n.',en:'a landform created where a river deposits sediment as it meets a larger body of water',th:'ดินดอนสามเหลี่ยมปากแม่น้ำ',use:'ใช้กับ river, fertile',ex:['The river delta is very fertile.','They studied the Nile delta.','River deltas often support dense populations due to their fertile soil.']},
+{cat:'geography',w:'basin',pos:'n.',en:'an area of land drained by a river and its tributaries',th:'ลุ่มน้ำ',use:'ใช้กับ river, drain',ex:['The Amazon basin is enormous.','Rainfall drains into the basin.','The entire river basin depends on seasonal rainfall for its water supply.']},
+{cat:'geography',w:'watershed',pos:'n.',en:'an area of land that drains rainfall and other water into a particular river or lake',th:'พื้นที่ลุ่มน้ำ (แหล่งรวมน้ำ)',use:'ใช้กับ protect, manage',ex:['They worked to protect the watershed.','The watershed supplies the city’s water.','Deforestation within a watershed can significantly increase the risk of flooding downstream.']},
+{cat:'geography',w:'GPS',pos:'n.',en:'a satellite-based system used to determine a precise location on Earth',th:'ระบบระบุตำแหน่งบนโลก',use:'ใช้กับ use, rely on',ex:['They used GPS to navigate.','The app relies on GPS.','Modern GPS technology has largely replaced traditional paper maps for navigation.']},
+{cat:'geography',w:'satellite imagery',pos:'phrase',en:'images of the Earth’s surface captured by satellites orbiting the planet',th:'ภาพถ่ายดาวเทียม',use:'ใช้กับ analyze, capture',ex:['Scientists analyze satellite imagery.','Satellite imagery captured the flooding.','Satellite imagery allows researchers to monitor deforestation across vast areas.']},
+{cat:'geography',w:'topographic map',pos:'phrase',en:'a detailed map showing the shape and elevation of terrain using contour lines',th:'แผนที่ภูมิประเทศ',use:'ใช้กับ read, use',ex:['Hikers use a topographic map.','The topographic map shows steep slopes.','A topographic map is essential for planning a safe route through mountainous terrain.']},
+{cat:'geography',w:'remote sensing',pos:'phrase',en:'the collection of information about an area from a distance, usually using satellites',th:'การสำรวจระยะไกล',use:'ใช้กับ use, technology',ex:['Scientists use remote sensing.','Remote sensing technology tracks deforestation.','Remote sensing allows researchers to monitor environmental changes without visiting the site.']},
+{cat:'geography',w:'geographic information system',pos:'phrase',en:'a computer system that stores, analyzes, and displays geographic data',th:'ระบบสารสนเทศภูมิศาสตร์',use:'ใช้กับ use, analyze with',ex:['Planners use a geographic information system.','They analyzed the data with a geographic information system.','A geographic information system helps city planners visualize population density across neighborhoods.']},
+{cat:'geography',w:'bedrock',pos:'n.',en:'the solid rock beneath the soil and loose material on the Earth’s surface',th:'ชั้นหินฐาน',use:'ใช้กับ solid, reach',ex:['The foundation rests on bedrock.','Drillers reached the bedrock.','Engineers must dig down to solid bedrock before building a tall structure.']},
+{cat:'geography',w:'landform',pos:'n.',en:'a natural feature of the Earth’s surface, such as a mountain or valley',th:'ลักษณะภูมิประเทศ',use:'ใช้กับ natural, study',ex:['Mountains are a common landform.','Geographers study different landforms.','Erosion and tectonic activity both play a role in shaping natural landforms.']},
+
+// ============ MUSIC THEORY & PERFORMANCE (25) ============
+{cat:'music',w:'melody',pos:'n.',en:'a sequence of musical notes that forms the main tune of a piece',th:'ทำนอง',use:'ใช้กับ catchy, compose',ex:['The song has a catchy melody.','She composed a beautiful melody.','A memorable melody is often what makes a song stick in people’s minds.']},
+{cat:'music',w:'harmony',pos:'n.',en:'the combination of different musical notes played or sung together',th:'เสียงประสาน',use:'ใช้กับ create, rich',ex:['The choir sang in harmony.','The chords create rich harmony.','Skilled musicians blend melody and harmony to create a fuller sound.']},
+{cat:'music',w:'rhythm',pos:'n.',en:'the pattern of beats or timing in music',th:'จังหวะ',use:'ใช้กับ steady, follow',ex:['The drummer keeps a steady rhythm.','Dancers follow the rhythm.','A strong sense of rhythm is essential for playing most percussion instruments.']},
+{cat:'music',w:'tempo',pos:'n.',en:'the speed at which a piece of music is played',th:'จังหวะความเร็วของเพลง',use:'ใช้กับ fast, slow down',ex:['The song has a fast tempo.','The conductor slowed the tempo.','Changing the tempo can completely change the mood of a piece of music.']},
+{cat:'music',w:'pitch',pos:'n.',en:'how high or low a musical note sounds',th:'ระดับเสียง',use:'ใช้กับ high, adjust',ex:['She sang at a high pitch.','The instrument’s pitch was adjusted.','A trained ear can detect even small changes in pitch during a performance.']},
+{cat:'music',w:'chord',pos:'n.',en:'a group of musical notes played together to produce harmony',th:'คอร์ด (กลุ่มโน้ตที่เล่นพร้อมกัน)',use:'ใช้กับ play a, strike',ex:['He played a simple chord.','She struck a chord on the piano.','Learning basic chords is often the first step in playing guitar.']},
+{cat:'music',w:'musical scale',pos:'phrase',en:'a sequence of musical notes arranged by pitch, used as the basis for a piece',th:'สเกลดนตรี',use:'ใช้กับ practice, major',ex:['She practices a musical scale daily.','He played a major scale.','Understanding musical scales helps musicians improvise more confidently.']},
+{cat:'music',w:'composition',pos:'n.',en:'an original piece of music written by a composer',th:'บทประพันธ์ดนตรี',use:'ใช้กับ original, complex',ex:['He wrote an original composition.','The composition is quite complex.','Her latest composition blends classical structure with modern electronic sound.']},
+{cat:'music',w:'orchestra',pos:'n.',en:'a large group of musicians who play various instruments together',th:'วงออร์เคสตรา',use:'ใช้กับ perform, conduct an',ex:['The orchestra performed beautifully.','She conducts a full orchestra.','The orchestra rehearsed for weeks before the opening night performance.']},
+{cat:'music',w:'conductor',pos:'n.',en:'a person who directs a musical performance, especially an orchestra',th:'ผู้อำนวยเพลง',use:'ใช้กับ lead, follow the',ex:['The conductor led the orchestra.','Musicians follow the conductor’s lead.','A skilled conductor keeps every musician perfectly synchronized during a performance.']},
+{cat:'music',w:'ensemble',pos:'n.',en:'a group of musicians who perform together',th:'กลุ่มนักดนตรี/วงดนตรีขนาดเล็ก',use:'ใช้กับ small, perform as',ex:['The small ensemble performed live.','They played as a jazz ensemble.','Chamber music is typically performed by a small, intimate ensemble.']},
+{cat:'music',w:'acoustic',pos:'adj.',en:'relating to sound produced without electronic amplification',th:'เสียงธรรมชาติ (ไม่ใช้ไฟฟ้าขยายเสียง)',use:'ใช้กับ guitar, performance',ex:['She played an acoustic guitar.','They gave an acoustic performance.','Acoustic performances often feel more intimate than heavily amplified concerts.']},
+{cat:'music',w:'amplify',pos:'v.',en:'to increase the volume or intensity of a sound',th:'ขยายเสียง',use:'ใช้กับ sound, electronically',ex:['Speakers amplify the sound.','The signal was amplified electronically.','The venue’s sound system amplified every note clearly throughout the hall.']},
+{cat:'music',w:'notation',pos:'n.',en:'a system of written symbols used to represent musical sounds',th:'สัญลักษณ์ทางดนตรี',use:'ใช้กับ musical, read',ex:['She reads musical notation fluently.','Musical notation varies by tradition.','Standard musical notation allows musicians from anywhere to interpret the same piece.']},
+{cat:'music',w:'dissonance',pos:'n.',en:'a combination of notes that sounds tense or unresolved',th:'เสียงที่ไม่ประสานกัน',use:'ใช้กับ create, resolve',ex:['The chord creates dissonance.','The composer resolved the dissonance.','Deliberate dissonance can add emotional tension to an otherwise calm piece.']},
+{cat:'music',w:'syncopation',pos:'n.',en:'a rhythmic technique that emphasizes beats not normally stressed',th:'จังหวะขัด (เน้นจังหวะที่ไม่ปกติ)',use:'ใช้กับ use, create',ex:['Jazz frequently uses syncopation.','The song creates syncopation.','Syncopation gives the rhythm a distinctive, off-balance energy.']},
+{cat:'music',w:'virtuoso',pos:'n.',en:'a person with exceptional skill in performing music',th:'ผู้เชี่ยวชาญด้านการแสดงดนตรี',use:'ใช้กับ renowned, considered a',ex:['She is considered a virtuoso.','The renowned virtuoso performed flawlessly.','Only a true virtuoso can perform such a technically demanding piece.']},
+{cat:'music',w:'repertoire',pos:'n.',en:'the range of pieces a musician or group is able to perform',th:'รายการเพลง/ผลงานที่แสดงได้',use:'ใช้กับ expand, extensive',ex:['He expanded his repertoire.','The pianist has an extensive repertoire.','Building a diverse repertoire takes years of consistent practice.']},
+{cat:'music',w:'cadence',pos:'n.',en:'a sequence of notes or chords that ends a musical phrase, creating a sense of resolution',th:'การจบวลีดนตรี',use:'ใช้กับ end with a, gentle',ex:['The piece ends with a cadence.','The melody used a gentle cadence.','A satisfying cadence gives listeners a clear sense that a musical phrase has ended.']},
+{cat:'music',w:'crescendo',pos:'n.',en:'a gradual increase in the loudness of music',th:'เสียงที่ค่อยๆ ดังขึ้น',use:'ใช้กับ build to a, dramatic',ex:['The music built to a crescendo.','The orchestra played a dramatic crescendo.','The symphony’s final crescendo left the audience completely captivated.']},
+{cat:'music',w:'instrumental',pos:'adj.',en:'(of music) performed using instruments only, without vocals',th:'ดนตรีบรรเลง (ไม่มีเสียงร้อง)',use:'ใช้กับ track, purely',ex:['The album includes an instrumental track.','The piece is purely instrumental.','The film’s soundtrack relies heavily on instrumental music to set the mood.']},
+{cat:'music',w:'vocal range',pos:'phrase',en:'the span of notes a singer can produce, from lowest to highest',th:'ช่วงเสียงร้อง',use:'ใช้กับ wide, extend',ex:['She has an impressive vocal range.','Training can extend vocal range.','A wide vocal range allows a singer to perform songs across many different styles.']},
+{cat:'music',w:'live performance',pos:'phrase',en:'a musical or artistic performance presented in front of an audience in real time',th:'การแสดงสด',use:'ใช้กับ deliver, attend a',ex:['She delivered an unforgettable live performance.','They attended a live performance.','A live performance carries an energy that a recorded track simply cannot replicate.']},
+{cat:'music',w:'sound engineer',pos:'phrase',en:'a technical professional responsible for recording, mixing, and balancing audio',th:'วิศวกรเสียง',use:'ใช้กับ hire, work as',ex:['They hired a sound engineer.','She works as a sound engineer.','The sound engineer carefully balanced every instrument during the live mix.']},
+{cat:'music',w:'rehearsal',pos:'n.',en:'a practice session held in preparation for a performance',th:'การซ้อม',use:'ใช้กับ attend, final',ex:['The band attended rehearsal.','They held a final rehearsal.','Weeks of rehearsal were needed before the orchestra felt fully prepared.']},
+
+// ============ NUTRITION & DIETETICS (25) ============
+{cat:'nutrition',w:'macronutrient',pos:'n.',en:'a nutrient required in large amounts, such as protein, fat, or carbohydrate',th:'สารอาหารหลัก',use:'ใช้กับ balance, essential',ex:['Protein is an essential macronutrient.','A balanced diet includes all macronutrients.','Athletes often carefully track their macronutrient intake to support training.']},
+{cat:'nutrition',w:'micronutrient',pos:'n.',en:'a nutrient required in small amounts, such as a vitamin or mineral',th:'สารอาหารรอง',use:'ใช้กับ essential, lack of',ex:['Vitamins are essential micronutrients.','A lack of micronutrients causes illness.','Micronutrient deficiencies remain a significant health issue in many developing regions.']},
+{cat:'nutrition',w:'carbohydrate',pos:'n.',en:'a nutrient that provides the body’s main source of energy, found in foods like bread and rice',th:'คาร์โบไฮเดรต',use:'ใช้กับ complex, limit',ex:['Rice contains carbohydrate.','She limits her carbohydrate intake.','Complex carbohydrates provide longer-lasting energy than refined sugar.']},
+{cat:'nutrition',w:'protein',pos:'n.',en:'a nutrient essential for building and repairing body tissue',th:'โปรตีน',use:'ใช้กับ dietary, source of',ex:['Meat is a good source of protein.','Athletes need more dietary protein.','Adequate protein intake is essential for muscle repair after exercise.']},
+{cat:'nutrition',w:'dietary fiber',pos:'phrase',en:'the indigestible part of plant food that aids digestion',th:'ใยอาหาร',use:'ใช้กับ increase, source of',ex:['Vegetables provide dietary fiber.','She increased her dietary fiber intake.','Dietary fiber helps regulate digestion and can lower cholesterol levels.']},
+{cat:'nutrition',w:'calorie',pos:'n.',en:'a unit used to measure the energy value of food',th:'แคลอรี',use:'ใช้กับ count, burn',ex:['She counts calories carefully.','Exercise burns calories.','Reading nutrition labels helps people track their daily calorie intake.']},
+{cat:'nutrition',w:'balanced diet',pos:'phrase',en:'an eating pattern that includes appropriate amounts of all necessary nutrients',th:'อาหารที่สมดุล',use:'ใช้กับ maintain, follow',ex:['She maintains a balanced diet.','Nutritionists recommend a balanced diet.','A balanced diet supports both physical health and long-term energy levels.']},
+{cat:'nutrition',w:'portion size',pos:'phrase',en:'the amount of food served or eaten at one time',th:'ปริมาณอาหารต่อหนึ่งมื้อ',use:'ใช้กับ control, reduce',ex:['He controls his portion size.','Restaurants often serve large portion sizes.','Reducing portion size is one of the simplest ways to manage calorie intake.']},
+{cat:'nutrition',w:'food pyramid',pos:'phrase',en:'a visual guide showing recommended proportions of different food groups in a diet',th:'พีระมิดอาหาร',use:'ใช้กับ follow, illustrate',ex:['The chart illustrates the food pyramid.','Schools once taught the food pyramid.','The food pyramid has been updated over the years to reflect new nutritional research.']},
+{cat:'nutrition',w:'undernourished',pos:'adj.',en:'not receiving enough food or nutrients for proper health and growth',th:'ขาดสารอาหาร',use:'ใช้กับ remain, population',ex:['Many children remain undernourished.','The population is severely undernourished.','Undernourished children often struggle with both physical and cognitive development.']},
+{cat:'nutrition',w:'dietitian',pos:'n.',en:'a professional trained to give advice on diet and nutrition',th:'นักกำหนดอาหาร',use:'ใช้กับ consult a, see a',ex:['She consulted a dietitian.','He sees a dietitian regularly.','A registered dietitian can create a personalized nutrition plan based on individual needs.']},
+{cat:'nutrition',w:'nutrient absorption',pos:'phrase',en:'the process by which the body takes in nutrients from food',th:'การดูดซึมสารอาหาร',use:'ใช้กับ improve, affect',ex:['Fiber can affect nutrient absorption.','Cooking can improve nutrient absorption.','Certain digestive conditions can significantly reduce nutrient absorption in the body.']},
+{cat:'nutrition',w:'cholesterol',pos:'n.',en:'a waxy, fat-like substance found in the blood, linked to heart health',th:'คอเลสเตอรอล',use:'ใช้กับ high, lower',ex:['He has high cholesterol.','Diet can help lower cholesterol.','High cholesterol levels are strongly linked to an increased risk of heart disease.']},
+{cat:'nutrition',w:'saturated fat',pos:'phrase',en:'a type of fat, often solid at room temperature, linked to increased heart disease risk when consumed in excess',th:'ไขมันอิ่มตัว',use:'ใช้กับ limit, contain',ex:['Butter contains saturated fat.','Doctors recommend limiting saturated fat.','Diets high in saturated fat have been linked to increased cardiovascular risk.']},
+{cat:'nutrition',w:'unsaturated fat',pos:'phrase',en:'a type of fat, usually liquid at room temperature, generally considered healthier than saturated fat',th:'ไขมันไม่อิ่มตัว',use:'ตรงข้ามกับ saturated fat',ex:['Olive oil contains unsaturated fat.','Unsaturated fat supports heart health.','Replacing saturated fat with unsaturated fat can improve overall cholesterol levels.']},
+{cat:'nutrition',w:'antioxidant',pos:'n.',en:'a substance that helps protect the body’s cells from damage caused by harmful molecules',th:'สารต้านอนุมูลอิสระ',use:'ใช้กับ rich in, contain',ex:['Berries are rich in antioxidants.','The supplement contains antioxidants.','Antioxidants are believed to help protect the body against certain chronic diseases.']},
+{cat:'nutrition',w:'supplement',pos:'n.',en:'a product taken to add nutrients that may be missing from a person’s diet',th:'ผลิตภัณฑ์เสริมอาหาร',use:'ใช้กับ take a, vitamin',ex:['She takes a daily supplement.','He uses a vitamin supplement.','Nutritional supplements should not replace a healthy, balanced diet.']},
+{cat:'nutrition',w:'gluten',pos:'n.',en:'a protein found in wheat and related grains',th:'กลูเตน',use:'ใช้กับ contain, avoid',ex:['Bread contains gluten.','She avoids gluten entirely.','People with celiac disease must strictly avoid foods containing gluten.']},
+{cat:'nutrition',w:'food intolerance',pos:'phrase',en:'difficulty digesting certain foods, causing discomfort but not a severe immune reaction',th:'ภาวะไม่ทนต่ออาหารบางชนิด',use:'ใช้กับ develop, identify',ex:['He developed a food intolerance.','Doctors helped identify her food intolerance.','Food intolerance can cause bloating and discomfort, unlike a true food allergy.']},
+{cat:'nutrition',w:'veganism',pos:'n.',en:'a diet and lifestyle that excludes all animal products',th:'วีแกน/มังสวิรัติเคร่งครัด',use:'ใช้กับ practice, adopt',ex:['She practices veganism.','He adopted veganism last year.','Veganism has grown significantly in popularity over the past decade.']},
+{cat:'nutrition',w:'plant-based diet',pos:'phrase',en:'a diet consisting mainly or entirely of foods derived from plants',th:'อาหารที่เน้นพืชเป็นหลัก',use:'ใช้กับ follow, switch to',ex:['She follows a plant-based diet.','He switched to a plant-based diet.','A plant-based diet has been linked to a lower risk of several chronic diseases.']},
+{cat:'nutrition',w:'meal planning',pos:'phrase',en:'the practice of deciding meals in advance, often to save time or eat more healthily',th:'การวางแผนมื้ออาหาร',use:'ใช้กับ practice, weekly',ex:['She practices weekly meal planning.','Meal planning saves time and money.','Careful meal planning makes it much easier to stick to a balanced diet.']},
+{cat:'nutrition',w:'nutritional value',pos:'phrase',en:'the amount of beneficial nutrients a food provides',th:'คุณค่าทางโภชนาการ',use:'ใช้กับ high, assess',ex:['The food has high nutritional value.','They assessed its nutritional value.','Processed snacks often have far lower nutritional value than fresh produce.']},
+{cat:'nutrition',w:'empty calories',pos:'phrase',en:'calories from food or drink that provide little or no nutritional benefit',th:'แคลอรีที่ไม่มีคุณค่าทางโภชนาการ',use:'ใช้กับ avoid, contain',ex:['Soda contains empty calories.','She tries to avoid empty calories.','Sugary snacks are often full of empty calories with almost no nutritional value.']},
+{cat:'nutrition',w:'gut health',pos:'phrase',en:'the state and function of the digestive system, particularly the balance of bacteria in the gut',th:'สุขภาพลำไส้',use:'ใช้กับ improve, support',ex:['Yogurt can support gut health.','She focuses on improving gut health.','A healthy diet plays a major role in maintaining good gut health.']},
+
+// ============ INSURANCE & RISK MANAGEMENT (25) ============
+{cat:'insurance',w:'policyholder',pos:'n.',en:'a person who owns an insurance policy',th:'ผู้ถือกรมธรรม์',use:'ใช้กับ notify, protect',ex:['The company notified the policyholder.','Insurance protects the policyholder.','The policyholder must report any changes that could affect their coverage.']},
+{cat:'insurance',w:'underwriting',pos:'n.',en:'the process by which an insurer evaluates the risk of insuring a person or asset',th:'การพิจารณารับประกันภัย',use:'ใช้กับ process, careful',ex:['Underwriting determines the premium.','The company follows a careful underwriting process.','Underwriting helps insurers decide whether to accept a risk and at what price.']},
+{cat:'insurance',w:'claim',pos:'n.',en:'a formal request for payment under the terms of an insurance policy',th:'การเรียกร้องค่าสินไหมทดแทน',use:'ใช้กับ file a, process',ex:['She filed an insurance claim.','The company processed the claim quickly.','Filing a fraudulent claim can result in serious legal consequences.']},
+{cat:'insurance',w:'deductible',pos:'n.',en:'the amount a policyholder must pay out of pocket before insurance coverage begins',th:'ค่าเสียหายส่วนแรก',use:'ใช้กับ pay, high',ex:['He paid the deductible first.','The policy has a high deductible.','A lower deductible usually means a higher monthly insurance premium.']},
+{cat:'insurance',w:'coverage',pos:'n.',en:'the protection provided by an insurance policy',th:'ความคุ้มครอง',use:'ใช้กับ full, extend',ex:['The policy offers full coverage.','They extended their coverage.','Reading the policy carefully helps customers understand exactly what coverage includes.']},
+{cat:'insurance',w:'liability insurance',pos:'phrase',en:'insurance that covers legal responsibility for injury or damage caused to others',th:'ประกันภัยความรับผิดต่อบุคคลภายนอก',use:'ใช้กับ purchase, require',ex:['The business purchased liability insurance.','Landlords often require liability insurance.','Liability insurance protects individuals and businesses from costly legal claims.']},
+{cat:'insurance',w:'actuary',pos:'n.',en:'a professional who uses statistics to calculate and manage financial risk',th:'นักคณิตศาสตร์ประกันภัย',use:'ใช้กับ work as, calculate',ex:['She works as an actuary.','Actuaries calculate insurance risk.','An actuary uses statistical models to help insurers set accurate premiums.']},
+{cat:'insurance',w:'risk assessment',pos:'phrase',en:'the process of identifying and evaluating potential risks',th:'การประเมินความเสี่ยง',use:'ใช้กับ conduct, thorough',ex:['The company conducted a risk assessment.','A thorough risk assessment is essential.','A detailed risk assessment helps insurers price a policy accurately.']},
+{cat:'insurance',w:'indemnity',pos:'n.',en:'protection or compensation against financial loss or damage',th:'การชดใช้ค่าเสียหาย',use:'ใช้กับ provide, seek',ex:['The contract provides indemnity.','They sought indemnity for their losses.','The indemnity clause protects the company from certain unexpected financial losses.']},
+{cat:'insurance',w:'payout',pos:'n.',en:'the amount of money paid by an insurer to settle a claim',th:'เงินที่จ่ายชดเชย',use:'ใช้กับ receive, large',ex:['She received a large payout.','The insurer approved the payout.','The payout covered the full cost of repairing the damaged property.']},
+{cat:'insurance',w:'beneficiary',pos:'n.',en:'a person designated to receive benefits from an insurance policy or will',th:'ผู้รับผลประโยชน์',use:'ใช้กับ name a, designate',ex:['She named her son as beneficiary.','He designated a new beneficiary.','It is important to update your beneficiary after major life changes.']},
+{cat:'insurance',w:'exclusion clause',pos:'phrase',en:'a section of an insurance policy that specifies what is not covered',th:'ข้อยกเว้นความคุ้มครอง',use:'ใช้กับ read, include',ex:['She read the exclusion clause carefully.','The policy includes several exclusion clauses.','Understanding the exclusion clause can prevent an unpleasant surprise when filing a claim.']},
+{cat:'insurance',w:'underinsured',pos:'adj.',en:'having insufficient insurance coverage to fully cover a potential loss',th:'เอาประกันภัยไม่เพียงพอ',use:'ใช้กับ remain, risk of being',ex:['Many homeowners remain underinsured.','She was underinsured for the damage.','Being underinsured can leave families exposed to significant unexpected expenses.']},
+{cat:'insurance',w:'reinsurance',pos:'n.',en:'insurance purchased by an insurance company to reduce its own risk',th:'การประกันภัยต่อ',use:'ใช้กับ purchase, rely on',ex:['The insurer purchased reinsurance.','Large companies rely on reinsurance.','Reinsurance allows insurance companies to spread out extremely large financial risks.']},
+{cat:'insurance',w:'actuarial table',pos:'phrase',en:'a chart used to estimate probabilities such as life expectancy, used to calculate insurance premiums',th:'ตารางคณิตศาสตร์ประกันภัย',use:'ใช้กับ use, refer to',ex:['Insurers use an actuarial table.','They referred to the actuarial table.','Actuarial tables help insurers estimate how long a policyholder is likely to live.']},
+{cat:'insurance',w:'peril',pos:'n.',en:'a specific risk or cause of loss covered by an insurance policy',th:'ภัยที่อาจก่อให้เกิดความเสียหาย',use:'ใช้กับ cover, specific',ex:['The policy covers fire as a peril.','Flood is a specific peril in the contract.','Each policy clearly lists the specific perils it is designed to cover.']},
+{cat:'insurance',w:'moral hazard',pos:'phrase',en:'a situation in which a person takes greater risks because they are protected from the consequences',th:'ภาวะเสี่ยงทางศีลธรรม',use:'ใช้กับ create, avoid',ex:['Insurance can create moral hazard.','Insurers try to avoid moral hazard.','Economists study how moral hazard can encourage riskier behavior among the insured.']},
+{cat:'insurance',w:'risk pooling',pos:'phrase',en:'the practice of combining risks from many individuals to reduce the overall impact of loss',th:'การรวมกลุ่มความเสี่ยง',use:'ใช้กับ rely on, principle of',ex:['Insurance relies on risk pooling.','The system is based on risk pooling.','Risk pooling allows the cost of rare, large losses to be shared across many policyholders.']},
+{cat:'insurance',w:'catastrophic loss',pos:'phrase',en:'an extremely large financial loss, often caused by a major disaster',th:'ความสูญเสียครั้งใหญ่',use:'ใช้กับ suffer, protect against',ex:['The company suffered a catastrophic loss.','Insurance protects against catastrophic loss.','Reinsurance helps insurers survive a single catastrophic loss without going bankrupt.']},
+{cat:'insurance',w:'loss adjuster',pos:'phrase',en:'a professional who assesses insurance claims and determines the amount to be paid',th:'ผู้ประเมินความเสียหาย',use:'ใช้กับ send, hire a',ex:['The insurer sent a loss adjuster.','They hired an independent loss adjuster.','The loss adjuster inspected the property before approving the final payout.']},
+{cat:'insurance',w:'fraudulent claim',pos:'phrase',en:'a false insurance claim made with the intent to receive money dishonestly',th:'การเรียกร้องค่าสินไหมโดยฉ้อโกง',use:'ใช้กับ detect, file a',ex:['Investigators detected a fraudulent claim.','He filed a fraudulent claim.','Insurers use data analysis to help detect and prevent fraudulent claims.']},
+{cat:'insurance',w:'no-claims bonus',pos:'phrase',en:'a discount given to a policyholder for not filing any claims over a period of time',th:'ส่วนลดจากประวัติไม่เคลมประกัน',use:'ใช้กับ earn, lose',ex:['She earned a no-claims bonus.','An accident cost him his no-claims bonus.','A no-claims bonus can significantly reduce the cost of car insurance over time.']},
+{cat:'insurance',w:'term life insurance',pos:'phrase',en:'life insurance that provides coverage for a specific, limited period of time',th:'ประกันชีวิตแบบชั่วระยะเวลา',use:'ใช้กับ purchase, renew',ex:['He purchased term life insurance.','They renewed their term life insurance.','Term life insurance is generally cheaper than a permanent life insurance policy.']},
+{cat:'insurance',w:'risk mitigation',pos:'phrase',en:'actions taken to reduce the likelihood or severity of a potential risk',th:'การบรรเทาความเสี่ยง',use:'ใช้กับ strategy, invest in',ex:['The company invested in risk mitigation.','Their risk mitigation strategy worked well.','Effective risk mitigation can significantly lower a company’s insurance costs.']},
+{cat:'insurance',w:'self-insured',pos:'adj.',en:'bearing one’s own financial risk rather than purchasing insurance from a third party',th:'รับความเสี่ยงเอง (ไม่ซื้อประกัน)',use:'ใช้กับ remain, choose to be',ex:['Large companies often remain self-insured.','They chose to be self-insured.','Being self-insured can save money but leaves the company fully exposed to large losses.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

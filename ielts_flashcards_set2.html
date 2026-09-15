@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 2</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'crime', name:'อาชญากรรม-กฎหมาย', color:'#47536B', light:'#E6E9EE'},
+  {id:'media', name:'สื่อ-การสื่อสาร', color:'#B5502F', light:'#F5E3DA'},
+  {id:'culture', name:'วัฒนธรรม-สังคม', color:'#6E7B3A', light:'#E9EDDD'},
+  {id:'science', name:'วิทยาศาสตร์-วิจัย', color:'#33507A', light:'#E1E7F0'},
+  {id:'work', name:'การทำงาน-อาชีพ', color:'#8C6A2F', light:'#F1E9D9'},
+  {id:'politics', name:'การเมือง-การปกครอง', color:'#7A3B54', light:'#F0E1E8'},
+];
+
+const vocab = [
+
+// ============ CRIME & LAW (25) ============
+{cat:'crime',w:'offence',pos:'n.',en:'an illegal act; a crime',th:'ความผิด/การกระทำผิดกฎหมาย',use:'ใช้กับ commit, criminal, minor',ex:['Stealing is a criminal offence.','He was charged with a minor traffic offence.','Repeat offenders often receive harsher sentences than those who commit a first offence.']},
+{cat:'crime',w:'felony',pos:'n.',en:'a serious crime, typically one involving violence',th:'ความผิดอาญาร้ายแรง',use:'ตรงข้ามกับ misdemeanor',ex:['Robbery is considered a felony.','He was convicted of a felony and sent to prison.','In many legal systems, a felony conviction can permanently affect a person’s civil rights.']},
+{cat:'crime',w:'misdemeanor',pos:'n.',en:'a minor wrongdoing or crime, less serious than a felony',th:'ความผิดลหุโทษ',use:'ตรงข้ามกับ felony',ex:['Jaywalking is usually a misdemeanor.','She received a fine for a minor misdemeanor.','Unlike a felony, a misdemeanor rarely results in a lengthy prison sentence.']},
+{cat:'crime',w:'verdict',pos:'n.',en:'a decision on a disputed issue in a legal case',th:'คำตัดสินของคณะลูกขุน/ศาล',use:'ใช้กับ reach, deliver, guilty/not guilty',ex:['The jury reached a verdict.','The court delivered its verdict after three days.','The jury’s verdict surprised many observers who had expected a conviction.']},
+{cat:'crime',w:'testimony',pos:'n.',en:'a formal statement given as evidence in a court of law',th:'คำให้การ (ในชั้นศาล)',use:'ใช้กับ give, provide, witness',ex:['The witness gave testimony in court.','Her testimony helped convict the suspect.','Conflicting testimony from the two witnesses made the case difficult to resolve.']},
+{cat:'crime',w:'litigation',pos:'n.',en:'the process of taking legal action in court',th:'การดำเนินคดีทางกฎหมาย',use:'ใช้กับ engage in, avoid, costly',ex:['The company faced litigation.','They settled to avoid costly litigation.','Prolonged litigation can drain a small business’s finances long before a verdict is reached.']},
+{cat:'crime',w:'prosecute',pos:'v.',en:'to bring criminal charges against someone in court',th:'ฟ้องร้องดำเนินคดี',use:'ใช้กับ decide to, fail to',ex:['Police decided to prosecute the driver.','The state chose to prosecute the case fully.','Prosecutors often struggle to prosecute cybercrime due to a lack of physical evidence.']},
+{cat:'crime',w:'defendant',pos:'n.',en:'a person accused of a crime in a court of law',th:'จำเลย',use:'ตรงข้ามกับ plaintiff',ex:['The defendant pleaded not guilty.','The judge addressed the defendant directly.','The defendant’s lawyer argued that the evidence had been collected unlawfully.']},
+{cat:'crime',w:'plaintiff',pos:'n.',en:'a person who brings a case against another in a court of law',th:'โจทก์',use:'ตรงข้ามกับ defendant',ex:['The plaintiff filed a lawsuit.','The plaintiff sought compensation for damages.','The plaintiff’s legal team presented documents proving the breach of contract.']},
+{cat:'crime',w:'acquit',pos:'v.',en:'to declare someone not guilty of a criminal charge',th:'ตัดสินให้พ้นผิด',use:'มักใช้ passive: be acquitted',ex:['The jury acquitted him.','She was acquitted of all charges.','Despite strong suspicion, the defendant was ultimately acquitted due to insufficient evidence.']},
+{cat:'crime',w:'convict',pos:'v./n.',en:'to declare someone guilty of a crime (v.); a person found guilty of a crime (n.)',th:'ตัดสินว่ามีความผิด / นักโทษ',use:'ใช้เป็นทั้งกริยาและนาม',ex:['The court convicted him of fraud.','He is now a convicted criminal.','Studies show that a significant number of convicts reoffend within five years of release.']},
+{cat:'crime',w:'custody',pos:'n.',en:'the state of being detained by police, or legal responsibility for caring for a child',th:'การควบคุมตัว/สิทธิ์ปกครองบุตร',use:'ใช้กับ police, in custody, child custody',ex:['He was taken into custody.','The couple disputed child custody.','The suspect remained in custody while investigators gathered further evidence.']},
+{cat:'crime',w:'bail',pos:'n.',en:'money paid to allow a person to be released from custody until trial',th:'การประกันตัว',use:'ใช้กับ post, grant, deny',ex:['He was released on bail.','The judge denied bail.','The court granted bail on the condition that the suspect surrender his passport.']},
+{cat:'crime',w:'juvenile',pos:'adj./n.',en:'relating to young people who are not yet adults, or a young offender',th:'เยาวชน',use:'ใช้กับ juvenile court, offender',ex:['He was tried in juvenile court.','Juvenile crime rates have fallen.','The reform aims to rehabilitate juvenile offenders rather than simply punish them.']},
+{cat:'crime',w:'deterrent',pos:'n.',en:'something that discourages a person from doing something, often through fear of consequences',th:'สิ่งที่ใช้ยับยั้งการกระทำผิด',use:'ใช้กับ act as, serve as',ex:['Fines act as a deterrent.','Harsh penalties serve as a deterrent to crime.','Criminologists debate whether the death penalty is truly an effective deterrent.']},
+{cat:'crime',w:'recidivism',pos:'n.',en:'the tendency of a convicted criminal to reoffend',th:'การกระทำผิดซ้ำ',use:'ใช้กับ rate, reduce',ex:['Recidivism is a serious problem.','The program aims to reduce recidivism.','Education programs in prison have been shown to significantly lower rates of recidivism.']},
+{cat:'crime',w:'forensic',pos:'adj.',en:'relating to scientific methods used to investigate crime',th:'ทางนิติวิทยาศาสตร์',use:'ใช้กับ evidence, analysis, expert',ex:['Forensic experts examined the scene.','Forensic evidence linked him to the crime.','Advances in forensic analysis have helped solve cases that were unsolved for decades.']},
+{cat:'crime',w:'legislation',pos:'n.',en:'laws considered collectively, or the process of making laws',th:'กฎหมาย/กระบวนการออกกฎหมาย',use:'ใช้กับ pass, introduce, draft',ex:['Parliament passed new legislation.','The government introduced tougher legislation.','Lawmakers drafted legislation aimed at closing loopholes in existing regulations.']},
+{cat:'crime',w:'legitimate',pos:'adj.',en:'conforming to the law or to accepted standards',th:'ถูกต้องตามกฎหมาย/ชอบธรรม',use:'ใช้กับ business, claim, reason',ex:['He runs a legitimate business.','She had a legitimate reason for being late.','The company insisted its practices were entirely legitimate despite public criticism.']},
+{cat:'crime',w:'infringe',pos:'v.',en:'to violate someone’s rights or break a rule or law',th:'ละเมิด (สิทธิ/กฎหมาย)',use:'ใช้กับ right, copyright, on',ex:['The rule infringes on privacy.','The company infringed his copyright.','Critics argue the new surveillance law infringes on basic civil liberties.']},
+{cat:'crime',w:'breach',pos:'n./v.',en:'an act of breaking a law, agreement, or code of conduct',th:'การละเมิด',use:'ใช้กับ contract, security, of',ex:['It was a breach of contract.','The company suffered a data breach.','The leak represented a serious breach of national security protocols.']},
+{cat:'crime',w:'liability',pos:'n.',en:'the state of being legally responsible for something',th:'ความรับผิดชอบตามกฎหมาย',use:'ใช้กับ legal, accept, limit',ex:['The driver accepted liability.','The company faces legal liability.','Insurance policies are designed to limit an individual’s financial liability in an accident.']},
+{cat:'crime',w:'jurisdiction',pos:'n.',en:'the official power to make legal decisions within a particular area',th:'เขตอำนาจศาล',use:'ใช้กับ fall under, outside',ex:['This case falls under local jurisdiction.','The matter is outside our jurisdiction.','Cross-border crimes often raise difficult questions about which country’s jurisdiction applies.']},
+{cat:'crime',w:'compliance',pos:'n.',en:'the act of obeying a rule, law, or request',th:'การปฏิบัติตามกฎ/ข้อบังคับ',use:'ใช้กับ ensure, in compliance with',ex:['The factory ensures safety compliance.','All staff must act in compliance with the law.','Regulators conducted an audit to verify the bank’s compliance with financial reporting rules.']},
+{cat:'crime',w:'perpetrator',pos:'n.',en:'a person who carries out a harmful, illegal, or immoral act',th:'ผู้กระทำความผิด',use:'ใช้กับ identify, bring to justice',ex:['Police identified the perpetrator.','The perpetrator was brought to justice.','Investigators used forensic evidence to trace the perpetrator of the cyberattack.']},
+
+// ============ MEDIA & COMMUNICATION (25) ============
+{cat:'media',w:'broadcast',pos:'v./n.',en:'to transmit a program on television or radio; a televised or radio program',th:'การออกอากาศ',use:'ใช้เป็นทั้งกริยาและนาม',ex:['The match was broadcast live.','She watched the evening broadcast.','The network decided to broadcast the debate to millions of viewers nationwide.']},
+{cat:'media',w:'censorship',pos:'n.',en:'the suppression of speech or information considered harmful or objectionable',th:'การเซ็นเซอร์/ตรวจสอบและควบคุมเนื้อหา',use:'ใช้กับ strict, impose, government',ex:['Some countries have strict censorship.','The government imposed censorship on the press.','Critics argue that online censorship threatens freedom of expression.']},
+{cat:'media',w:'propaganda',pos:'n.',en:'biased information used to promote a political cause or point of view',th:'โฆษณาชวนเชื่อ',use:'ใช้กับ spread, political',ex:['The regime spread propaganda.','Political propaganda filled the newspapers.','Historians have studied how wartime propaganda shaped public opinion for decades.']},
+{cat:'media',w:'bias',pos:'n.',en:'a tendency to favor one side unfairly',th:'อคติ/ความลำเอียง',use:'ใช้กับ media, political, show',ex:['The report showed media bias.','Readers accused the paper of political bias.','Algorithms can unintentionally reinforce bias by showing users only content they already agree with.']},
+{cat:'media',w:'objectivity',pos:'n.',en:'the quality of being based on facts rather than personal feelings',th:'ความเป็นกลาง (ไม่มีอคติ)',use:'ใช้กับ maintain, journalistic',ex:['Journalists strive for objectivity.','The editor questioned the report’s objectivity.','Maintaining objectivity becomes difficult when journalists report on issues that affect them personally.']},
+{cat:'media',w:'credibility',pos:'n.',en:'the quality of being trusted and believed',th:'ความน่าเชื่อถือ',use:'ใช้กับ lose, gain, question',ex:['The source lacked credibility.','The scandal damaged his credibility.','Repeated factual errors have seriously undermined the news outlet’s credibility.']},
+{cat:'media',w:'misinformation',pos:'n.',en:'false or inaccurate information that is spread, regardless of intent',th:'ข้อมูลที่ผิดพลาด (ไม่จำเป็นต้องตั้งใจ)',use:'ใช้กับ spread, combat, online',ex:['Misinformation spread online quickly.','The site tries to combat misinformation.','Health misinformation during the outbreak made it harder for officials to communicate accurate guidance.']},
+{cat:'media',w:'defamation',pos:'n.',en:'the act of damaging someone’s reputation through false statements',th:'การหมิ่นประมาท',use:'ใช้กับ sue for, commit',ex:['He sued the newspaper for defamation.','The comment was considered defamation.','Public figures often find it harder to win defamation cases than private individuals.']},
+{cat:'media',w:'journalism',pos:'n.',en:'the activity of collecting and reporting news',th:'วารสารศาสตร์/งานสื่อสารมวลชน',use:'ใช้กับ investigative, career in',ex:['She studied journalism at university.','Investigative journalism exposed the scandal.','Quality journalism depends on reporters verifying facts before a story is published.']},
+{cat:'media',w:'tabloid',pos:'n./adj.',en:'a newspaper with small pages that often features sensational stories',th:'หนังสือพิมพ์แนวเน้นข่าวฉาว',use:'ใช้กับ tabloid press, headline',ex:['He read a tabloid at the station.','The tabloid press loves celebrity gossip.','The story was picked up by several tabloids before serious outlets confirmed the facts.']},
+{cat:'media',w:'outlet',pos:'n.',en:'an organization that provides news or information to the public',th:'สำนักข่าว/ช่องทางสื่อ',use:'ใช้กับ media, news, reputable',ex:['The story appeared in a major outlet.','She works for a news outlet.','Several reputable outlets independently confirmed the details before publishing the report.']},
+{cat:'media',w:'headline',pos:'n.',en:'the title printed in large letters above a newspaper article',th:'พาดหัวข่าว',use:'ใช้กับ catch, make, misleading',ex:['The headline caught my eye.','She made headlines with her speech.','A misleading headline can shape public perception even if the article itself is accurate.']},
+{cat:'media',w:'viral',pos:'adj.',en:'spreading quickly and widely among many people, especially online',th:'แพร่กระจายอย่างรวดเร็ว (บนโลกออนไลน์)',use:'ใช้กับ go viral, video',ex:['The video went viral overnight.','Her post became viral within hours.','Companies now design advertisements specifically hoping they will go viral on social media.']},
+{cat:'media',w:'platform',pos:'n.',en:'a system or service used to publish or share content',th:'แพลตฟอร์มสื่อ',use:'ใช้กับ social media, online',ex:['She posts daily on the platform.','The company launched a new streaming platform.','Social media platforms have faced pressure to remove harmful content more quickly.']},
+{cat:'media',w:'influencer',pos:'n.',en:'a person who can affect the opinions of others through social media',th:'ผู้มีอิทธิพลบนโซเชียลมีเดีย',use:'ใช้กับ social media, partner with',ex:['The influencer promoted the product.','Brands often partner with influencers.','Regulators now require influencers to clearly disclose paid sponsorships to their followers.']},
+{cat:'media',w:'subscription',pos:'n.',en:'an arrangement to receive or access something regularly, usually by payment',th:'การสมัครสมาชิก',use:'ใช้กับ cancel, renew, monthly',ex:['She cancelled her subscription.','He renewed his magazine subscription.','Many newspapers now rely on digital subscriptions rather than advertising revenue.']},
+{cat:'media',w:'circulation',pos:'n.',en:'the number of copies of a publication distributed',th:'ยอดจำหน่าย (สิ่งพิมพ์)',use:'ใช้กับ fall, daily',ex:['The paper’s circulation fell.','Its daily circulation reached one million.','Print circulation has declined steadily as more readers move to digital news.']},
+{cat:'media',w:'correspondent',pos:'n.',en:'a journalist who reports on a particular subject or from a particular location',th:'ผู้สื่อข่าว',use:'ใช้กับ foreign, war',ex:['She is a foreign correspondent.','The war correspondent reported from the front line.','The network’s correspondent risked personal safety to cover the unfolding conflict.']},
+{cat:'media',w:'editorial',pos:'n./adj.',en:'an article expressing the opinion of a publication’s editors',th:'บทบรรณาธิการ/เกี่ยวกับการบรรณาธิการ',use:'ใช้กับ write, publish',ex:['The paper published an editorial.','The editorial criticized the new policy.','The newspaper’s editorial board argued strongly against the proposed regulation.']},
+{cat:'media',w:'censor',pos:'v.',en:'to examine and remove unacceptable parts of a publication or broadcast',th:'ตรวจสอบ/ตัดทอนเนื้อหา',use:'ใช้กับ content, government',ex:['The film was censored.','The government censored the report.','Authorities censored parts of the broadcast before it was allowed to air.']},
+{cat:'media',w:'sensationalism',pos:'n.',en:'the use of exciting or shocking content to attract attention',th:'การนำเสนอข่าวแบบเร้าอารมณ์เกินจริง',use:'ใช้กับ accuse of, resort to',ex:['The show relied on sensationalism.','Critics accused the channel of sensationalism.','Some outlets resort to sensationalism to compete for viewers in a crowded media market.']},
+{cat:'media',w:'anonymity',pos:'n.',en:'the state of not being identified by name',th:'การไม่เปิดเผยตัวตน',use:'ใช้กับ preserve, online',ex:['The source asked for anonymity.','Online anonymity can encourage bad behavior.','The whistleblower’s anonymity was protected throughout the entire investigation.']},
+{cat:'media',w:'transparency',pos:'n.',en:'the quality of being open and honest, with nothing hidden',th:'ความโปร่งใส',use:'ใช้กับ demand, lack of',ex:['Voters demand more transparency.','There was a lack of transparency in the decision.','Greater transparency in government spending helps restore public trust in institutions.']},
+{cat:'media',w:'disseminate',pos:'v.',en:'to spread information widely',th:'เผยแพร่ (ข้อมูล)',use:'ใช้กับ information, widely',ex:['The agency disseminated the warning.','News spreads to disseminate quickly online.','Public health officials worked to disseminate accurate information before rumors spread further.']},
+{cat:'media',w:'mainstream',pos:'adj.',en:'regarded as normal or conventional, shared by the majority',th:'กระแสหลัก',use:'ใช้กับ media, become',ex:['The idea became mainstream.','Mainstream media covered the story widely.','What was once a fringe opinion has gradually entered mainstream political debate.']},
+
+// ============ CULTURE & SOCIETY (25) ============
+{cat:'culture',w:'heritage',pos:'n.',en:'traditions, buildings, and cultural features passed down from previous generations',th:'มรดกทางวัฒนธรรม',use:'ใช้กับ cultural, preserve, protect',ex:['The temple is part of our heritage.','The town works to preserve its heritage.','UNESCO recognized the site as a world heritage location worth protecting for future generations.']},
+{cat:'culture',w:'custom',pos:'n.',en:'a traditional way of behaving that is specific to a society or region',th:'ธรรมเนียมปฏิบัติ',use:'ใช้กับ local, follow, ancient',ex:['It is a local custom.','Visitors should follow local customs.','Many ancient customs have gradually faded as younger generations adopt more modern lifestyles.']},
+{cat:'culture',w:'assimilation',pos:'n.',en:'the process of adapting to and adopting the culture of a group',th:'การกลืนกลายทางวัฒนธรรม',use:'ใช้กับ cultural, process of',ex:['Assimilation was difficult for the family.','The policy encouraged cultural assimilation.','Forced assimilation policies often caused communities to lose their native language over time.']},
+{cat:'culture',w:'diaspora',pos:'n.',en:'people who have spread from their original homeland to other parts of the world',th:'ชุมชนพลัดถิ่น',use:'ใช้กับ community, global',ex:['The diaspora sent money home.','There is a large Chinese diaspora abroad.','The country’s diaspora maintains strong cultural ties despite living far from their homeland.']},
+{cat:'culture',w:'indigenous',pos:'adj.',en:'originating naturally in a particular place rather than arriving from elsewhere',th:'พื้นเมือง/ดั้งเดิม',use:'ใช้กับ population, community, rights',ex:['Indigenous people live in the forest.','The government protects indigenous rights.','Indigenous communities have long argued for greater control over their ancestral lands.']},
+{cat:'culture',w:'multicultural',pos:'adj.',en:'relating to a society containing several distinct cultural groups',th:'หลากหลายทางวัฒนธรรม',use:'ใช้กับ society, city',ex:['It is a multicultural city.','The school promotes a multicultural environment.','Living in a multicultural society exposes children to a wide range of traditions and beliefs.']},
+{cat:'culture',w:'norm',pos:'n.',en:'a standard of behavior considered typical or acceptable in a society',th:'บรรทัดฐานทางสังคม',use:'ใช้กับ social, challenge, break',ex:['It is a social norm to greet elders.','She broke the traditional norm.','Younger generations are increasingly challenging norms their parents once took for granted.']},
+{cat:'culture',w:'stereotype',pos:'n.',en:'a widely held but oversimplified idea about a group of people',th:'ภาพเหมารวม',use:'ใช้กับ challenge, reinforce',ex:['The film relies on a stereotype.','Media can reinforce harmful stereotypes.','The campaign aimed to challenge common stereotypes about people with disabilities.']},
+{cat:'culture',w:'taboo',pos:'n./adj.',en:'a subject or action that is socially or culturally forbidden',th:'ข้อห้ามทางสังคม',use:'ใช้กับ break, consider, subject',ex:['Death is a taboo topic there.','She broke a cultural taboo.','What is considered taboo in one culture may be perfectly acceptable in another.']},
+{cat:'culture',w:'etiquette',pos:'n.',en:'the accepted rules of behavior in a particular social setting',th:'มารยาททางสังคม',use:'ใช้กับ social, business, follow',ex:['Good etiquette matters at dinner.','He learned business etiquette abroad.','Understanding local etiquette can prevent embarrassing misunderstandings while traveling.']},
+{cat:'culture',w:'identity',pos:'n.',en:'the qualities and characteristics that make a person or group who they are',th:'อัตลักษณ์',use:'ใช้กับ cultural, national, sense of',ex:['Language shapes cultural identity.','She has a strong sense of identity.','Migration often forces individuals to renegotiate their sense of cultural identity.']},
+{cat:'culture',w:'integration',pos:'n.',en:'the process of becoming part of a larger group or society',th:'การผสมผสาน/หลอมรวมเข้าสู่สังคม',use:'ใช้กับ social, promote',ex:['Integration takes time for immigrants.','The program promotes social integration.','Successful integration often depends on access to language classes and employment opportunities.']},
+{cat:'culture',w:'discrimination',pos:'n.',en:'unfair treatment of a person or group based on characteristics such as race or gender',th:'การเลือกปฏิบัติ',use:'ใช้กับ face, racial, gender',ex:['She faced discrimination at work.','Racial discrimination is illegal.','Laws exist to prevent discrimination based on age, gender, or disability.']},
+{cat:'culture',w:'prejudice',pos:'n.',en:'an unfair opinion formed without enough knowledge or reason',th:'อคติ/ความคิดเห็นที่มีมาก่อนโดยปราศจากเหตุผล',use:'ใช้กับ racial, overcome',ex:['He faced racial prejudice.','Education can help overcome prejudice.','Unconscious prejudice can influence hiring decisions even when no one intends discrimination.']},
+{cat:'culture',w:'tolerance',pos:'n.',en:'willingness to accept beliefs or practices different from one’s own',th:'ความอดทนอดกลั้น/ยอมรับความแตกต่าง',use:'ใช้กับ religious, promote',ex:['The school promotes tolerance.','Religious tolerance is important.','Building tolerance requires meaningful contact between people of different backgrounds.']},
+{cat:'culture',w:'secular',pos:'adj.',en:'not connected with religious or spiritual matters',th:'ทางโลก (ไม่เกี่ยวกับศาสนา)',use:'ใช้กับ state, education, society',ex:['It is a secular state.','The school offers secular education.','Debate continues over how strictly secular a government’s laws should be.']},
+{cat:'culture',w:'ritual',pos:'n.',en:'a series of actions performed according to a set tradition, often religious',th:'พิธีกรรม',use:'ใช้กับ perform, religious',ex:['They perform a morning ritual.','The wedding ritual lasted all day.','Anthropologists study how rituals reinforce a community’s shared values and identity.']},
+{cat:'culture',w:'preserve',pos:'v.',en:'to maintain something in its original state so it is not lost',th:'อนุรักษ์ไว้',use:'ใช้กับ culture, tradition, heritage',ex:['They work to preserve the language.','Museums preserve historical artifacts.','Efforts to preserve endangered languages often rely on recordings made by native speakers.']},
+{cat:'culture',w:'homogenization',pos:'n.',en:'the process of becoming similar or uniform, losing distinct differences',th:'การทำให้เหมือนกัน (สูญเสียความหลากหลาย)',use:'ใช้กับ cultural, global',ex:['Cultural homogenization worries some experts.','Global brands drive homogenization.','Critics warn that globalization accelerates cultural homogenization, eroding local traditions.']},
+{cat:'culture',w:'cohesion',pos:'n.',en:'the state of members of a society being united and working together',th:'ความเป็นปึกแผ่นของสังคม',use:'ใช้กับ social, strengthen, threaten',ex:['The festival builds social cohesion.','Inequality can threaten social cohesion.','Community programs are designed to strengthen social cohesion among diverse residents.']},
+{cat:'culture',w:'marginalized',pos:'adj.',en:'treated as insignificant and pushed to the edge of society',th:'ถูกทำให้อยู่ชายขอบ/ถูกกีดกัน',use:'ใช้กับ group, community',ex:['The policy ignores marginalized groups.','She works with marginalized communities.','Marginalized groups often have less access to healthcare, education, and legal protection.']},
+{cat:'culture',w:'exclusion',pos:'n.',en:'the act of preventing someone from being part of a group or activity',th:'การกีดกัน',use:'ใช้กับ social, fear of',ex:['He felt a sense of exclusion.','Social exclusion affects mental health.','Prolonged social exclusion has been linked to a range of negative psychological outcomes.']},
+{cat:'culture',w:'inclusive',pos:'adj.',en:'including everyone, without excluding any group',th:'ครอบคลุม/ไม่กีดกันใคร',use:'ใช้กับ policy, environment',ex:['The school has an inclusive policy.','They created an inclusive environment.','Building a truly inclusive workplace requires more than simply writing a diversity policy.']},
+{cat:'culture',w:'generational',pos:'adj.',en:'relating to differences in attitudes between age groups',th:'ระหว่างรุ่น (ช่องว่างระหว่างวัย)',use:'ใช้กับ gap, divide',ex:['There is a generational gap.','The topic caused a generational divide.','The generational gap in attitudes toward technology often creates tension within families.']},
+{cat:'culture',w:'materialism',pos:'n.',en:'a tendency to place too much value on material possessions',th:'วัตถุนิยม',use:'ใช้กับ excessive, criticize',ex:['He criticized modern materialism.','Materialism dominates advertising.','Some sociologists argue that rising materialism has weakened traditional community bonds.']},
+
+// ============ SCIENCE & RESEARCH (25) ============
+{cat:'science',w:'empirical',pos:'adj.',en:'based on observation or experiment rather than theory',th:'เชิงประจักษ์ (มาจากการสังเกต/ทดลอง)',use:'ใช้กับ evidence, data, study',ex:['The claim needs empirical evidence.','Researchers gathered empirical data.','Without empirical evidence, the theory remains speculative rather than scientifically established.']},
+{cat:'science',w:'methodology',pos:'n.',en:'a system of methods used in a particular area of study',th:'ระเบียบวิธีวิจัย',use:'ใช้กับ research, sound, describe',ex:['The paper explains its methodology.','They used a sound research methodology.','Reviewers questioned whether the study’s methodology could reliably support its conclusions.']},
+{cat:'science',w:'variable',pos:'n.',en:'a factor that can change or be changed in an experiment',th:'ตัวแปร',use:'ใช้กับ control, independent, dependent',ex:['Temperature was the main variable.','Scientists controlled every variable.','Researchers isolated a single variable to determine its precise effect on the outcome.']},
+{cat:'science',w:'peer-reviewed',pos:'adj.',en:'evaluated by experts in the same field before publication',th:'ผ่านการตรวจสอบโดยผู้เชี่ยวชาญ',use:'ใช้กับ journal, study',ex:['It was published in a peer-reviewed journal.','The study is peer-reviewed.','Only peer-reviewed research was included to ensure the review’s overall reliability.']},
+{cat:'science',w:'replicate',pos:'v.',en:'to repeat an experiment or study to check its results',th:'ทำซ้ำ (การทดลอง)',use:'ใช้กับ study, result, fail to',ex:['Scientists tried to replicate the result.','The team replicated the experiment.','Other laboratories were unable to replicate the original findings, raising doubts about the study.']},
+{cat:'science',w:'anomaly',pos:'n.',en:'something that deviates from what is standard or expected',th:'ความผิดปกติ/สิ่งที่เบี่ยงเบนจากปกติ',use:'ใช้กับ detect, statistical',ex:['The data showed an anomaly.','Researchers detected a statistical anomaly.','The unexpected anomaly forced scientists to reconsider part of their original model.']},
+{cat:'science',w:'theoretical',pos:'adj.',en:'based on theory rather than practice or experiment',th:'เชิงทฤษฎี',use:'ใช้กับ model, framework, physics',ex:['It remains a theoretical possibility.','She studies theoretical physics.','The theoretical model predicted results that experiments later confirmed to be accurate.']},
+{cat:'science',w:'extrapolate',pos:'v.',en:'to estimate or conclude something by extending known information',th:'คาดการณ์จากข้อมูลที่มีอยู่',use:'ใช้กับ from data, trend',ex:['We can extrapolate from past trends.','Scientists extrapolated future growth.','It can be risky to extrapolate long-term trends from only a few years of data.']},
+{cat:'science',w:'quantitative',pos:'adj.',en:'relating to information that can be measured in numbers',th:'เชิงปริมาณ',use:'ตรงข้ามกับ qualitative',ex:['The study used quantitative data.','Quantitative research relies on numbers.','Combining quantitative and qualitative methods can give a fuller picture of the issue.']},
+{cat:'science',w:'qualitative',pos:'adj.',en:'relating to descriptions or qualities rather than numerical measurement',th:'เชิงคุณภาพ',use:'ตรงข้ามกับ quantitative',ex:['They conducted qualitative interviews.','Qualitative research explores experiences.','Qualitative interviews revealed nuances that survey numbers alone could not capture.']},
+{cat:'science',w:'longitudinal',pos:'adj.',en:'involving repeated observation of the same subjects over a long period',th:'ระยะยาว (การศึกษาต่อเนื่อง)',use:'ใช้กับ study, data',ex:['It was a longitudinal study.','Researchers collected longitudinal data.','A longitudinal study tracked the same participants for over twenty years.']},
+{cat:'science',w:'control group',pos:'phrase',en:'a group in an experiment that does not receive the treatment being tested',th:'กลุ่มควบคุม',use:'ใช้คู่กับ experimental group',ex:['The control group received no treatment.','Scientists compared results to the control group.','Without a proper control group, it is difficult to know whether the treatment truly worked.']},
+{cat:'science',w:'placebo',pos:'n.',en:'a substance with no medical effect, given to compare against a real treatment',th:'ยาหลอก',use:'ใช้กับ effect, given',ex:['Some patients received a placebo.','The placebo effect can be powerful.','Patients given the placebo still reported improvement, illustrating the strength of belief in treatment.']},
+{cat:'science',w:'clinical trial',pos:'phrase',en:'a scientific study testing a medical treatment on human participants',th:'การทดลองทางคลินิก',use:'ใช้กับ conduct, undergo, phase',ex:['The drug entered clinical trials.','Volunteers joined the clinical trial.','The vaccine passed several phases of clinical trials before receiving official approval.']},
+{cat:'science',w:'genome',pos:'n.',en:'the complete set of genetic material of an organism',th:'จีโนม/ข้อมูลพันธุกรรมทั้งหมด',use:'ใช้กับ human, sequence, map',ex:['Scientists mapped the human genome.','Researchers study the genome closely.','Sequencing the entire genome allowed researchers to identify the mutation responsible for the disease.']},
+{cat:'science',w:'molecule',pos:'n.',en:'the smallest unit of a substance that retains its chemical properties',th:'โมเลกุล',use:'ใช้กับ single, structure of',ex:['Water is made of molecules.','They studied the molecule’s structure.','Chemists designed a new molecule capable of binding directly to the target protein.']},
+{cat:'science',w:'synthesize',pos:'v.',en:'to combine parts or elements to form a whole, especially chemically',th:'สังเคราะห์',use:'ใช้กับ compound, chemical',ex:['Chemists synthesize new compounds.','The lab synthesized the drug.','Researchers successfully synthesized a compound that mimics the natural protein’s function.']},
+{cat:'science',w:'catalyst',pos:'n.',en:'a substance that speeds up a reaction, or something that causes change',th:'ตัวเร่งปฏิกิริยา/สิ่งที่กระตุ้นให้เกิดการเปลี่ยนแปลง',use:'ใช้กับ act as, chemical',ex:['The event acted as a catalyst.','A catalyst speeds up the reaction.','The scandal became a catalyst for major reforms across the entire industry.']},
+{cat:'science',w:'phenomenon',pos:'n.',en:'a fact or event that can be observed, especially one that is unusual',th:'ปรากฏการณ์',use:'ใช้กับ natural, explain, rare',ex:['It is a natural phenomenon.','Scientists tried to explain the phenomenon.','This rare phenomenon has puzzled astronomers for more than a decade.']},
+{cat:'science',w:'inference',pos:'n.',en:'a conclusion reached on the basis of evidence and reasoning',th:'การอนุมาน/การสรุปจากหลักฐาน',use:'ใช้กับ draw, statistical',ex:['We can draw an inference from the data.','Statistical inference guided the conclusion.','Careful statistical inference allowed researchers to draw conclusions from a relatively small sample.']},
+{cat:'science',w:'validate',pos:'v.',en:'to check or prove that something is accurate or well-founded',th:'ยืนยันความถูกต้อง',use:'ใช้กับ finding, result, claim',ex:['The test validated their theory.','Further study is needed to validate the result.','Independent experiments were conducted to validate the original findings before publication.']},
+{cat:'science',w:'calibrate',pos:'v.',en:'to adjust an instrument so it gives accurate measurements',th:'ปรับเทียบ (เครื่องมือ)',use:'ใช้กับ instrument, equipment',ex:['Technicians calibrate the equipment.','The sensor must be calibrated regularly.','Instruments must be carefully calibrated before each experiment to ensure accurate readings.']},
+{cat:'science',w:'discovery',pos:'n.',en:'the act of finding something previously unknown',th:'การค้นพบ',use:'ใช้กับ scientific, groundbreaking, make',ex:['It was a major scientific discovery.','The team made a groundbreaking discovery.','The discovery of the new species could reshape our understanding of the ecosystem.']},
+{cat:'science',w:'pioneering',pos:'adj.',en:'introducing new methods or ideas for the first time',th:'บุกเบิก',use:'ใช้กับ work, research, study',ex:['Her pioneering work changed the field.','They conducted pioneering research.','This pioneering study laid the foundation for decades of subsequent medical research.']},
+{cat:'science',w:'publication',pos:'n.',en:'the act of making research or writing available to the public, or the work itself',th:'การตีพิมพ์เผยแพร่ผลงาน',use:'ใช้กับ scientific, submit for',ex:['The paper is ready for publication.','She submitted her study for publication.','Publication in a leading journal significantly boosted the researcher’s academic reputation.']},
+
+// ============ WORK & EMPLOYMENT (25) ============
+{cat:'work',w:'recruitment',pos:'n.',en:'the process of finding and hiring people for jobs',th:'การสรรหาบุคลากร',use:'ใช้กับ process, agency',ex:['Recruitment takes several weeks.','The agency handles staff recruitment.','The company overhauled its recruitment process to attract a wider range of candidates.']},
+{cat:'work',w:'candidate',pos:'n.',en:'a person being considered for a job or position',th:'ผู้สมัคร',use:'ใช้กับ suitable, shortlist, ideal',ex:['She is a strong candidate.','They shortlisted three candidates.','The ideal candidate would combine strong technical skills with excellent communication.']},
+{cat:'work',w:'qualification',pos:'n.',en:'a skill, achievement, or quality that makes someone suitable for a job',th:'คุณสมบัติ/วุฒิการศึกษา',use:'ใช้กับ relevant, meet, lack',ex:['He has the right qualifications.','She lacks the required qualification.','Employers increasingly value practical experience alongside formal academic qualifications.']},
+{cat:'work',w:'resign',pos:'v.',en:'to formally leave a job or position',th:'ลาออก',use:'ใช้กับ from, suddenly',ex:['She resigned from her job.','He resigned suddenly last week.','The manager resigned after the company’s financial troubles became public.']},
+{cat:'work',w:'layoff',pos:'n.',en:'the act of dismissing employees, usually due to lack of work',th:'การเลิกจ้าง',use:'ใช้กับ mass, announce',ex:['The company announced layoffs.','Mass layoffs hit the factory.','The economic downturn forced the firm to carry out widespread layoffs across departments.']},
+{cat:'work',w:'promotion',pos:'n.',en:'advancement to a higher position or rank at work',th:'การเลื่อนตำแหน่ง',use:'ใช้กับ earn, deserve, get',ex:['She earned a promotion.','He deserves a promotion this year.','Years of consistent performance eventually led to her long-awaited promotion to manager.']},
+{cat:'work',w:'probation',pos:'n.',en:'a trial period during which a new employee’s performance is assessed',th:'ช่วงทดลองงาน',use:'ใช้กับ period, complete',ex:['He is on a three-month probation.','She completed her probation successfully.','New hires must complete a six-month probation period before receiving full benefits.']},
+{cat:'work',w:'appraisal',pos:'n.',en:'a formal assessment of an employee’s work performance',th:'การประเมินผลการปฏิบัติงาน',use:'ใช้กับ annual, performance',ex:['He received a positive appraisal.','The annual appraisal takes place in June.','Regular performance appraisals help employees understand where they can improve.']},
+{cat:'work',w:'incentive',pos:'n.',en:'something that motivates a person to work harder or perform better',th:'สิ่งจูงใจ',use:'ใช้กับ financial, offer, provide',ex:['The bonus is a financial incentive.','The company offers incentives for good work.','Offering flexible hours can serve as a powerful incentive for talented employees to stay.']},
+{cat:'work',w:'flexible',pos:'adj.',en:'able to be adapted or changed to suit different needs',th:'ยืดหยุ่น (เวลาทำงาน)',use:'ใช้กับ working hours, schedule',ex:['The company offers flexible hours.','She prefers a flexible schedule.','Flexible working arrangements have become an important factor for many job seekers.']},
+{cat:'work',w:'remote',pos:'adj.',en:'done from a location away from the main office, often from home',th:'การทำงานทางไกล',use:'ใช้กับ remote work, job',ex:['She works remote three days a week.','Remote jobs became common after the pandemic.','Many companies now offer fully remote positions to attract talent from anywhere in the world.']},
+{cat:'work',w:'burnout',pos:'n.',en:'extreme physical or mental exhaustion caused by prolonged stress at work',th:'ภาวะหมดไฟในการทำงาน',use:'ใช้กับ suffer from, prevent',ex:['He suffered from burnout.','The company tries to prevent employee burnout.','Chronic overwork without adequate rest is one of the leading causes of burnout.']},
+{cat:'work',w:'productivity',pos:'n.',en:'the rate at which work is completed or output is produced',th:'ผลิตภาพ/ประสิทธิภาพการทำงาน',use:'ใช้กับ increase, boost, workplace',ex:['Exercise can boost productivity.','The new tools increased productivity.','Studies suggest that shorter, well-structured meetings can significantly improve overall productivity.']},
+{cat:'work',w:'collaborate',pos:'v.',en:'to work jointly with others on a task or project',th:'ร่วมมือกันทำงาน',use:'ใช้กับ closely, with',ex:['The teams collaborate on projects.','She collaborates closely with designers.','Cross-departmental teams were encouraged to collaborate more closely on shared goals.']},
+{cat:'work',w:'delegate',pos:'v.',en:'to assign responsibility or a task to another person',th:'มอบหมายงาน',use:'ใช้กับ task, responsibility',ex:['She delegates tasks to her team.','He struggled to delegate responsibility.','Effective managers learn to delegate tasks rather than trying to handle everything themselves.']},
+{cat:'work',w:'supervise',pos:'v.',en:'to observe and direct the work of others',th:'ควบคุมดูแล',use:'ใช้กับ staff, project',ex:['She supervises new employees.','He supervises the entire project.','The senior engineer was assigned to supervise the junior staff throughout the project.']},
+{cat:'work',w:'compensation',pos:'n.',en:'payment or reward given for work done',th:'ค่าตอบแทน',use:'ใช้กับ fair, package',ex:['He negotiated better compensation.','The company offers a fair compensation package.','Employees increasingly expect compensation packages that include more than just a base salary.']},
+{cat:'work',w:'benefits',pos:'n.',en:'additional advantages given to employees beyond salary, such as insurance',th:'สวัสดิการพนักงาน',use:'ใช้กับ employee, offer, health',ex:['The job offers good benefits.','Health benefits attracted many applicants.','Comprehensive benefits, including parental leave, have become a major selling point for employers.']},
+{cat:'work',w:'contract',pos:'n.',en:'a formal agreement outlining the terms of employment',th:'สัญญาจ้างงาน',use:'ใช้กับ sign, temporary, permanent',ex:['She signed a two-year contract.','He was offered a permanent contract.','The union negotiated better terms in the workers’ new employment contract.']},
+{cat:'work',w:'freelance',pos:'adj./n.',en:'working independently for various clients rather than being employed by one company',th:'รับงานอิสระ',use:'ใช้กับ freelance work, writer',ex:['She works freelance as a designer.','He does freelance writing.','More young professionals are choosing freelance work over traditional full-time employment.']},
+{cat:'work',w:'onboarding',pos:'n.',en:'the process of integrating a new employee into an organization',th:'กระบวนการปฐมนิเทศพนักงานใหม่',use:'ใช้กับ process, complete',ex:['The onboarding process took a week.','New hires complete online onboarding.','A well-designed onboarding process helps new employees become productive more quickly.']},
+{cat:'work',w:'turnover',pos:'n.',en:'the rate at which employees leave a company and are replaced',th:'อัตราการลาออกของพนักงาน',use:'ใช้กับ staff, high, reduce',ex:['The company has high staff turnover.','They aim to reduce employee turnover.','High staff turnover often signals deeper problems with management or workplace culture.']},
+{cat:'work',w:'hierarchy',pos:'n.',en:'a system in which people are ranked according to status or authority',th:'ลำดับชั้นในองค์กร',use:'ใช้กับ corporate, rigid, flat',ex:['The company has a clear hierarchy.','She moved up the corporate hierarchy.','Startups often favor a flatter hierarchy over the rigid structures of large corporations.']},
+{cat:'work',w:'work-life balance',pos:'phrase',en:'a state in which work and personal life are given appropriate time and attention',th:'สมดุลระหว่างงานกับชีวิตส่วนตัว',use:'ใช้กับ achieve, maintain, poor',ex:['She struggles with work-life balance.','The job offers a good work-life balance.','Employees increasingly prioritize work-life balance over higher salaries when choosing a job.']},
+{cat:'work',w:'meritocracy',pos:'n.',en:'a system in which advancement is based on ability and achievement',th:'ระบบคุณธรรม/ระบบที่ให้รางวัลตามความสามารถ',use:'ใช้กับ true, believe in',ex:['The firm claims to be a meritocracy.','She believes in true meritocracy.','Critics argue that so-called meritocracies often still favor people from privileged backgrounds.']},
+
+// ============ POLITICS & GOVERNMENT (25) ============
+{cat:'politics',w:'diplomacy',pos:'n.',en:'the management of relations between countries through negotiation',th:'การทูต',use:'ใช้กับ international, practice',ex:['Diplomacy prevented the conflict.','The two leaders practiced diplomacy.','Quiet diplomacy behind closed doors ultimately resolved the border dispute peacefully.']},
+{cat:'politics',w:'sovereignty',pos:'n.',en:'the authority of a state to govern itself independently',th:'อธิปไตย',use:'ใช้กับ national, respect, threaten',ex:['The country values its sovereignty.','The treaty respects national sovereignty.','The dispute raised difficult questions about territorial sovereignty in the region.']},
+{cat:'politics',w:'referendum',pos:'n.',en:'a vote by the public on a single political question',th:'การลงประชามติ',use:'ใช้กับ hold, national, result',ex:['The country held a referendum.','Voters rejected the referendum.','The government called a national referendum to decide whether to join the alliance.']},
+{cat:'politics',w:'constituency',pos:'n.',en:'a body of voters in a specific area who elect a representative',th:'เขตเลือกตั้ง',use:'ใช้กับ represent, local',ex:['She represents a rural constituency.','The MP visited his constituency.','The politician promised to prioritize funding for schools within her own constituency.']},
+{cat:'politics',w:'coalition',pos:'n.',en:'an alliance formed between different political parties, usually to form a government',th:'รัฐบาลผสม/พันธมิตรทางการเมือง',use:'ใช้กับ form, government',ex:['The parties formed a coalition.','A coalition government was created.','Negotiations to form a stable coalition took several weeks after the election.']},
+{cat:'politics',w:'electorate',pos:'n.',en:'all the people in a country or area entitled to vote',th:'กลุ่มผู้มีสิทธิเลือกตั้ง',use:'ใช้กับ appeal to, persuade',ex:['The candidate appealed to the electorate.','The electorate rejected the proposal.','Politicians spent months trying to persuade a divided electorate before the vote.']},
+{cat:'politics',w:'manifesto',pos:'n.',en:'a public declaration of policies and aims, especially by a political party',th:'นโยบายที่แถลงไว้ (พรรคการเมือง)',use:'ใช้กับ publish, party',ex:['The party published its manifesto.','Her manifesto focused on education.','Critics accused the party of quietly abandoning key promises made in its election manifesto.']},
+{cat:'politics',w:'lobbying',pos:'n.',en:'the act of trying to influence politicians on a particular issue',th:'การวิ่งเต้นเพื่อผลักดันนโยบาย',use:'ใช้กับ industry, intense',ex:['Lobbying influenced the vote.','The industry engaged in intense lobbying.','Critics argue that corporate lobbying gives large companies disproportionate political influence.']},
+{cat:'politics',w:'sanction',pos:'n.',en:'an official penalty imposed to force compliance with a law or standard',th:'มาตรการคว่ำบาตร/บทลงโทษ',use:'ใช้กับ impose, economic, lift',ex:['The UN imposed sanctions.','The country faced economic sanctions.','International sanctions were gradually lifted once the agreement was fully implemented.']},
+{cat:'politics',w:'autonomy',pos:'n.',en:'the right of a region or group to govern itself independently',th:'อำนาจปกครองตนเอง',use:'ใช้กับ regional, grant, seek',ex:['The region seeks greater autonomy.','The government granted limited autonomy.','The province was granted autonomy over education while remaining part of the national government.']},
+{cat:'politics',w:'authoritarian',pos:'adj.',en:'favoring strict obedience to authority at the expense of personal freedom',th:'แบบเผด็จการ/อำนาจนิยม',use:'ใช้กับ regime, rule',ex:['The country has an authoritarian government.','He criticized the authoritarian regime.','Authoritarian rule often relies on strict control of the media and limited political opposition.']},
+{cat:'politics',w:'totalitarian',pos:'adj.',en:'relating to a system of government with total control over public and private life',th:'เบ็ดเสร็จนิยม',use:'ใช้กับ regime, state',ex:['It was a totalitarian state.','The novel describes a totalitarian regime.','Totalitarian regimes typically suppress independent media and any form of organized dissent.']},
+{cat:'politics',w:'corruption',pos:'n.',en:'dishonest or illegal behavior, especially by people in positions of power',th:'การทุจริต',use:'ใช้กับ political, tackle, expose',ex:['Corruption is a serious problem.','The report exposed political corruption.','Efforts to tackle corruption have been hampered by weak enforcement of existing laws.']},
+{cat:'politics',w:'accountability',pos:'n.',en:'the obligation to explain or justify one’s actions to others',th:'ความรับผิดชอบที่ตรวจสอบได้',use:'ใช้กับ demand, political, lack of',ex:['Citizens demand accountability.','There was a lack of political accountability.','Independent oversight bodies exist to ensure greater accountability among elected officials.']},
+{cat:'politics',w:'amendment',pos:'n.',en:'a formal change or addition made to a law or document',th:'การแก้ไขเพิ่มเติม (กฎหมาย/รัฐธรรมนูญ)',use:'ใช้กับ propose, pass, constitutional',ex:['Lawmakers proposed an amendment.','The constitutional amendment passed.','The proposed amendment sparked heated debate before finally being approved by parliament.']},
+{cat:'politics',w:'ratify',pos:'v.',en:'to formally approve or confirm an agreement, making it officially valid',th:'ให้สัตยาบัน/รับรองอย่างเป็นทางการ',use:'ใช้กับ treaty, agreement',ex:['The senate ratified the treaty.','The countries ratified the agreement.','Several member states have yet to ratify the treaty, delaying its full implementation.']},
+{cat:'politics',w:'veto',pos:'n./v.',en:'the power to reject or block a decision, or to use this power',th:'การยับยั้ง (สิทธิ์คัดค้าน)',use:'ใช้กับ power, exercise',ex:['The president used his veto.','The council vetoed the proposal.','The permanent members of the council each hold the power to veto major resolutions.']},
+{cat:'politics',w:'coup',pos:'n.',en:'a sudden, illegal seizure of power from a government',th:'การรัฐประหาร',use:'ใช้กับ stage, military',ex:['The military staged a coup.','The coup shocked the nation.','International leaders condemned the coup and called for the restoration of civilian rule.']},
+{cat:'politics',w:'partisan',pos:'adj.',en:'strongly supporting a particular party, cause, or person, often unfairly',th:'ฝักใฝ่ฝ่ายใดฝ่ายหนึ่ง',use:'ใช้กับ politics, divide',ex:['The debate turned partisan.','Partisan politics slowed the vote.','Deep partisan divisions made it nearly impossible to pass meaningful legislation.']},
+{cat:'politics',w:'grassroots',pos:'adj.',en:'originating from ordinary people rather than political leadership',th:'ระดับรากหญ้า',use:'ใช้กับ movement, support, organize',ex:['It began as a grassroots movement.','The campaign relied on grassroots support.','The grassroots movement grew rapidly, eventually influencing national policy discussions.']},
+{cat:'politics',w:'civil liberties',pos:'phrase',en:'individual rights protected by law, such as freedom of speech',th:'เสรีภาพของพลเมือง',use:'ใช้กับ protect, threaten, defend',ex:['The law protects civil liberties.','Activists defend civil liberties.','Critics warned that the new surveillance measures could seriously threaten civil liberties.']},
+{cat:'politics',w:'policy',pos:'n.',en:'a course of action adopted by a government or organization',th:'นโยบาย',use:'ใช้กับ foreign, adopt, implement',ex:['The government changed its policy.','They adopted a new foreign policy.','Implementing the new policy required significant cooperation between several government agencies.']},
+{cat:'politics',w:'governance',pos:'n.',en:'the process and system of managing and controlling an organization or country',th:'การบริหารปกครอง',use:'ใช้กับ good, corporate, local',ex:['Good governance reduces corruption.','The report examined local governance.','Weak governance structures made it difficult to enforce the newly passed regulations.']},
+{cat:'politics',w:'incumbent',pos:'n./adj.',en:'the current holder of a political office',th:'ผู้ดำรงตำแหน่งอยู่ในปัจจุบัน',use:'ใช้กับ defeat, challenge',ex:['The challenger defeated the incumbent.','The incumbent sought re-election.','Despite a strong campaign, the incumbent struggled to defend her record on the economy.']},
+{cat:'politics',w:'nationalism',pos:'n.',en:'strong pride in and loyalty to one’s own nation, often prioritizing it above others',th:'ชาตินิยม',use:'ใช้กับ rise of, fuel',ex:['Nationalism grew during the crisis.','The speech fueled nationalism.','Rising nationalism across the region has complicated efforts toward international cooperation.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Vocabulary Library — คลังคำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:40px 16px 70px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  header{text-align:center;margin-bottom:8px;}
+  .eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.08em;
+    color:var(--ink-soft);text-transform:uppercase;margin:0 0 10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:clamp(30px,6vw,46px);
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16.5px;
+    color:var(--ink-soft);
+    max-width:560px;
+    margin:0 auto 6px;
+    line-height:1.6;
+  }
+  .stat-row{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    margin:26px 0 38px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:30px;
+    color:var(--ink);
+    line-height:1;
+  }
+  .stat-label{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+  .divider{
+    width:1px;background:var(--paper-line);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));
+    gap:18px;
+  }
+  .set-card{
+    background:var(--card-bg);
+    border-radius:16px;
+    box-shadow:0 8px 22px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    padding:22px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    text-decoration:none;
+    color:var(--ink);
+    transition:transform .16s ease, box-shadow .16s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .set-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+  }
+  .set-card::before{
+    content:"";
+    position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6));
+  }
+  .set-top{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:4px;
+  }
+  .set-num{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .set-count{
+    font-size:12px;
+    font-weight:700;
+    color:var(--ink-soft);
+    background:var(--paper);
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .set-title{
+    font-family:'Noto Sans Thai',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    margin:6px 0 12px;
+  }
+  .cat-dots{
+    display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;
+  }
+  .cat-dot{
+    display:flex;align-items:center;gap:5px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    padding:4px 9px 4px 6px;
+    border-radius:20px;
+  }
+  .dot{
+    width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  }
+  .set-cta{
+    margin-top:auto;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    padding-top:10px;
+    border-top:1px dashed var(--paper-line);
+  }
+  .set-cta .arrow{transition:transform .15s ease;}
+  .set-card:hover .arrow{transform:translateX(4px);}
+
+  footer{
+    text-align:center;
+    margin-top:50px;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.7;
+  }
+  footer b{color:var(--ink);}
+
+  @media (max-width:480px){
+    .stat-row{gap:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">IELTS Advanced Vocabulary</p>
+    <h1>คลังคำศัพท์เตรียมสอบ IELTS</h1>
+    <p class="subtitle">คำศัพท์ขั้นสูง 8 ชุด พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ — เลือกชุดที่ต้องการฝึกด้านล่าง</p>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num">1,200</div><div class="stat-label">คำศัพท์ทั้งหมด</div></div>
+    <div class="divider"></div>
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label">ชุด</div></div>
+    <div class="divider"></div>
+    <div class="stat"><div class="stat-num">48</div><div class="stat-label">หมวดหมู่</div></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    แนะนำให้เริ่มจาก <b>ชุดที่ 1–3</b> ก่อน เพราะเป็นหัวข้อที่ออกสอบบ่อยที่สุด<br>
+    เปิดไฟล์ทั้งหมดไว้ในโฟลเดอร์เดียวกันเพื่อให้ลิงก์เชื่อมโยงกันได้ถูกต้อง
+  </footer>
+</div>
+
+<script>
+const sets = [
+  {
+    n: 1, file: 'ielts_flashcards_set1.html', title: 'ศัพท์พื้นฐานวิชาการ IELTS',
+    cats: [
+      {name:'สิ่งแวดล้อม', color:'#3F6B4C'},
+      {name:'การศึกษา', color:'#3A4E8C'},
+      {name:'เทคโนโลยี', color:'#2C7873'},
+      {name:'สุขภาพ', color:'#9C3D54'},
+      {name:'เศรษฐกิจ', color:'#A9762F'},
+      {name:'ศัพท์วิชาการ', color:'#6A4C93'},
+    ]
+  },
+  {
+    n: 2, file: 'ielts_flashcards_set2.html', title: 'สังคม สื่อ และการเมือง',
+    cats: [
+      {name:'อาชญากรรม-กฎหมาย', color:'#47536B'},
+      {name:'สื่อ-การสื่อสาร', color:'#B5502F'},
+      {name:'วัฒนธรรม-สังคม', color:'#6E7B3A'},
+      {name:'วิทยาศาสตร์-วิจัย', color:'#33507A'},
+      {name:'การทำงาน-อาชีพ', color:'#8C6A2F'},
+      {name:'การเมือง-การปกครอง', color:'#7A3B54'},
+    ]
+  },
+  {
+    n: 3, file: 'ielts_flashcards_set3.html', title: 'ชีวิตประจำวันและงานอดิเรก',
+    cats: [
+      {name:'การเดินทาง-คมนาคม', color:'#2472A4'},
+      {name:'ครอบครัว-ความสัมพันธ์', color:'#C1654A'},
+      {name:'ที่อยู่อาศัย-ผังเมือง', color:'#6B5D4F'},
+      {name:'ศิลปะ-บันเทิง', color:'#A6447A'},
+      {name:'อาหาร-เกษตรกรรม', color:'#7A8C3A'},
+      {name:'กีฬา-นันทนาการ', color:'#2E8C6B'},
+    ]
+  },
+  {
+    n: 4, file: 'ielts_flashcards_set4.html', title: 'วิทยาศาสตร์และธุรกิจ',
+    cats: [
+      {name:'อวกาศ-ดาราศาสตร์', color:'#38356B'},
+      {name:'ประวัติศาสตร์-โบราณคดี', color:'#8C6239'},
+      {name:'จิตวิทยา-พฤติกรรมมนุษย์', color:'#7A5468'},
+      {name:'ธุรกิจ-การตลาด', color:'#3A5568'},
+      {name:'ภาษา-ภาษาศาสตร์', color:'#A85C3A'},
+      {name:'พลังงาน-อุตสาหกรรม', color:'#B98A2E'},
+    ]
+  },
+  {
+    n: 5, file: 'ielts_flashcards_set5.html', title: 'ปรัชญาและประเด็นร่วมสมัย',
+    cats: [
+      {name:'ปรัชญา-จริยธรรม', color:'#4A4A6E'},
+      {name:'ภัยพิบัติ-การจัดการฉุกเฉิน', color:'#B23A3A'},
+      {name:'พฤติกรรมผู้บริโภค-ค้าปลีก', color:'#C77F2E'},
+      {name:'การทหาร-ความมั่นคง', color:'#4B5320'},
+      {name:'สภาพอากาศ-ภูมิอากาศ', color:'#3D7EA6'},
+      {name:'ร่างกาย-สรีรวิทยา', color:'#A13F5C'},
+    ]
+  },
+  {
+    n: 6, file: 'ielts_flashcards_set6.html', title: 'กฎหมาย ศาสนา และเทคโนโลยีอนาคต',
+    cats: [
+      {name:'กฎหมาย-กระบวนการยุติธรรม', color:'#33574A'},
+      {name:'ศาสนา-ความเชื่อ', color:'#6B5040'},
+      {name:'เพศสภาพ-บทบาททางสังคม', color:'#7A3F6B'},
+      {name:'นวัตกรรม-เทคโนโลยีอนาคต', color:'#1F6F8B'},
+      {name:'การเงินส่วนบุคคล', color:'#3C8C5C'},
+      {name:'ความสัมพันธ์ระหว่างประเทศ', color:'#4A5C7A'},
+    ]
+  },
+  {
+    n: 7, file: 'ielts_flashcards_set7.html', title: 'ธรรมชาติ การออกแบบ และวงจรชีวิต',
+    cats: [
+      {name:'ชีววิทยาทางทะเล', color:'#1D6E7A'},
+      {name:'สถาปัตยกรรม-การออกแบบ', color:'#6E6250'},
+      {name:'พัฒนาการเด็ก-การเลี้ยงดู', color:'#D4845E'},
+      {name:'ผู้สูงวัย-การดูแลผู้สูงอายุ', color:'#5C6B73'},
+      {name:'แฟชั่น-อุตสาหกรรมสิ่งทอ', color:'#B23E76'},
+      {name:'เวชศาสตร์การกีฬา', color:'#C4562E'},
+    ]
+  },
+  {
+    n: 8, file: 'ielts_flashcards_set8.html', title: 'วิทยาศาสตร์เฉพาะทางและการเงิน',
+    cats: [
+      {name:'เคมี-วัสดุศาสตร์', color:'#2E6B6B'},
+      {name:'วิทยาการคอมพิวเตอร์', color:'#3F5C8A'},
+      {name:'ภูมิศาสตร์-การทำแผนที่', color:'#4A7A5C'},
+      {name:'ทฤษฎีดนตรี-การแสดง', color:'#8A4A6B'},
+      {name:'โภชนาการ-อาหารศาสตร์', color:'#6B8A3F'},
+      {name:'ประกันภัย-การบริหารความเสี่ยง', color:'#5C4A3F'},
+    ]
+  },
+];
+
+const grid = document.getElementById('grid');
+sets.forEach(s => {
+  const a = document.createElement('a');
+  a.href = s.file;
+  a.className = 'set-card';
+  const colors = s.cats.map(c=>c.color);
+  a.style.setProperty('--c1', colors[0]);
+  a.style.setProperty('--c2', colors[1]);
+  a.style.setProperty('--c3', colors[2]);
+  a.style.setProperty('--c4', colors[3]);
+  a.style.setProperty('--c5', colors[4]);
+  a.style.setProperty('--c6', colors[5]);
+
+  a.innerHTML = `
+    <div class="set-top">
+      <div class="set-num">ชุดที่ ${s.n}</div>
+      <div class="set-count">150 คำ</div>
+    </div>
+    <div class="set-title">${s.title}</div>
+    <div class="cat-dots">
+      ${s.cats.map(c => `<span class="cat-dot"><span class="dot" style="background:${c.color}"></span>${c.name}</span>`).join('')}
+    </div>
+    <div class="set-cta">เปิดชุดนี้ <span class="arrow">→</span></div>
+  `;
+  grid.appendChild(a);
+});
+</script>
+</body>
+</html>

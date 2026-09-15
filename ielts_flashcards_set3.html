@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 3</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'travel', name:'การเดินทาง-คมนาคม', color:'#2472A4', light:'#DCEAF2'},
+  {id:'family', name:'ครอบครัว-ความสัมพันธ์', color:'#C1654A', light:'#F3E1D9'},
+  {id:'housing', name:'ที่อยู่อาศัย-ผังเมือง', color:'#6B5D4F', light:'#EAE5DE'},
+  {id:'art', name:'ศิลปะ-บันเทิง', color:'#A6447A', light:'#F0DCE9'},
+  {id:'food', name:'อาหาร-เกษตรกรรม', color:'#7A8C3A', light:'#EAEEDA'},
+  {id:'sport', name:'กีฬา-นันทนาการ', color:'#2E8C6B', light:'#DCEFE6'},
+];
+
+const vocab = [
+
+// ============ TRAVEL & TRANSPORT (25) ============
+{cat:'travel',w:'commute',pos:'v./n.',en:'to travel regularly between home and work',th:'เดินทางไปกลับที่ทำงาน/โรงเรียนเป็นประจำ',use:'ใช้กับ daily, long',ex:['She commutes to work by train.','His daily commute takes an hour.','Long commutes have been linked to higher stress and lower job satisfaction.']},
+{cat:'travel',w:'itinerary',pos:'n.',en:'a planned route or schedule for a journey',th:'กำหนดการเดินทาง',use:'ใช้กับ plan, detailed, follow',ex:['We planned our travel itinerary.','She followed a detailed itinerary.','A flexible itinerary allows travelers to adjust their plans if unexpected opportunities arise.']},
+{cat:'travel',w:'congestion',pos:'n.',en:'the state of being overcrowded or blocked, especially with traffic',th:'การจราจรติดขัด/ความแออัด',use:'ใช้กับ traffic, reduce, cause',ex:['Traffic congestion delayed the bus.','The city aims to reduce congestion.','Severe congestion during rush hour has pushed many commuters toward public transport.']},
+{cat:'travel',w:'accessible',pos:'adj.',en:'able to be reached, entered, or used easily',th:'เข้าถึงได้ง่าย',use:'ใช้กับ easily, wheelchair',ex:['The station is easily accessible.','The building is wheelchair accessible.','Making public transport more accessible benefits elderly and disabled passengers alike.']},
+{cat:'travel',w:'transit',pos:'n.',en:'the system of traveling around an area using public transport, or the act of passing through',th:'การขนส่งสาธารณะ/การผ่านทาง',use:'ใช้กับ public, in transit',ex:['She uses public transit daily.','The package is currently in transit.','Investment in public transit has reduced private car use in several major cities.']},
+{cat:'travel',w:'terminal',pos:'n.',en:'a building where passengers begin or end a journey, such as at an airport',th:'อาคารผู้โดยสาร/สถานีปลายทาง',use:'ใช้กับ airport, bus, arrive at',ex:['We arrived at the terminal early.','The airport has three terminals.','Passengers were redirected to a different terminal due to construction work.']},
+{cat:'travel',w:'layover',pos:'n.',en:'a short stay in a place between parts of a journey, especially a flight',th:'การแวะพักระหว่างการเดินทาง (เที่ยวบิน)',use:'ใช้กับ long, short, during',ex:['We had a two-hour layover.','She explored the city during her layover.','A long layover gave passengers enough time to leave the airport and explore downtown.']},
+{cat:'travel',w:'jet lag',pos:'phrase',en:'tiredness and disorientation caused by rapid travel across time zones',th:'อาการเพลียจากการเปลี่ยนเขตเวลา',use:'ใช้กับ suffer from, recover from',ex:['He suffered from jet lag.','It took days to recover from jet lag.','Frequent long-haul travelers often develop strategies to minimize the effects of jet lag.']},
+{cat:'travel',w:'excursion',pos:'n.',en:'a short trip taken for pleasure or a specific purpose',th:'การท่องเที่ยวระยะสั้น/ทัศนศึกษา',use:'ใช้กับ day, organize, go on',ex:['We went on a day excursion.','The school organized an excursion.','The tour company offers optional excursions to nearby historical sites.']},
+{cat:'travel',w:'nomadic',pos:'adj.',en:'living a lifestyle that involves moving from place to place rather than settling',th:'เร่ร่อน/ไม่มีถิ่นที่อยู่ถาวร',use:'ใช้กับ lifestyle, tribe',ex:['They lead a nomadic lifestyle.','The tribe remains nomadic.','Remote work has allowed some professionals to adopt a semi-nomadic lifestyle.']},
+{cat:'travel',w:'customs',pos:'n.',en:'the official process and place where goods entering a country are checked and taxed',th:'ด่านศุลกากร',use:'ใช้กับ clear, go through, declare',ex:['We cleared customs quickly.','He declared items at customs.','Travelers must go through customs and declare any restricted goods before entering the country.']},
+{cat:'travel',w:'voyage',pos:'n.',en:'a long journey, especially by sea or in space',th:'การเดินทางไกล (ทางเรือ)',use:'ใช้กับ sea, embark on',ex:['They embarked on a sea voyage.','The voyage lasted three weeks.','Early explorers undertook dangerous voyages across uncharted oceans.']},
+{cat:'travel',w:'expedition',pos:'n.',en:'an organized journey undertaken for a specific purpose, such as exploration',th:'การเดินทางสำรวจ',use:'ใช้กับ scientific, mount, lead',ex:['They organized a scientific expedition.','She led an expedition to Antarctica.','The expedition faced extreme weather conditions throughout the journey.']},
+{cat:'travel',w:'picturesque',pos:'adj.',en:'visually attractive, especially in a quaint or charming way',th:'สวยงามน่าประทับใจ (ภูมิทัศน์)',use:'ใช้กับ village, view, scenery',ex:['It’s a picturesque village.','The route offers picturesque views.','Tourists are drawn to the picturesque coastline dotted with small fishing villages.']},
+{cat:'travel',w:'logistics',pos:'n.',en:'the detailed coordination of complex operations, especially transport and supply',th:'การจัดการด้านการขนส่งและกระจายสินค้า',use:'ใช้กับ manage, complex',ex:['The event required careful logistics.','They manage shipping logistics.','Coordinating logistics for a large international conference can take months of planning.']},
+{cat:'travel',w:'hub',pos:'n.',en:'a central point where activity or transport connects',th:'ศูนย์กลางการคมนาคม',use:'ใช้กับ transport, major',ex:['The airport is a major hub.','The city is a transport hub.','The port became a key trading hub connecting several regional economies.']},
+{cat:'travel',w:'gridlock',pos:'n.',en:'a situation in which traffic is completely blocked and unable to move',th:'การจราจรติดขัดอย่างหนัก',use:'ใช้กับ traffic, cause',ex:['Traffic gridlock lasted for hours.','An accident caused gridlock downtown.','The construction project caused gridlock throughout the city center for several weeks.']},
+{cat:'travel',w:'pedestrian',pos:'n./adj.',en:'a person walking rather than traveling in a vehicle',th:'คนเดินเท้า/สำหรับคนเดินเท้า',use:'ใช้กับ zone, crossing, area',ex:['The area is a pedestrian zone.','Pedestrians crossed carefully.','The city converted several streets into pedestrian-only zones to reduce traffic.']},
+{cat:'travel',w:'commuter',pos:'n.',en:'a person who regularly travels between home and work',th:'ผู้เดินทางไปกลับที่ทำงานเป็นประจำ',use:'ใช้กับ daily, rush hour',ex:['Commuters filled the platform.','Rush hour is busy for commuters.','Many commuters prefer trains over driving to avoid daily traffic congestion.']},
+{cat:'travel',w:'fare',pos:'n.',en:'the price charged for a journey on public transport',th:'ค่าโดยสาร',use:'ใช้กับ bus, train, raise',ex:['The bus fare increased.','She paid the train fare.','The city raised public transport fares to help cover rising maintenance costs.']},
+{cat:'travel',w:'destination',pos:'n.',en:'the place to which someone is traveling',th:'จุดหมายปลายทาง',use:'ใช้กับ popular, tourist, final',ex:['Paris is a popular destination.','We reached our final destination.','The island has become a favorite destination for travelers seeking quiet beaches.']},
+{cat:'travel',w:'detour',pos:'n.',en:'a longer route taken to avoid an obstacle or blocked road',th:'เส้นทางอ้อม',use:'ใช้กับ take, force',ex:['We took a detour around the flood.','Roadwork forced a detour.','The unexpected detour added nearly an hour to their journey.']},
+{cat:'travel',w:'transfer',pos:'n.',en:'the act of changing from one vehicle or route to another during a journey',th:'การเปลี่ยนต่อ (พาหนะ)',use:'ใช้กับ train, make a',ex:['We need to transfer trains.','The transfer took ten minutes.','Passengers must make a transfer at the central station to reach the coast.']},
+{cat:'travel',w:'stopover',pos:'n.',en:'a short stay at a place during a longer journey',th:'การแวะพักระหว่างทาง',use:'ใช้กับ overnight, brief',ex:['We had an overnight stopover.','The flight includes a brief stopover.','An overnight stopover gave them a chance to briefly explore the city.']},
+{cat:'travel',w:'backpacking',pos:'n.',en:'traveling or hiking with one’s belongings carried in a backpack, usually on a low budget',th:'การท่องเที่ยวแบบสะพายเป้ (งบประหยัด)',use:'ใช้กับ go, trip',ex:['They went backpacking through Asia.','She loves backpacking trips.','Backpacking allows travelers to experience a country more closely on a limited budget.']},
+
+// ============ FAMILY & RELATIONSHIPS (25) ============
+{cat:'family',w:'upbringing',pos:'n.',en:'the way a person is cared for and raised during childhood',th:'การเลี้ยงดู',use:'ใช้กับ strict, shape',ex:['He had a strict upbringing.','Her upbringing shaped her values.','A supportive upbringing can significantly influence a child’s confidence later in life.']},
+{cat:'family',w:'sibling',pos:'n.',en:'a brother or sister',th:'พี่น้อง',use:'ใช้กับ rivalry, close',ex:['She has two siblings.','Sibling rivalry is common.','Close sibling relationships often provide lasting emotional support throughout life.']},
+{cat:'family',w:'nurture',pos:'v.',en:'to care for and encourage the growth or development of someone',th:'เลี้ยงดู/บ่มเพาะ',use:'ใช้กับ child, talent',ex:['Parents nurture their children.','The school nurtures creativity.','Teachers play an important role in nurturing a child’s natural curiosity.']},
+{cat:'family',w:'dependent',pos:'n./adj.',en:'a person who relies on another for financial or other support',th:'ผู้ที่ต้องพึ่งพา/ต้องพึ่งพา',use:'ใช้กับ financial, elderly',ex:['She has two dependents.','He is financially dependent on his parents.','Caring for elderly dependents places a growing burden on many working families.']},
+{cat:'family',w:'estranged',pos:'adj.',en:'no longer close or in contact with a family member, often due to conflict',th:'ห่างเหิน/แยกทางกัน',use:'ใช้กับ from, become',ex:['He is estranged from his father.','They became estranged after the argument.','After years of being estranged, the siblings slowly began speaking to each other again.']},
+{cat:'family',w:'bond',pos:'n.',en:'a close emotional connection between people',th:'ความผูกพัน',use:'ใช้กับ form, strong, emotional',ex:['They share a close bond.','The trip strengthened their bond.','Shared experiences during childhood often create bonds that last a lifetime.']},
+{cat:'family',w:'nuclear family',pos:'phrase',en:'a family unit consisting of parents and their children, not including other relatives',th:'ครอบครัวเดี่ยว',use:'ตรงข้ามกับ extended family',ex:['They live as a nuclear family.','The nuclear family is common in cities.','Sociologists have studied how the traditional nuclear family has changed over generations.']},
+{cat:'family',w:'extended family',pos:'phrase',en:'a family that includes relatives beyond parents and children, such as grandparents and cousins',th:'ครอบครัวขยาย',use:'ตรงข้ามกับ nuclear family',ex:['Her extended family visits often.','They rely on their extended family.','In many cultures, the extended family plays a central role in raising children.']},
+{cat:'family',w:'guardian',pos:'n.',en:'a person legally responsible for the care of someone who cannot care for themselves',th:'ผู้ปกครอง (ตามกฎหมาย)',use:'ใช้กับ legal, appoint',ex:['Her aunt became her guardian.','The court appointed a legal guardian.','A legal guardian is responsible for the child’s welfare until they reach adulthood.']},
+{cat:'family',w:'caregiver',pos:'n.',en:'a person who looks after someone who is ill, elderly, or unable to care for themselves',th:'ผู้ดูแล',use:'ใช้กับ primary, family',ex:['She is the primary caregiver.','Family caregivers often feel exhausted.','Being a full-time caregiver can be both rewarding and emotionally demanding.']},
+{cat:'family',w:'domestic',pos:'adj.',en:'relating to the running of a home or family life',th:'เกี่ยวกับบ้าน/ในครัวเรือน',use:'ใช้กับ chore, responsibility',ex:['They share domestic chores.','Domestic responsibilities fell mostly on her.','Balancing domestic responsibilities with a career remains challenging for many parents.']},
+{cat:'family',w:'household',pos:'n.',en:'a house and its occupants regarded as a unit',th:'ครัวเรือน',use:'ใช้กับ single-parent, average',ex:['It’s a single-parent household.','The average household has four members.','Rising costs have put pressure on household budgets across the country.']},
+{cat:'family',w:'cohabit',pos:'v.',en:'to live together as a couple without being married',th:'อยู่ร่วมกันโดยไม่ได้แต่งงาน',use:'ใช้กับ before marriage',ex:['The couple decided to cohabit.','Many couples cohabit before marriage.','Attitudes toward cohabiting before marriage have shifted considerably over the past decades.']},
+{cat:'family',w:'kinship',pos:'n.',en:'the state of being related to others, especially by blood or marriage',th:'ความสัมพันธ์ทางเครือญาติ',use:'ใช้กับ ties, sense of',ex:['They share strong kinship ties.','She felt a sense of kinship.','Kinship networks often provide vital support in communities with limited public services.']},
+{cat:'family',w:'dysfunctional',pos:'adj.',en:'not operating normally or properly, especially in relationships',th:'ผิดปกติ/มีปัญหาในการทำงานร่วมกัน (ครอบครัว)',use:'ใช้กับ family, relationship',ex:['It was a dysfunctional family.','Their relationship became dysfunctional.','Growing up in a dysfunctional household can have lasting effects on a child’s development.']},
+{cat:'family',w:'reconcile',pos:'v.',en:'to restore friendly relations between people after a disagreement',th:'คืนดีกัน',use:'ใช้กับ with, differences',ex:['They finally reconciled.','She reconciled with her sister.','After years of silence, the brothers were finally able to reconcile their differences.']},
+{cat:'family',w:'empathize',pos:'v.',en:'to understand and share the feelings of another person',th:'เข้าใจความรู้สึกผู้อื่น',use:'ใช้กับ with',ex:['She empathizes with her patients.','He struggled to empathize with them.','Learning to empathize with others is an important part of emotional development.']},
+{cat:'family',w:'affection',pos:'n.',en:'a gentle feeling of fondness or care for someone',th:'ความรักใคร่ผูกพัน',use:'ใช้กับ show, express',ex:['She showed affection to her pet.','He rarely expresses affection.','Children who receive consistent affection tend to develop greater emotional security.']},
+{cat:'family',w:'overprotective',pos:'adj.',en:'excessively protective of someone, often limiting their independence',th:'ปกป้องมากเกินไป',use:'ใช้กับ parent',ex:['Her parents were overprotective.','He felt his mother was overprotective.','Overprotective parenting can sometimes prevent children from developing independence.']},
+{cat:'family',w:'filial',pos:'adj.',en:'relating to the duty and respect a child owes to a parent',th:'เกี่ยวกับความกตัญญู/หน้าที่ของบุตรต่อบิดามารดา',use:'ใช้กับ duty, piety',ex:['Filial duty is valued in many cultures.','He showed great filial respect.','Filial piety remains an important cultural value in many East Asian societies.']},
+{cat:'family',w:'intergenerational',pos:'adj.',en:'involving people of different generations',th:'ระหว่างรุ่น (หลายชั่วอายุคน)',use:'ใช้กับ relationship, gap',ex:['They have a close intergenerational bond.','Intergenerational conflict can arise at home.','Intergenerational programs bring together young people and elderly residents to share experiences.']},
+{cat:'family',w:'co-parenting',pos:'n.',en:'the shared responsibility of raising a child, especially between separated parents',th:'การเลี้ยงดูบุตรร่วมกัน (หลังหย่าร้าง)',use:'ใช้กับ successful, arrangement',ex:['They agreed on co-parenting.','Successful co-parenting requires communication.','A stable co-parenting arrangement can help children adjust after their parents separate.']},
+{cat:'family',w:'alienation',pos:'n.',en:'the state of feeling isolated or disconnected from others',th:'ความรู้สึกแปลกแยก/ห่างเหิน',use:'ใช้กับ feel, social',ex:['He felt a sense of alienation.','Social alienation affects teenagers too.','Prolonged family alienation can leave lasting emotional scars on both sides.']},
+{cat:'family',w:'dote',pos:'v.',en:'to show excessive love and attention toward someone',th:'รักและตามใจมากเกินไป',use:'ใช้กับ on grandchildren',ex:['Grandparents often dote on grandchildren.','She dotes on her youngest son.','It’s common for grandparents to dote on their grandchildren more than they did their own kids.']},
+{cat:'family',w:'matriarch',pos:'n.',en:'a woman who is the most respected or powerful member of a family or group',th:'หัวหน้าครอบครัวฝ่ายหญิง (ผู้อาวุโส)',use:'ใช้กับ family',ex:['She is the family matriarch.','The matriarch made the final decision.','As the family matriarch, she held significant influence over major family decisions.']},
+
+// ============ HOUSING & URBAN PLANNING (25) ============
+{cat:'housing',w:'residential',pos:'adj.',en:'relating to areas where people live rather than work or shop',th:'เขตที่อยู่อาศัย',use:'ใช้กับ area, zone',ex:['It’s a quiet residential area.','The land was rezoned as residential.','New residential developments have transformed the once-industrial neighborhood.']},
+{cat:'housing',w:'commercial',pos:'adj.',en:'relating to buying and selling goods or services',th:'เชิงพาณิชย์',use:'ใช้กับ zone, district, property',ex:['The area is zoned commercial.','They opened a commercial building.','Mixed-use developments combine residential and commercial spaces within the same block.']},
+{cat:'housing',w:'zoning',pos:'n.',en:'the division of an area into sections designated for particular uses, such as housing or business',th:'การกำหนดเขตการใช้ที่ดิน',use:'ใช้กับ law, regulation',ex:['Zoning laws limit building height.','The city changed its zoning rules.','Strict zoning regulations prevented factories from being built near residential neighborhoods.']},
+{cat:'housing',w:'gentrification',pos:'n.',en:'the process by which a poorer area is changed by wealthier people moving in, raising property values',th:'การเปลี่ยนแปลงย่านให้กลายเป็นย่านของคนมีฐานะ',use:'ใช้กับ cause, drive',ex:['Gentrification raised local rents.','New cafes signaled gentrification.','Rapid gentrification often pushes long-term, lower-income residents out of their neighborhoods.']},
+{cat:'housing',w:'skyline',pos:'n.',en:'the outline of tall buildings and structures against the sky',th:'เส้นขอบฟ้าของเมือง (ตึกสูง)',use:'ใช้กับ city, dominate',ex:['The city skyline is beautiful.','Skyscrapers dominate the skyline.','New towers have dramatically changed the city’s skyline over the past decade.']},
+{cat:'housing',w:'tenant',pos:'n.',en:'a person who rents property from a landlord',th:'ผู้เช่า',use:'ใช้กับ evict, rights',ex:['The tenant paid rent monthly.','The landlord evicted the tenant.','Tenant rights vary considerably from one country to another.']},
+{cat:'housing',w:'landlord',pos:'n.',en:'a person who owns and rents out property to tenants',th:'เจ้าของบ้านเช่า',use:'ใช้กับ raise rent',ex:['The landlord raised the rent.','She complained to her landlord.','Landlords are legally required to maintain the property in a safe condition.']},
+{cat:'housing',w:'mortgage',pos:'n.',en:'a loan used to buy property, repaid over a long period',th:'สินเชื่อบ้าน',use:'ใช้กับ take out, pay off',ex:['They took out a mortgage.','It took 20 years to pay off the mortgage.','Rising interest rates made monthly mortgage payments harder for many families to afford.']},
+{cat:'housing',w:'affordable housing',pos:'phrase',en:'housing that is priced within the financial reach of low- or middle-income people',th:'ที่อยู่อาศัยราคาย่อมเยา',use:'ใช้กับ shortage of, build',ex:['The city needs affordable housing.','There is a shortage of affordable housing.','City officials pledged to build more affordable housing near public transport.']},
+{cat:'housing',w:'overcrowding',pos:'n.',en:'the condition of having too many people or things in a limited space',th:'ความแออัดเกินไป',use:'ใช้กับ housing, prison',ex:['Overcrowding is a housing problem.','The city suffers from overcrowding.','Severe overcrowding in the district has strained local schools and hospitals.']},
+{cat:'housing',w:'slum',pos:'n.',en:'a densely populated area with poor housing conditions',th:'ชุมชนแออัด',use:'ใช้กับ live in, clear',ex:['Many families live in a slum.','The government tried to clear the slum.','Millions of people worldwide still live in slums lacking basic sanitation.']},
+{cat:'housing',w:'suburban',pos:'adj.',en:'relating to residential areas on the outskirts of a city',th:'ชานเมือง',use:'ใช้กับ area, life',ex:['They live in a suburban area.','She prefers suburban life.','Suburban neighborhoods often offer more space but require longer commutes to the city center.']},
+{cat:'housing',w:'metropolitan',pos:'adj.',en:'relating to a large city or its surrounding urban area',th:'เกี่ยวกับเขตเมืองใหญ่',use:'ใช้กับ area, population',ex:['It’s a large metropolitan area.','The metropolitan population is growing.','The metropolitan region includes the city center and several surrounding towns.']},
+{cat:'housing',w:'high-rise',pos:'n./adj.',en:'a tall building with many floors',th:'อาคารสูง',use:'ใช้กับ apartment, building',ex:['They live in a high-rise apartment.','The city built new high-rises.','High-rise apartments have become the dominant housing type in the crowded city center.']},
+{cat:'housing',w:'renovate',pos:'v.',en:'to repair and improve a building, especially an old one',th:'ปรับปรุงซ่อมแซม',use:'ใช้กับ house, completely',ex:['They renovated the old house.','The building was completely renovated.','The historic building was carefully renovated to preserve its original architectural details.']},
+{cat:'housing',w:'dilapidated',pos:'adj.',en:'in a state of disrepair due to age or neglect',th:'ทรุดโทรม',use:'ใช้กับ building, condition',ex:['The house looked dilapidated.','They bought a dilapidated building.','The once-grand hotel had become dilapidated after years of neglect.']},
+{cat:'housing',w:'amenities',pos:'n.',en:'features that make a place pleasant or convenient to live in',th:'สิ่งอำนวยความสะดวก',use:'ใช้กับ local, offer',ex:['The area has good amenities.','The apartment offers modern amenities.','Buyers often prioritize proximity to local amenities like schools and shops.']},
+{cat:'housing',w:'public space',pos:'phrase',en:'an open area accessible to all members of the public, such as a park',th:'พื้นที่สาธารณะ',use:'ใช้กับ create, shared',ex:['The park is a public space.','The city created new public spaces.','Well-designed public spaces encourage community interaction and outdoor activity.']},
+{cat:'housing',w:'sprawl',pos:'n.',en:'the uncontrolled expansion of a city into surrounding areas',th:'การขยายตัวของเมืองแบบกระจัดกระจาย',use:'ใช้กับ urban, control',ex:['Urban sprawl consumed farmland.','The city tried to control sprawl.','Unchecked urban sprawl has increased dependence on cars and lengthened commute times.']},
+{cat:'housing',w:'displacement',pos:'n.',en:'the forced removal of people from their homes or living area',th:'การถูกขับไล่ออกจากที่อยู่อาศัย',use:'ใช้กับ cause, community',ex:['The project caused displacement.','Community displacement worried residents.','Redevelopment plans raised concerns about the displacement of long-term residents.']},
+{cat:'housing',w:'eviction',pos:'n.',en:'the legal process of forcing a tenant to leave a property',th:'การขับไล่ผู้เช่าออกจากที่พัก',use:'ใช้กับ face, notice of',ex:['He received an eviction notice.','Many families faced eviction.','Rising rents led to a sharp increase in eviction cases across the city.']},
+{cat:'housing',w:'real estate',pos:'phrase',en:'property in the form of land and buildings',th:'อสังหาริมทรัพย์',use:'ใช้กับ market, invest in',ex:['He works in real estate.','The real estate market is booming.','Foreign investment has driven up prices across the local real estate market.']},
+{cat:'housing',w:'densely populated',pos:'phrase',en:'having a large number of people living in a relatively small area',th:'มีประชากรหนาแน่น',use:'ใช้กับ area, city',ex:['It is a densely populated city.','The region is densely populated.','Densely populated urban centers face unique challenges in waste management and housing.']},
+{cat:'housing',w:'municipal',pos:'adj.',en:'relating to a town, city, or local government',th:'ของเทศบาล/ท้องถิ่น',use:'ใช้กับ government, service',ex:['The municipal government approved the plan.','Municipal services include waste collection.','Municipal authorities are responsible for maintaining local roads and public parks.']},
+{cat:'housing',w:'rezone',pos:'v.',en:'to officially change the designated use of an area of land',th:'เปลี่ยนแปลงการกำหนดเขตการใช้ที่ดิน',use:'ใช้กับ land, approve',ex:['The council voted to rezone the land.','They rezoned the area for housing.','Local residents opposed the plan to rezone the park for commercial development.']},
+
+// ============ ART & ENTERTAINMENT (25) ============
+{cat:'art',w:'aesthetic',pos:'adj./n.',en:'relating to beauty or the appreciation of beauty',th:'เกี่ยวกับความงาม/สุนทรียภาพ',use:'ใช้กับ appeal, minimalist',ex:['The design has a modern aesthetic.','She values aesthetic appeal.','The building’s minimalist aesthetic reflects the architect’s broader design philosophy.']},
+{cat:'art',w:'abstract',pos:'adj.',en:'not representing things in a realistic or recognizable way',th:'แนวนามธรรม',use:'ใช้กับ art, painting',ex:['He paints abstract art.','The gallery displayed abstract work.','Abstract art often invites multiple interpretations rather than a single fixed meaning.']},
+{cat:'art',w:'contemporary',pos:'adj.',en:'belonging to or occurring in the present time',th:'ร่วมสมัย',use:'ใช้กับ art, music',ex:['She enjoys contemporary art.','The museum features contemporary pieces.','Contemporary artists often blend traditional techniques with new digital technology.']},
+{cat:'art',w:'masterpiece',pos:'n.',en:'a work of outstanding skill or artistry',th:'ผลงานชิ้นเอก',use:'ใช้กับ consider, create',ex:['The painting is a masterpiece.','Critics consider it his masterpiece.','The film is widely regarded as a cinematic masterpiece decades after its release.']},
+{cat:'art',w:'exhibition',pos:'n.',en:'a public display of works of art or other items of interest',th:'นิทรรศการ',use:'ใช้กับ hold, attend',ex:['The museum held an exhibition.','We attended the art exhibition.','The exhibition featured works from artists across several generations.']},
+{cat:'art',w:'curator',pos:'n.',en:'a person who selects and organizes items for a museum or exhibition',th:'ภัณฑารักษ์',use:'ใช้กับ museum, appoint',ex:['The museum hired a new curator.','The curator selected the paintings.','The curator carefully arranged the exhibition to tell a coherent visual story.']},
+{cat:'art',w:'genre',pos:'n.',en:'a category of artistic work characterized by a particular style or subject',th:'ประเภท/แนว (ของงานศิลปะ)',use:'ใช้กับ film, literary',ex:['Horror is her favorite genre.','The film blends several genres.','Science fiction has become one of the most commercially successful film genres.']},
+{cat:'art',w:'improvisation',pos:'n.',en:'the act of creating or performing something spontaneously, without preparation',th:'การแสดงสด/การด้นสด',use:'ใช้กับ musical, skill',ex:['The band is known for improvisation.','Jazz relies heavily on improvisation.','Skilled improvisation allows performers to respond creatively to the audience in real time.']},
+{cat:'art',w:'choreography',pos:'n.',en:'the sequence of steps and movements designed for a dance or performance',th:'การออกแบบท่าเต้น',use:'ใช้กับ create, complex',ex:['The dancer performed complex choreography.','She created the choreography herself.','The show’s choreography combined classical ballet with modern contemporary dance.']},
+{cat:'art',w:'narrative',pos:'n.',en:'a spoken or written account of connected events; a story',th:'เรื่องเล่า/โครงเรื่อง',use:'ใช้กับ compelling, structure',ex:['The film has a compelling narrative.','The novel’s narrative unfolds slowly.','The director used a nonlinear narrative to reveal the story’s twist gradually.']},
+{cat:'art',w:'protagonist',pos:'n.',en:'the main character in a story, film, or play',th:'ตัวเอกของเรื่อง',use:'ใช้กับ main, sympathetic',ex:['The protagonist faces many challenges.','Viewers sympathized with the protagonist.','The novel’s protagonist undergoes significant personal growth throughout the story.']},
+{cat:'art',w:'adaptation',pos:'n.',en:'a version of a work, such as a book, changed for another medium like film',th:'การดัดแปลง (จากงานต้นฉบับ)',use:'ใช้กับ film, faithful',ex:['The film is an adaptation of the novel.','Critics praised the faithful adaptation.','The stage adaptation captured much of the book’s original emotional depth.']},
+{cat:'art',w:'box office',pos:'phrase',en:'the total amount of money earned by a film or show from ticket sales',th:'รายได้จากการขายตั๋วภาพยนตร์',use:'ใช้กับ success, top',ex:['The movie topped the box office.','It was a box office success.','The film’s disappointing box office performance surprised many industry analysts.']},
+{cat:'art',w:'blockbuster',pos:'n.',en:'a very successful and popular film, book, or show',th:'ภาพยนตร์/งานที่ประสบความสำเร็จอย่างมาก',use:'ใช้กับ summer, release',ex:['It became a summer blockbuster.','The studio released a new blockbuster.','Major studios often schedule blockbuster releases during the summer holiday season.']},
+{cat:'art',w:'soundtrack',pos:'n.',en:'the recorded music accompanying a film, show, or game',th:'เพลงประกอบ',use:'ใช้กับ original, memorable',ex:['The film has a great soundtrack.','She loved the movie’s soundtrack.','The composer’s original soundtrack significantly enhanced the film’s emotional impact.']},
+{cat:'art',w:'avant-garde',pos:'adj.',en:'new and experimental, especially in art or ideas',th:'แนวหน้า/ทดลองแหวกแนว',use:'ใช้กับ art, fashion',ex:['The exhibit featured avant-garde art.','Her fashion style is avant-garde.','Avant-garde theater often challenges audiences with unconventional staging and structure.']},
+{cat:'art',w:'critique',pos:'n./v.',en:'a detailed analysis and assessment of something, especially a work of art',th:'บทวิจารณ์/วิพากษ์วิจารณ์',use:'ใช้กับ write, harsh',ex:['She wrote a critique of the film.','The critic offered a harsh critique.','A thoughtful critique can help artists refine their work rather than simply discourage them.']},
+{cat:'art',w:'satire',pos:'n.',en:'the use of humor or exaggeration to criticize people or society',th:'เสียดสี',use:'ใช้กับ political, use',ex:['The show uses political satire.','The novel is a work of satire.','Political satire allows comedians to criticize powerful figures through humor.']},
+{cat:'art',w:'symbolism',pos:'n.',en:'the use of symbols to represent ideas or qualities in art or literature',th:'สัญลักษณ์นิยม/การใช้สัญลักษณ์',use:'ใช้กับ religious, rich in',ex:['The painting is rich in symbolism.','Religious symbolism appears throughout the work.','The director used visual symbolism to hint at the character’s inner conflict.']},
+{cat:'art',w:'authenticity',pos:'n.',en:'the quality of being genuine and true to its origins',th:'ความแท้จริง/ความจริงใจ (ในงานศิลปะ)',use:'ใช้กับ question, artistic',ex:['Experts questioned the painting’s authenticity.','The film aims for cultural authenticity.','Collectors are willing to pay a premium for guaranteed authenticity.']},
+{cat:'art',w:'commission',pos:'n./v.',en:'an instruction or request to produce a piece of work, or to formally request it',th:'การว่าจ้างให้สร้างผลงาน',use:'ใช้กับ receive, artwork',ex:['The artist received a commission.','The city commissioned a new mural.','The gallery commissioned the sculpture specifically for the new building’s entrance.']},
+{cat:'art',w:'patron',pos:'n.',en:'a person who financially supports an artist, cause, or organization',th:'ผู้อุปถัมภ์ศิลปะ',use:'ใช้กับ arts, wealthy',ex:['A wealthy patron funded the museum.','She became a patron of the arts.','Without generous patrons, many young artists would struggle to fund their early work.']},
+{cat:'art',w:'portray',pos:'v.',en:'to depict or represent someone or something in a particular way',th:'ถ่ายทอด/แสดงบทบาทเป็น',use:'ใช้กับ character, accurately',ex:['The actor portrays a king.','The film portrays war realistically.','The documentary portrays the community’s struggles with honesty and sensitivity.']},
+{cat:'art',w:'captivate',pos:'v.',en:'to attract and hold the attention or interest of someone',th:'ดึงดูดใจอย่างมาก',use:'ใช้กับ audience, performance',ex:['The performance captivated the audience.','Her voice captivated listeners.','The stunning visuals captivated audiences throughout the entire film.']},
+{cat:'art',w:'immersive',pos:'adj.',en:'creating a deeply engaging experience that surrounds the audience',th:'ดื่มด่ำ/ทำให้รู้สึกเหมือนอยู่ในเหตุการณ์จริง',use:'ใช้กับ experience, exhibit',ex:['The exhibit offers an immersive experience.','Virtual reality creates immersive games.','The immersive installation surrounded visitors with sound, light, and moving images.']},
+
+// ============ FOOD & AGRICULTURE (25) ============
+{cat:'food',w:'cultivate',pos:'v.',en:'to prepare and use land for growing crops',th:'เพาะปลูก',use:'ใช้กับ crop, land',ex:['Farmers cultivate rice here.','They cultivate the land carefully.','Local farmers have cultivated this valley for hundreds of years.']},
+{cat:'food',w:'crop rotation',pos:'phrase',en:'the practice of growing different crops in succession on the same land to maintain soil health',th:'การปลูกพืชหมุนเวียน',use:'ใช้กับ practice, improve soil',ex:['Farmers use crop rotation.','Crop rotation improves soil quality.','Consistent crop rotation helps prevent the depletion of specific soil nutrients.']},
+{cat:'food',w:'livestock',pos:'n.',en:'farm animals raised for meat, milk, or other products',th:'ปศุสัตว์',use:'ใช้กับ raise, breed',ex:['They raise livestock on the farm.','Livestock farming requires large land.','Rising demand for meat has increased pressure on livestock farming worldwide.']},
+{cat:'food',w:'irrigation',pos:'n.',en:'the artificial supply of water to land to help crops grow',th:'การชลประทาน',use:'ใช้กับ system, rely on',ex:['The farm uses irrigation.','Crops rely on irrigation in dry areas.','Modern irrigation systems have allowed farming to expand into previously arid regions.']},
+{cat:'food',w:'organic',pos:'adj.',en:'grown or produced without the use of synthetic chemicals',th:'เกษตรอินทรีย์',use:'ใช้กับ farming, produce',ex:['They sell organic vegetables.','Organic farming avoids pesticides.','Demand for organic produce has grown steadily among health-conscious consumers.']},
+{cat:'food',w:'yield',pos:'n.',en:'the amount of a crop or product produced',th:'ผลผลิต',use:'ใช้กับ crop, increase',ex:['The farm had a good yield.','New methods increased crop yield.','Improved irrigation techniques significantly increased the farm’s overall yield.']},
+{cat:'food',w:'arable',pos:'adj.',en:'(of land) suitable for growing crops',th:'เหมาะแก่การเพาะปลูก',use:'ใช้กับ land, limited',ex:['The region has fertile arable land.','Arable land is limited here.','Much of the country’s arable land has been lost to urban expansion.']},
+{cat:'food',w:'fertile',pos:'adj.',en:'(of land) able to produce abundant vegetation or crops',th:'อุดมสมบูรณ์',use:'ใช้กับ soil, land',ex:['The valley has fertile soil.','Farmers value fertile land.','The river regularly floods the plain, leaving behind fertile soil for farming.']},
+{cat:'food',w:'harvest',pos:'n./v.',en:'to gather crops when they are ripe; the crops gathered',th:'การเก็บเกี่ยว',use:'ใช้กับ annual, bring in',ex:['They harvest wheat in summer.','The annual harvest was good.','Workers rushed to bring in the harvest before the storm arrived.']},
+{cat:'food',w:'subsistence farming',pos:'phrase',en:'farming that produces just enough food for a farmer’s own family, with little surplus',th:'เกษตรกรรมเพื่อยังชีพ',use:'ใช้กับ rely on, practice',ex:['Many families rely on subsistence farming.','They practice subsistence farming.','Subsistence farming leaves families vulnerable to poor harvests and drought.']},
+{cat:'food',w:'genetically modified',pos:'phrase',en:'(of crops or organisms) altered through genetic engineering',th:'ดัดแปลงพันธุกรรม',use:'ใช้กับ crop, food',ex:['The store sells genetically modified corn.','Some countries ban genetically modified crops.','Genetically modified crops are engineered to resist pests and drought.']},
+{cat:'food',w:'processed food',pos:'phrase',en:'food that has been significantly altered from its natural state through industrial methods',th:'อาหารแปรรูป',use:'ใช้กับ avoid, rely on',ex:['She tries to avoid processed food.','Processed food is often high in salt.','Many nutritionists recommend limiting the intake of heavily processed food.']},
+{cat:'food',w:'perishable',pos:'adj.',en:'(of food) likely to decay or spoil quickly',th:'เน่าเสียง่าย',use:'ใช้กับ goods, store',ex:['Fruit is a perishable item.','Perishable goods need refrigeration.','Transporting perishable goods long distances requires an efficient cold-chain system.']},
+{cat:'food',w:'preservative',pos:'n.',en:'a substance added to food to prevent decay',th:'สารกันบูด',use:'ใช้กับ artificial, avoid',ex:['The bread contains no preservatives.','Artificial preservatives extend shelf life.','Consumers increasingly seek products free from artificial preservatives.']},
+{cat:'food',w:'staple',pos:'n.',en:'a food that forms a regular and important part of a diet',th:'อาหารหลัก',use:'ใช้กับ dietary, main',ex:['Rice is a dietary staple.','Bread is a staple in many countries.','Rice remains the dietary staple for more than half the world’s population.']},
+{cat:'food',w:'self-sufficient',pos:'adj.',en:'able to produce or provide for oneself without outside help',th:'พึ่งพาตนเองได้',use:'ใช้กับ farm, food',ex:['The farm is nearly self-sufficient.','They grow food to be self-sufficient.','The community aimed to become self-sufficient in food production within a decade.']},
+{cat:'food',w:'famine',pos:'n.',en:'an extreme scarcity of food affecting a large population',th:'ทุพภิกขภัย',use:'ใช้กับ cause, suffer from',ex:['The drought caused a famine.','Millions suffered during the famine.','Poor harvests combined with conflict often trigger devastating famines.']},
+{cat:'food',w:'surplus',pos:'n.',en:'an amount of something left over after requirements have been met',th:'ส่วนเกิน (ผลผลิต)',use:'ใช้กับ food, produce',ex:['The farm had a grain surplus.','They sold the surplus produce.','A large agricultural surplus allowed the country to export food abroad.']},
+{cat:'food',w:'agribusiness',pos:'n.',en:'large-scale farming and the commercial businesses connected to agricultural production',th:'ธุรกิจการเกษตร',use:'ใช้กับ large, industry',ex:['Agribusiness dominates the region.','The company is a major agribusiness.','Large agribusiness firms have replaced many small family farms in recent decades.']},
+{cat:'food',w:'monoculture',pos:'n.',en:'the cultivation of a single crop over a large area',th:'การปลูกพืชเชิงเดี่ยว',use:'ใช้กับ practice, risk of',ex:['The farm practices monoculture.','Monoculture increases pest risk.','Relying on monoculture leaves farms vulnerable to disease wiping out an entire crop.']},
+{cat:'food',w:'supply chain',pos:'phrase',en:'the sequence of processes involved in producing and delivering a product',th:'ห่วงโซ่อุปทาน',use:'ใช้กับ disrupt, food',ex:['The storm disrupted the supply chain.','The food supply chain is complex.','Global supply chains were severely disrupted during the recent crisis.']},
+{cat:'food',w:'food security',pos:'phrase',en:'reliable access to sufficient, safe, and nutritious food',th:'ความมั่นคงทางอาหาร',use:'ใช้กับ ensure, threaten',ex:['The program aims to ensure food security.','Drought threatens food security.','Climate change poses a growing threat to global food security.']},
+{cat:'food',w:'cash crop',pos:'phrase',en:'a crop grown for sale rather than for the farmer’s own use',th:'พืชเศรษฐกิจ',use:'ใช้กับ grow, export',ex:['Coffee is a major cash crop.','Farmers grow cash crops for export.','The region’s economy depends heavily on a single cash crop.']},
+{cat:'food',w:'free-range',pos:'adj.',en:'(of animals) raised in natural conditions with freedom to move rather than confined',th:'เลี้ยงแบบปล่อยอิสระ',use:'ใช้กับ chicken, egg',ex:['They sell free-range eggs.','Free-range chickens roam freely.','Free-range farming is generally considered more humane, though often more expensive.']},
+{cat:'food',w:'nutrient-rich',pos:'adj.',en:'containing a high amount of nutrients beneficial to health',th:'อุดมด้วยสารอาหาร',use:'ใช้กับ soil, diet',ex:['The soil is nutrient-rich.','She eats a nutrient-rich diet.','Nutrient-rich soil is essential for producing healthy, high-yield crops.']},
+
+// ============ SPORT & LEISURE (25) ============
+{cat:'sport',w:'leisure',pos:'n.',en:'time free from work or duties, used for relaxation or enjoyment',th:'เวลาว่าง/การพักผ่อน',use:'ใช้กับ activity, spend',ex:['She spends leisure time reading.','Leisure activities help reduce stress.','People today have more leisure time than previous generations due to shorter working hours.']},
+{cat:'sport',w:'recreational',pos:'adj.',en:'relating to activities done for enjoyment rather than as a serious pursuit',th:'เพื่อการพักผ่อนหย่อนใจ',use:'ใช้กับ activity, facility',ex:['Swimming is a recreational activity.','The park offers recreational facilities.','Recreational sports encourage community involvement without the pressure of competition.']},
+{cat:'sport',w:'spectator',pos:'n.',en:'a person who watches a show, game, or other event',th:'ผู้ชม (การแข่งขัน)',use:'ใช้กับ crowd of, attract',ex:['Spectators cheered loudly.','The match attracted many spectators.','A large crowd of spectators gathered to watch the final match.']},
+{cat:'sport',w:'endurance',pos:'n.',en:'the ability to withstand prolonged physical or mental effort',th:'ความอดทน/ความทนทาน',use:'ใช้กับ build, test of',ex:['Marathon running requires endurance.','The race tested their endurance.','Years of training helped the athlete build remarkable physical endurance.']},
+{cat:'sport',w:'rigorous',pos:'adj.',en:'extremely thorough, strict, or demanding',th:'เข้มงวด/หนักหน่วง',use:'ใช้กับ training, schedule',ex:['Athletes follow a rigorous schedule.','The training was rigorous.','The rigorous training regimen left little time for rest between competitions.']},
+{cat:'sport',w:'amateur',pos:'n./adj.',en:'a person who engages in an activity without being paid, especially as a hobby',th:'มือสมัครเล่น',use:'ตรงข้ามกับ professional',ex:['He plays as an amateur.','She competed in amateur boxing.','Many amateur athletes dream of one day turning professional.']},
+{cat:'sport',w:'sponsorship',pos:'n.',en:'financial support given to an event, team, or individual, often in exchange for advertising',th:'การสนับสนุนด้านการเงิน (โดยแลกกับการโฆษณา)',use:'ใช้กับ secure, corporate',ex:['The team secured corporate sponsorship.','Sponsorship funds the tournament.','Losing a major sponsorship deal put the team’s finances under serious strain.']},
+{cat:'sport',w:'tournament',pos:'n.',en:'a series of contests between several competitors, competing for an overall championship',th:'การแข่งขัน (แบบทัวร์นาเมนต์)',use:'ใช้กับ host, enter',ex:['The city hosted the tournament.','She entered the chess tournament.','The tournament attracted teams from more than twenty countries this year.']},
+{cat:'sport',w:'referee',pos:'n.',en:'an official who supervises a sports match and enforces the rules',th:'ผู้ตัดสิน',use:'ใช้กับ blow the whistle, disagree with',ex:['The referee blew the whistle.','Players disagreed with the referee.','The referee’s controversial decision sparked heated debate among fans.']},
+{cat:'sport',w:'disqualify',pos:'v.',en:'to officially exclude someone from a competition for breaking a rule',th:'ตัดสิทธิ์',use:'ใช้กับ from competition',ex:['He was disqualified from the race.','The team was disqualified for cheating.','The runner was disqualified after failing a post-race drug test.']},
+{cat:'sport',w:'underdog',pos:'n.',en:'a competitor thought unlikely to win',th:'ผู้ที่ไม่ได้ถูกคาดหวังให้ชนะ',use:'ใช้กับ root for, become',ex:['Fans rooted for the underdog.','The underdog won the match.','Against all expectations, the underdog team advanced to the final round.']},
+{cat:'sport',w:'rivalry',pos:'n.',en:'a state of competition between people or teams',th:'การแข่งขันชิงดีชิงเด่น',use:'ใช้กับ fierce, sporting',ex:['The two teams have a fierce rivalry.','Their rivalry dates back years.','The sporting rivalry between the two clubs draws huge crowds every season.']},
+{cat:'sport',w:'milestone',pos:'n.',en:'a significant event or achievement in the development of something',th:'เหตุการณ์สำคัญ/จุดหมายสำคัญ',use:'ใช้กับ reach, mark',ex:['Winning gold was a milestone.','She reached a career milestone.','Breaking the world record marked a major milestone in her athletic career.']},
+{cat:'sport',w:'adrenaline',pos:'n.',en:'a hormone released during excitement or stress that increases energy and alertness',th:'อะดรีนาลีน/ความตื่นเต้นเร้าใจ',use:'ใช้กับ rush of, feel',ex:['She felt a rush of adrenaline.','Extreme sports give an adrenaline rush.','The adrenaline of competing in front of a large crowd is hard to describe.']},
+{cat:'sport',w:'venue',pos:'n.',en:'the place where an event or activity takes place',th:'สถานที่จัดงาน',use:'ใช้กับ host, book',ex:['The stadium is the event venue.','They booked a venue for the match.','Organizers chose a new venue capable of holding a much larger crowd.']},
+{cat:'sport',w:'spectacle',pos:'n.',en:'a visually striking public event or performance',th:'ภาพที่น่าตื่นตาตื่นใจ',use:'ใช้กับ visual, impressive',ex:['The opening ceremony was a spectacle.','Fans enjoyed the visual spectacle.','The closing ceremony offered a dazzling spectacle of lights and music.']},
+{cat:'sport',w:'doping',pos:'n.',en:'the use of banned substances to improve athletic performance',th:'การใช้สารกระตุ้น (ในกีฬา)',use:'ใช้กับ test for, ban',ex:['The athlete was tested for doping.','Doping is strictly banned in sport.','The scandal exposed widespread doping across several national teams.']},
+{cat:'sport',w:'team spirit',pos:'phrase',en:'a feeling of loyalty and cooperation shared by members of a team',th:'จิตวิญญาณของการทำงานเป็นทีม',use:'ใช้กับ boost, strong',ex:['The coach praised their team spirit.','Team spirit helped them win.','Strong team spirit carried the underdog squad through a difficult season.']},
+{cat:'sport',w:'resilience',pos:'n.',en:'the ability to recover quickly from difficulty or setback',th:'ความสามารถในการฟื้นตัว/ความยืดหยุ่นทางจิตใจ',use:'ใช้กับ show, mental',ex:['The athlete showed great resilience.','Mental resilience matters in sport.','Her resilience after the injury inspired teammates throughout the recovery.']},
+{cat:'sport',w:'competitive',pos:'adj.',en:'having a strong desire to win or succeed, or involving strong competition',th:'มีการแข่งขันสูง/มุ่งเอาชนะ',use:'ใช้กับ nature, edge',ex:['He has a competitive nature.','The market is highly competitive.','Her competitive edge pushed her to train harder than any of her teammates.']},
+{cat:'sport',w:'downtime',pos:'n.',en:'a period of rest or inactivity, especially between periods of activity',th:'เวลาว่างจากการทำงาน/พัก',use:'ใช้กับ need, enjoy',ex:['Athletes need downtime to recover.','She enjoys downtime after training.','Scheduling regular downtime is essential to avoid burnout during a long season.']},
+{cat:'sport',w:'pastime',pos:'n.',en:'an activity done regularly for enjoyment in one’s spare time',th:'งานอดิเรก/กิจกรรมยามว่าง',use:'ใช้กับ favorite, popular',ex:['Fishing is his favorite pastime.','Reading is a popular pastime.','Gardening has become a popular pastime for people working from home.']},
+{cat:'sport',w:'elite',pos:'adj.',en:'belonging to the most skilled or successful group in a particular field',th:'ระดับหัวกะทิ/ชั้นยอด',use:'ใช้กับ athlete, level',ex:['She trains at an elite level.','Elite athletes follow strict diets.','Reaching elite competition level requires years of disciplined training.']},
+{cat:'sport',w:'retire',pos:'v.',en:'to formally end one’s career, especially in sport',th:'เลิกเล่น/เกษียณ (จากอาชีพนักกีฬา)',use:'ใช้กับ from sport, announce',ex:['The champion decided to retire.','She announced she would retire.','The veteran player announced he would retire at the end of the season.']},
+{cat:'sport',w:'comeback',pos:'n.',en:'a return to a former successful position after a setback or absence',th:'การกลับมา (หลังจากพ่ายแพ้หรือหายไป)',use:'ใช้กับ stage, remarkable',ex:['The team staged a comeback.','Her comeback surprised everyone.','The injured athlete made a remarkable comeback to win the championship the following year.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

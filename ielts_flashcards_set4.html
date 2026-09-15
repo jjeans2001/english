@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 4</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'space', name:'อวกาศ-ดาราศาสตร์', color:'#38356B', light:'#E2E1EE'},
+  {id:'history', name:'ประวัติศาสตร์-โบราณคดี', color:'#8C6239', light:'#EFE6D8'},
+  {id:'psychology', name:'จิตวิทยา-พฤติกรรมมนุษย์', color:'#7A5468', light:'#ECE0E6'},
+  {id:'business', name:'ธุรกิจ-การตลาด', color:'#3A5568', light:'#E1E7EB'},
+  {id:'language', name:'ภาษา-ภาษาศาสตร์', color:'#A85C3A', light:'#F4E2D8'},
+  {id:'energy', name:'พลังงาน-อุตสาหกรรม', color:'#B98A2E', light:'#F3E9D5'},
+];
+
+const vocab = [
+
+// ============ SPACE & ASTRONOMY (25) ============
+{cat:'space',w:'orbit',pos:'n./v.',en:'the curved path of an object around a star, planet, or moon; to move in such a path',th:'วงโคจร/โคจร',use:'ใช้กับ Earth’s, complete an',ex:['The moon orbits the Earth.','The satellite completed its orbit.','Scientists calculated the exact orbit needed to keep the satellite in position.']},
+{cat:'space',w:'galaxy',pos:'n.',en:'a huge system of stars, gas, and dust held together by gravity',th:'ดาราจักร',use:'ใช้กับ spiral, distant',ex:['Our galaxy is called the Milky Way.','Astronomers study distant galaxies.','Telescopes have captured images of galaxies billions of light-years away.']},
+{cat:'space',w:'celestial',pos:'adj.',en:'relating to the sky or outer space',th:'เกี่ยวกับท้องฟ้า/เทหวัตถุ',use:'ใช้กับ body, object',ex:['Stars are celestial bodies.','They observed a celestial event.','Ancient civilizations tracked celestial movements to develop early calendars.']},
+{cat:'space',w:'gravity',pos:'n.',en:'the force that attracts objects toward each other, especially toward the center of a planet',th:'แรงโน้มถ่วง',use:'ใช้กับ Earth’s, zero',ex:['Gravity pulls objects down.','Earth’s gravity keeps us grounded.','Scientists study how gravity affects the human body during long space missions.']},
+{cat:'space',w:'asteroid',pos:'n.',en:'a small rocky object that orbits the sun',th:'ดาวเคราะห์น้อย',use:'ใช้กับ belt, collide',ex:['An asteroid passed near Earth.','Scientists tracked the asteroid’s path.','A large asteroid impact is believed to have caused the extinction of the dinosaurs.']},
+{cat:'space',w:'telescope',pos:'n.',en:'an instrument used to observe distant objects, especially in space',th:'กล้องโทรทรรศน์',use:'ใช้กับ powerful, point',ex:['He looked through a telescope.','The powerful telescope revealed new stars.','The new space telescope allows scientists to observe galaxies never seen before.']},
+{cat:'space',w:'satellite',pos:'n.',en:'an object that orbits a planet, either natural or artificial',th:'ดาวเทียม',use:'ใช้กับ launch, communication',ex:['The company launched a satellite.','Satellites help with communication.','Weather satellites provide crucial data for predicting storms accurately.']},
+{cat:'space',w:'cosmos',pos:'n.',en:'the universe considered as a well-ordered whole',th:'จักรวาล',use:'ใช้กับ vast, explore',ex:['The cosmos is vast.','Scientists try to understand the cosmos.','Humans have long been fascinated by their place within the vast cosmos.']},
+{cat:'space',w:'astronaut',pos:'n.',en:'a person trained to travel and work in space',th:'นักบินอวกาศ',use:'ใช้กับ train, mission',ex:['The astronaut trained for years.','Astronauts conducted experiments in space.','The astronaut spent six months aboard the international space station.']},
+{cat:'space',w:'spacecraft',pos:'n.',en:'a vehicle designed to travel in space',th:'ยานอวกาศ',use:'ใช้กับ launch, design',ex:['The spacecraft launched successfully.','Engineers designed the new spacecraft.','The spacecraft traveled millions of kilometers before reaching its destination.']},
+{cat:'space',w:'launch',pos:'v./n.',en:'to send a rocket, satellite, or spacecraft into space',th:'ปล่อย (จรวด/ดาวเทียม)',use:'ใช้กับ rocket, successful',ex:['They launched the rocket.','The launch was successful.','Engineers delayed the launch due to unfavorable weather conditions.']},
+{cat:'space',w:'trajectory',pos:'n.',en:'the curved path followed by an object moving through space',th:'วิถีการเคลื่อนที่',use:'ใช้กับ calculate, precise',ex:['They calculated the rocket’s trajectory.','The trajectory was precise.','A slight error in trajectory can cause a spacecraft to miss its target entirely.']},
+{cat:'space',w:'interstellar',pos:'adj.',en:'relating to or occurring between stars',th:'ระหว่างดวงดาว',use:'ใช้กับ travel, space',ex:['Interstellar travel remains difficult.','The film explores interstellar space.','Interstellar distances are so vast that light itself takes years to cross them.']},
+{cat:'space',w:'extraterrestrial',pos:'adj.',en:'originating from or existing outside the Earth',th:'นอกโลก',use:'ใช้กับ life, search for',ex:['Scientists search for extraterrestrial life.','The film features extraterrestrial creatures.','No confirmed evidence of extraterrestrial life has yet been discovered.']},
+{cat:'space',w:'lunar',pos:'adj.',en:'relating to the moon',th:'เกี่ยวกับดวงจันทร์',use:'ใช้กับ mission, surface, calendar',ex:['They studied the lunar surface.','The lunar mission was a success.','Several countries are planning new lunar missions in the coming years.']},
+{cat:'space',w:'solar system',pos:'phrase',en:'the sun and all the planets and other bodies that orbit it',th:'ระบบสุริยะ',use:'ใช้กับ explore, edge of',ex:['Earth is part of the solar system.','They study our solar system.','Probes have now reached the outer edge of our solar system.']},
+{cat:'space',w:'nebula',pos:'n.',en:'a cloud of gas and dust in space, often where stars are formed',th:'เนบิวลา (กลุ่มแก๊สและฝุ่นในอวกาศ)',use:'ใช้กับ observe, form',ex:['The telescope captured a nebula.','Stars form within a nebula.','New stars are constantly being born within massive interstellar nebulae.']},
+{cat:'space',w:'black hole',pos:'phrase',en:'a region of space with gravity so strong that nothing, not even light, can escape',th:'หลุมดำ',use:'ใช้กับ form, discover',ex:['A black hole forms from a collapsed star.','Scientists photographed a black hole.','Astronomers recently captured the first direct image of a black hole.']},
+{cat:'space',w:'cosmic',pos:'adj.',en:'relating to the universe, especially as distinct from Earth',th:'เกี่ยวกับจักรวาล',use:'ใช้กับ ray, event',ex:['Cosmic rays reach Earth constantly.','It was a cosmic event.','Cosmic radiation poses a serious risk to astronauts on long space missions.']},
+{cat:'space',w:'probe',pos:'n.',en:'an unmanned spacecraft sent to gather information, especially in space',th:'ยานสำรวจอวกาศ',use:'ใช้กับ space, send',ex:['They sent a probe to Mars.','The probe collected valuable data.','The space probe transmitted images back to Earth for over a decade.']},
+{cat:'space',w:'exploration',pos:'n.',en:'the act of traveling through and investigating an unfamiliar area',th:'การสำรวจ',use:'ใช้กับ space, deep-sea',ex:['Space exploration excites scientists.','They fund ocean exploration too.','Continued space exploration could eventually lead to human settlement on other planets.']},
+{cat:'space',w:'propulsion',pos:'n.',en:'the force that drives something forward, especially a vehicle or rocket',th:'ระบบขับเคลื่อน',use:'ใช้กับ system, rocket',ex:['The rocket uses powerful propulsion.','Engineers improved the propulsion system.','New propulsion technology could dramatically shorten travel time to Mars.']},
+{cat:'space',w:'zero gravity',pos:'phrase',en:'a condition in which there is no apparent gravitational pull, as experienced in space',th:'ภาวะไร้น้ำหนัก',use:'ใช้กับ experience, float in',ex:['Astronauts float in zero gravity.','They trained for zero gravity.','Objects simply float when released in a zero gravity environment.']},
+{cat:'space',w:'observatory',pos:'n.',en:'a building equipped with telescopes for observing stars and other astronomical objects',th:'หอดูดาว',use:'ใช้กับ build, visit',ex:['They visited the mountain observatory.','The observatory has a large telescope.','The observatory was built at high altitude to reduce atmospheric interference.']},
+{cat:'space',w:'astronomical',pos:'adj.',en:'relating to astronomy, or extremely large in amount',th:'ทางดาราศาสตร์/มหาศาล',use:'ใช้กับ object, cost',ex:['They studied an astronomical object.','The cost was astronomical.','Building a new space telescope requires an astronomical budget.']},
+
+// ============ HISTORY & ARCHAEOLOGY (25) ============
+{cat:'history',w:'artifact',pos:'n.',en:'an object made by humans, especially one of historical or cultural interest',th:'โบราณวัตถุ',use:'ใช้กับ ancient, discover',ex:['They found an ancient artifact.','The museum displays rare artifacts.','Archaeologists carefully catalogued every artifact discovered at the site.']},
+{cat:'history',w:'excavation',pos:'n.',en:'the process of digging in the ground to uncover buried objects or structures',th:'การขุดค้นทางโบราณคดี',use:'ใช้กับ site, conduct',ex:['The excavation revealed old walls.','They conducted a careful excavation.','The excavation took several years to complete due to the site’s complexity.']},
+{cat:'history',w:'archaeologist',pos:'n.',en:'a person who studies human history through the excavation of sites and artifacts',th:'นักโบราณคดี',use:'ใช้กับ team of, discover',ex:['The archaeologist studied ancient pottery.','A team of archaeologists arrived.','Archaeologists spent decades piecing together the city’s forgotten history.']},
+{cat:'history',w:'civilization',pos:'n.',en:'a complex society with developed culture, government, and technology',th:'อารยธรรม',use:'ใช้กับ ancient, rise and fall of',ex:['Ancient civilization thrived here.','The civilization eventually collapsed.','Historians continue to debate what caused the sudden fall of this civilization.']},
+{cat:'history',w:'ancient',pos:'adj.',en:'belonging to the very distant past',th:'โบราณ',use:'ใช้กับ ruins, civilization',ex:['They explored ancient ruins.','Ancient texts describe the event.','Ancient trade routes connected distant civilizations long before modern transport existed.']},
+{cat:'history',w:'medieval',pos:'adj.',en:'relating to the Middle Ages, roughly between the 5th and 15th centuries',th:'ยุคกลาง',use:'ใช้กับ castle, period',ex:['They visited a medieval castle.','The medieval period lasted centuries.','Medieval towns were often built around a central marketplace and cathedral.']},
+{cat:'history',w:'dynasty',pos:'n.',en:'a series of rulers from the same family',th:'ราชวงศ์',use:'ใช้กับ rule, powerful',ex:['The dynasty ruled for centuries.','A powerful dynasty controlled the region.','The dynasty eventually fell after years of internal conflict and rebellion.']},
+{cat:'history',w:'monument',pos:'n.',en:'a structure built to commemorate a person or event',th:'อนุสรณ์สถาน',use:'ใช้กับ historic, build',ex:['They built a monument to the war heroes.','The historic monument attracts tourists.','The government restored the ancient monument for future generations to appreciate.']},
+{cat:'history',w:'relic',pos:'n.',en:'an object surviving from an earlier time, often of historical interest',th:'สิ่งของหลงเหลือจากอดีต',use:'ใช้กับ ancient, sacred',ex:['They found a religious relic.','The relic is centuries old.','The sacred relic was carefully preserved inside a glass display case.']},
+{cat:'history',w:'chronicle',pos:'n./v.',en:'a written record of events in the order they occurred; to record such events',th:'บันทึกเหตุการณ์ตามลำดับเวลา',use:'ใช้กับ historical, detailed',ex:['The book chronicles the war.','Historians study ancient chronicles.','The chronicle provides a detailed account of events over several centuries.']},
+{cat:'history',w:'unearth',pos:'v.',en:'to discover something by digging in the ground',th:'ขุดค้นพบ',use:'ใช้กับ artifact, remains',ex:['Workers unearthed ancient bones.','Archaeologists unearthed a lost city.','The construction crew accidentally unearthed a set of ancient burial chambers.']},
+{cat:'history',w:'antiquity',pos:'n.',en:'the ancient past, especially the period of ancient Greek and Roman civilization',th:'สมัยโบราณ/ความเป็นของโบราณ',use:'ใช้กับ classical, dating from',ex:['The statue dates from antiquity.','Classical antiquity influenced art.','Many modern legal principles trace their origins back to antiquity.']},
+{cat:'history',w:'archive',pos:'n.',en:'a collection of historical documents or records kept for reference',th:'หอจดหมายเหตุ/คลังเอกสาร',use:'ใช้กับ national, store in',ex:['The documents are kept in an archive.','She researched the national archive.','Historians uncovered new evidence buried deep within the national archive.']},
+{cat:'history',w:'colonization',pos:'n.',en:'the process of settling among and establishing control over a foreign land and its people',th:'การล่าอาณานิคม',use:'ใช้กับ era, impact of',ex:['Colonization changed the region.','The era of colonization ended.','The long-term impact of colonization is still felt across many former colonies today.']},
+{cat:'history',w:'empire',pos:'n.',en:'a large group of states or territories ruled by a single supreme authority',th:'จักรวรรดิ',use:'ใช้กับ vast, rule, fall of',ex:['The empire covered vast land.','Historians study the empire’s rise.','The fall of the empire led to centuries of political fragmentation.']},
+{cat:'history',w:'inscription',pos:'n.',en:'words carved or engraved onto a surface, especially stone or metal',th:'จารึก',use:'ใช้กับ ancient, decipher',ex:['They found an ancient inscription.','Scholars tried to decipher the inscription.','The inscription on the tomb wall took researchers years to decipher.']},
+{cat:'history',w:'prehistoric',pos:'adj.',en:'relating to the period before written records existed',th:'ก่อนประวัติศาสตร์',use:'ใช้กับ era, remains',ex:['They found prehistoric remains.','The prehistoric era fascinates scientists.','Prehistoric cave paintings provide rare insight into early human life.']},
+{cat:'history',w:'legacy',pos:'n.',en:'something handed down from the past, especially an influence or achievement',th:'มรดกตกทอด',use:'ใช้กับ lasting, leave',ex:['He left a lasting legacy.','The empire’s legacy still shapes the region.','The scientist’s legacy continues to influence research decades after her death.']},
+{cat:'history',w:'conquest',pos:'n.',en:'the act of taking control of a place or people by force',th:'การพิชิต',use:'ใช้กับ military, territorial',ex:['The conquest expanded the empire.','Military conquest reshaped borders.','The territorial conquest brought vast new resources under the empire’s control.']},
+{cat:'history',w:'archaeological site',pos:'phrase',en:'a place where evidence of past human activity is preserved and studied',th:'แหล่งโบราณคดี',use:'ใช้กับ discover, protect',ex:['They protected the archaeological site.','The site revealed ancient tools.','UNESCO recognized the archaeological site as a place of exceptional historical value.']},
+{cat:'history',w:'era',pos:'n.',en:'a period of time identified by a particular characteristic or event',th:'ยุคสมัย',use:'ใช้กับ new, mark the beginning of',ex:['It marked the start of a new era.','The invention began a new era.','Historians often use major events to divide history into distinct eras.']},
+{cat:'history',w:'chronology',pos:'n.',en:'the arrangement of events in the order in which they occurred',th:'ลำดับเวลาของเหตุการณ์',use:'ใช้กับ establish, historical',ex:['Historians established a clear chronology.','The book follows a strict chronology.','Piecing together an accurate chronology required comparing dozens of ancient records.']},
+{cat:'history',w:'fossilized',pos:'adj.',en:'preserved in rock form over a very long period, usually referring to organic remains',th:'กลายเป็นซากดึกดำบรรพ์',use:'ใช้กับ remains, bones',ex:['They found fossilized bones.','The fossilized remains were ancient.','Scientists examined the fossilized remains to determine the animal’s age.']},
+{cat:'history',w:'reconstruction',pos:'n.',en:'the act of rebuilding or recreating something based on available evidence',th:'การสร้างขึ้นใหม่ (ตามหลักฐานทางประวัติศาสตร์)',use:'ใช้กับ historical, accurate',ex:['Experts created a historical reconstruction.','The reconstruction took years.','Researchers relied on fragments of pottery to guide their reconstruction of the site.']},
+{cat:'history',w:'heirloom',pos:'n.',en:'a valuable object that has been passed down through generations of a family',th:'มรดกตกทอด (สิ่งของ)',use:'ใช้กับ family, pass down',ex:['The ring is a family heirloom.','They passed down the heirloom.','The antique clock has been a treasured family heirloom for five generations.']},
+
+// ============ PSYCHOLOGY & HUMAN BEHAVIOR (25) ============
+{cat:'psychology',w:'subconscious',pos:'n./adj.',en:'the part of the mind that influences thoughts and behavior without full awareness',th:'จิตใต้สำนึก',use:'ใช้กับ mind, influence',ex:['Dreams reveal the subconscious mind.','Our subconscious influences decisions.','Advertisers often try to appeal to the subconscious rather than rational thought.']},
+{cat:'psychology',w:'perception',pos:'n.',en:'the way in which something is understood or interpreted through the senses or mind',th:'การรับรู้',use:'ใช้กับ public, shape',ex:['Public perception changed quickly.','Advertising shapes consumer perception.','Media coverage can significantly shape public perception of an entire issue.']},
+{cat:'psychology',w:'motivation',pos:'n.',en:'the reason or drive behind a person’s actions or behavior',th:'แรงจูงใจ',use:'ใช้กับ lack of, intrinsic',ex:['He lacked motivation to study.','Intrinsic motivation drives creativity.','Understanding what drives student motivation can help teachers design better lessons.']},
+{cat:'psychology',w:'conditioning',pos:'n.',en:'a process of training behavior through repeated association or reward',th:'การปรับพฤติกรรมโดยการวางเงื่อนไข',use:'ใช้กับ psychological, classical',ex:['The dog responded to conditioning.','Classical conditioning shapes habits.','Early psychological conditioning can influence behavior well into adulthood.']},
+{cat:'psychology',w:'temperament',pos:'n.',en:'a person’s natural disposition, especially in terms of how they react emotionally',th:'อารมณ์/นิสัยโดยกำเนิด',use:'ใช้กับ calm, mild',ex:['She has a calm temperament.','His temperament suits teaching.','Children display noticeably different temperaments from a very young age.']},
+{cat:'psychology',w:'introvert',pos:'n.',en:'a person who tends to be quiet and prefers spending time alone rather than socializing',th:'คนเก็บตัว',use:'ตรงข้ามกับ extrovert',ex:['He is a natural introvert.','Introverts often prefer small groups.','As an introvert, she found large social gatherings mentally exhausting.']},
+{cat:'psychology',w:'extrovert',pos:'n.',en:'a person who is outgoing and energized by social interaction',th:'คนเปิดเผยเข้าสังคม',use:'ตรงข้ามกับ introvert',ex:['She is a confident extrovert.','Extroverts enjoy large parties.','Extroverts tend to feel energized rather than drained after socializing.']},
+{cat:'psychology',w:'compassion',pos:'n.',en:'a feeling of sympathy and concern for the suffering of others',th:'ความเห็นอกเห็นใจ',use:'ใช้กับ show, act with',ex:['She showed great compassion.','The nurse acted with compassion.','Teaching children compassion early can shape how they treat others for life.']},
+{cat:'psychology',w:'instinct',pos:'n.',en:'a natural tendency to behave in a particular way without conscious thought',th:'สัญชาตญาณ',use:'ใช้กับ natural, trust',ex:['He trusted his instinct.','Animals rely on instinct to survive.','Her instinct told her something was wrong before she had any real evidence.']},
+{cat:'psychology',w:'cognitive bias',pos:'phrase',en:'a systematic error in thinking that affects judgments and decisions',th:'อคติทางความคิด',use:'ใช้กับ common, avoid',ex:['Confirmation bias is a common cognitive bias.','We all have some cognitive bias.','Recognizing common cognitive biases can help people make more rational decisions.']},
+{cat:'psychology',w:'reinforcement',pos:'n.',en:'the process of encouraging a behavior by rewarding it',th:'การเสริมแรง (พฤติกรรม)',use:'ใช้กับ positive, negative',ex:['Positive reinforcement encourages good behavior.','Teachers use reinforcement techniques.','Positive reinforcement is generally more effective than punishment in changing behavior.']},
+{cat:'psychology',w:'stimulus',pos:'n.',en:'something that causes a reaction or response in a person or organism',th:'สิ่งเร้า',use:'ใช้กับ respond to, external',ex:['The dog responded to the stimulus.','External stimuli affect mood.','Researchers measured how quickly participants reacted to each visual stimulus.']},
+{cat:'psychology',w:'subjective',pos:'adj.',en:'based on personal opinions or feelings rather than objective facts',th:'เชิงอัตวิสัย/ขึ้นอยู่กับความรู้สึกส่วนตัว',use:'ตรงข้ามกับ objective',ex:['Taste in music is subjective.','Her review was highly subjective.','Beauty is often considered a largely subjective judgment.']},
+{cat:'psychology',w:'rational',pos:'adj.',en:'based on clear thinking and logical reasoning',th:'มีเหตุผล',use:'ใช้กับ decision, thinking',ex:['He made a rational decision.','Rational thinking solves problems.','A rational approach to the crisis helped avoid unnecessary panic.']},
+{cat:'psychology',w:'irrational',pos:'adj.',en:'not based on logical reasoning; illogical',th:'ไร้เหตุผล',use:'ใช้กับ fear, behavior',ex:['She has an irrational fear of spiders.','His anger seemed irrational.','Irrational fears can sometimes be traced back to a specific childhood experience.']},
+{cat:'psychology',w:'self-esteem',pos:'n.',en:'confidence in one’s own worth or abilities',th:'ความภาคภูมิใจในตนเอง',use:'ใช้กับ low, boost',ex:['He has low self-esteem.','Exercise can boost self-esteem.','Constant criticism during childhood can seriously damage a person’s self-esteem.']},
+{cat:'psychology',w:'gratification',pos:'n.',en:'pleasure, especially when a need or desire is satisfied',th:'ความพึงพอใจ',use:'ใช้กับ instant, delayed',ex:['He sought instant gratification.','Delayed gratification builds discipline.','Studies show that delayed gratification in childhood predicts later success.']},
+{cat:'psychology',w:'impulsive',pos:'adj.',en:'acting suddenly without careful thought',th:'หุนหันพลันแล่น',use:'ใช้กับ behavior, decision',ex:['He made an impulsive decision.','Impulsive spending caused debt.','Impulsive behavior in teenagers is partly linked to ongoing brain development.']},
+{cat:'psychology',w:'introspection',pos:'n.',en:'the examination of one’s own thoughts and feelings',th:'การใคร่ครวญภายในตน',use:'ใช้กับ encourage, practice',ex:['Journaling encourages introspection.','She practiced quiet introspection.','Regular introspection can help people better understand their own emotional patterns.']},
+{cat:'psychology',w:'assertive',pos:'adj.',en:'confident and direct in expressing one’s opinions or needs',th:'กล้าแสดงออก/ยืนหยัดในความคิดตนเอง',use:'ใช้กับ become, communication',ex:['She learned to be more assertive.','Assertive communication avoids conflict.','Being assertive rather than aggressive helps resolve disagreements more effectively.']},
+{cat:'psychology',w:'manipulate',pos:'v.',en:'to influence or control someone unfairly for one’s own benefit',th:'บงการ/ชักจูงเพื่อผลประโยชน์ตนเอง',use:'ใช้กับ emotionally, others',ex:['He tried to manipulate her.','Advertisers manipulate emotions.','The manager was accused of manipulating employees through fear and false promises.']},
+{cat:'psychology',w:'perceive',pos:'v.',en:'to become aware of or interpret something through the senses or mind',th:'รับรู้/มองเห็น (เชิงความคิด)',use:'ใช้กับ threat, differently',ex:['She perceived the change immediately.','People perceive risk differently.','Consumers perceive higher prices as a sign of better quality, even when untrue.']},
+{cat:'psychology',w:'denial',pos:'n.',en:'the refusal to accept or acknowledge an unpleasant truth',th:'การปฏิเสธ/ไม่ยอมรับความจริง',use:'ใช้กับ state of, in',ex:['He was in denial about the loss.','Denial is a common reaction to grief.','Living in denial about the problem only made the situation worse over time.']},
+{cat:'psychology',w:'coping mechanism',pos:'phrase',en:'a strategy used to manage stress, emotion, or a difficult situation',th:'กลไกการรับมือกับความเครียด',use:'ใช้กับ healthy, develop',ex:['Exercise is her coping mechanism.','He developed unhealthy coping mechanisms.','Therapists often help clients develop healthier coping mechanisms for stress.']},
+{cat:'psychology',w:'mindset',pos:'n.',en:'a person’s established set of attitudes or way of thinking',th:'กรอบความคิด/ทัศนคติ',use:'ใช้กับ growth, shift',ex:['She has a positive mindset.','A growth mindset encourages learning.','Shifting to a growth mindset helped him embrace challenges rather than avoid them.']},
+
+// ============ BUSINESS & MARKETING (25) ============
+{cat:'business',w:'brand',pos:'n.',en:'a product or company identified by a particular name, design, or reputation',th:'แบรนด์/ตราสินค้า',use:'ใช้กับ build, loyal',ex:['The company built a strong brand.','She is loyal to the brand.','Building brand trust takes years but can be lost in a single scandal.']},
+{cat:'business',w:'stakeholder',pos:'n.',en:'a person or group with an interest or concern in a business or decision',th:'ผู้มีส่วนได้ส่วนเสีย',use:'ใช้กับ key, satisfy',ex:['Employees are important stakeholders.','The plan must satisfy all stakeholders.','Major decisions require input from every key stakeholder involved in the project.']},
+{cat:'business',w:'profit margin',pos:'phrase',en:'the difference between revenue and cost, expressed as a percentage',th:'อัตรากำไร',use:'ใช้กับ narrow, increase',ex:['The store has a narrow profit margin.','They increased their profit margin.','Rising material costs have significantly squeezed the company’s profit margin.']},
+{cat:'business',w:'market share',pos:'phrase',en:'the portion of a market controlled by a particular company',th:'ส่วนแบ่งตลาด',use:'ใช้กับ gain, dominant',ex:['The company gained market share.','They hold a dominant market share.','Aggressive pricing helped the new brand quickly capture significant market share.']},
+{cat:'business',w:'niche',pos:'n.',en:'a specialized segment of the market for a particular kind of product',th:'ตลาดเฉพาะกลุ่ม',use:'ใช้กับ find, target',ex:['They found a profitable niche.','The brand targets a specific niche.','The small company thrived by focusing on a narrow but loyal niche market.']},
+{cat:'business',w:'startup',pos:'n.',en:'a newly established business, especially in technology',th:'ธุรกิจเริ่มต้น',use:'ใช้กับ launch, tech',ex:['He launched a tech startup.','The startup grew quickly.','Many startups fail within their first few years due to limited funding.']},
+{cat:'business',w:'venture capital',pos:'phrase',en:'money invested in new or growing businesses in exchange for a share of ownership',th:'เงินทุนร่วมลงทุน',use:'ใช้กับ raise, secure',ex:['The startup raised venture capital.','They secured venture capital funding.','Venture capital investment allowed the company to expand into new international markets.']},
+{cat:'business',w:'merger',pos:'n.',en:'the combination of two companies into a single new company',th:'การควบรวมกิจการ',use:'ใช้กับ announce, complete',ex:['The two firms announced a merger.','The merger was completed last year.','Regulators reviewed the proposed merger to ensure it did not harm competition.']},
+{cat:'business',w:'acquisition',pos:'n.',en:'the act of one company buying another',th:'การเข้าซื้อกิจการ',use:'ใช้กับ complete, major',ex:['The company completed the acquisition.','It was a major acquisition.','The acquisition allowed the larger firm to expand rapidly into a new market.']},
+{cat:'business',w:'franchise',pos:'n.',en:'a business authorized to operate under an established brand’s name and system',th:'แฟรนไชส์',use:'ใช้กับ open, own',ex:['She opened a coffee franchise.','He owns several franchises.','Opening a franchise lets entrepreneurs use an already established brand and business model.']},
+{cat:'business',w:'supply and demand',pos:'phrase',en:'the economic relationship between the availability of a product and the desire for it',th:'อุปสงค์และอุปทาน',use:'ใช้กับ law of, affect',ex:['Prices follow supply and demand.','The law of supply and demand applies.','Basic supply and demand explains why prices rise sharply during shortages.']},
+{cat:'business',w:'target audience',pos:'phrase',en:'the specific group of people a product, service, or message is intended to reach',th:'กลุ่มเป้าหมาย',use:'ใช้กับ identify, reach',ex:['The ad reached its target audience.','They identified their target audience.','Understanding your target audience is essential before launching any marketing campaign.']},
+{cat:'business',w:'branding',pos:'n.',en:'the process of creating a distinct image and identity for a product or company',th:'การสร้างตราสินค้า',use:'ใช้กับ consistent, strategy',ex:['Consistent branding builds trust.','The company updated its branding.','Strong branding helps a company stand out in a crowded, competitive market.']},
+{cat:'business',w:'campaign',pos:'n.',en:'a series of organized actions carried out to achieve a particular goal, such as promoting a product',th:'แคมเปญ (การตลาด)',use:'ใช้กับ marketing, launch',ex:['They launched a marketing campaign.','The campaign boosted sales.','The advertising campaign successfully increased brand awareness among younger consumers.']},
+{cat:'business',w:'endorsement',pos:'n.',en:'public approval or support given to a product, usually by a well-known person',th:'การรับรอง/สนับสนุนสินค้า',use:'ใช้กับ celebrity, secure',ex:['The brand secured a celebrity endorsement.','Endorsements boost credibility.','A single celebrity endorsement can dramatically increase a product’s sales.']},
+{cat:'business',w:'loyalty',pos:'n.',en:'strong support or allegiance, especially of a customer toward a brand',th:'ความภักดี (ของลูกค้า)',use:'ใช้กับ customer, build',ex:['The store rewards customer loyalty.','Brands try to build loyalty.','Reward programs are commonly used to strengthen long-term customer loyalty.']},
+{cat:'business',w:'competitive advantage',pos:'phrase',en:'a factor that allows a company to outperform its competitors',th:'ความได้เปรียบทางการแข่งขัน',use:'ใช้กับ gain, maintain',ex:['Innovation gave them a competitive advantage.','The company maintained its competitive advantage.','Lower production costs gave the firm a significant competitive advantage over rivals.']},
+{cat:'business',w:'outsourcing',pos:'n.',en:'the practice of hiring an outside company to perform tasks or provide services',th:'การจ้างบุคคลภายนอกทำงาน',use:'ใช้กับ jobs, rely on',ex:['The company relies on outsourcing.','Outsourcing reduced labor costs.','Outsourcing customer service to another country helped the company cut expenses.']},
+{cat:'business',w:'e-commerce',pos:'n.',en:'the buying and selling of goods and services over the internet',th:'พาณิชย์อิเล็กทรอนิกส์',use:'ใช้กับ platform, growth of',ex:['E-commerce sales grew rapidly.','She runs an e-commerce business.','The pandemic accelerated the shift toward e-commerce across nearly every industry.']},
+{cat:'business',w:'logo',pos:'n.',en:'a symbol or design used by a company to identify its products or brand',th:'โลโก้',use:'ใช้กับ design, recognizable',ex:['The company redesigned its logo.','The logo is instantly recognizable.','A simple, memorable logo can significantly strengthen a brand’s overall identity.']},
+{cat:'business',w:'shareholder',pos:'n.',en:'a person who owns shares in a company',th:'ผู้ถือหุ้น',use:'ใช้กับ major, meeting',ex:['Shareholders attended the meeting.','She is a major shareholder.','Shareholders voted to approve the company’s new expansion strategy.']},
+{cat:'business',w:'bankruptcy',pos:'n.',en:'a legal state in which a person or company cannot repay their debts',th:'ภาวะล้มละลาย',use:'ใช้กับ file for, avoid',ex:['The company filed for bankruptcy.','They tried to avoid bankruptcy.','Poor financial management eventually forced the retailer into bankruptcy.']},
+{cat:'business',w:'diversify',pos:'v.',en:'to expand a business or investment into different areas to reduce risk',th:'กระจายความเสี่ยง/ขยายความหลากหลาย (ธุรกิจ)',use:'ใช้กับ portfolio, business',ex:['Investors diversify their portfolio.','The company diversified its products.','Diversifying into new markets helped the company survive the economic downturn.']},
+{cat:'business',w:'monetize',pos:'v.',en:'to earn money from an asset, activity, or platform',th:'แปลงเป็นรายได้',use:'ใช้กับ content, platform',ex:['They monetize the app with ads.','She monetized her online content.','The platform found new ways to monetize user data without upsetting customers.']},
+{cat:'business',w:'asset',pos:'n.',en:'a valuable resource owned by a person or company',th:'สินทรัพย์',use:'ใช้กับ valuable, financial',ex:['Employees are a company’s greatest asset.','They sold off unused assets.','Intellectual property has become one of the company’s most valuable assets.']},
+
+// ============ LANGUAGE & LINGUISTICS (25) ============
+{cat:'language',w:'dialect',pos:'n.',en:'a particular form of a language specific to a region or social group',th:'ภาษาถิ่น',use:'ใช้กับ regional, speak in',ex:['She speaks in a local dialect.','Regional dialects vary widely.','Linguists study how dialects evolve differently across neighboring regions.']},
+{cat:'language',w:'fluency',pos:'n.',en:'the ability to speak or write a language smoothly and accurately',th:'ความคล่องแคล่วในการใช้ภาษา',use:'ใช้กับ achieve, native-like',ex:['She achieved fluency in French.','Native-like fluency takes years.','Achieving true fluency requires regular practice, not just memorizing vocabulary.']},
+{cat:'language',w:'bilingual',pos:'adj.',en:'able to speak two languages fluently',th:'สองภาษา',use:'ใช้กับ education, become',ex:['He grew up bilingual.','The school offers bilingual education.','Being bilingual has been shown to offer several cognitive advantages.']},
+{cat:'language',w:'lexicon',pos:'n.',en:'the complete set of words used in a particular language or by a person',th:'คลังคำศัพท์',use:'ใช้กับ expand, technical',ex:['Reading expands your lexicon.','The field has its own lexicon.','Medicine has developed an extensive technical lexicon over the centuries.']},
+{cat:'language',w:'syntax',pos:'n.',en:'the arrangement of words to form correct sentences in a language',th:'วากยสัมพันธ์/โครงสร้างประโยค',use:'ใช้กับ correct, complex',ex:['He studied English syntax.','The sentence has complex syntax.','Learning the syntax of a new language often takes longer than learning vocabulary.']},
+{cat:'language',w:'phonetics',pos:'n.',en:'the study of the sounds made in human speech',th:'สัทศาสตร์',use:'ใช้กับ study, English',ex:['She studies phonetics at university.','Phonetics explains pronunciation patterns.','Understanding phonetics can help learners improve their pronunciation more quickly.']},
+{cat:'language',w:'semantics',pos:'n.',en:'the study of meaning in language',th:'อรรถศาสตร์/ความหมายของคำ',use:'ใช้กับ study, matter of',ex:['Semantics deals with meaning.','It’s a matter of semantics.','Small differences in semantics can completely change how a sentence is understood.']},
+{cat:'language',w:'etymology',pos:'n.',en:'the study of the origin and history of words',th:'นิรุกติศาสตร์/ที่มาของคำ',use:'ใช้กับ trace, word’s',ex:['He studied the word’s etymology.','Etymology reveals language history.','Tracing a word’s etymology can reveal surprising connections between languages.']},
+{cat:'language',w:'colloquial',pos:'adj.',en:'used in ordinary, informal conversation rather than formal speech or writing',th:'ภาษาพูด/ไม่เป็นทางการ',use:'ใช้กับ expression, speech',ex:['That’s a colloquial expression.','Colloquial speech differs from writing.','The textbook avoided colloquial language in favor of a more formal style.']},
+{cat:'language',w:'jargon',pos:'n.',en:'specialized words or expressions used within a particular profession or group',th:'ศัพท์เฉพาะทาง',use:'ใช้กับ technical, avoid',ex:['The report was full of jargon.','Technical jargon confused readers.','Good writers avoid unnecessary jargon when addressing a general audience.']},
+{cat:'language',w:'idiom',pos:'n.',en:'a phrase whose meaning cannot be understood from the individual words alone',th:'สำนวน',use:'ใช้กับ common, learn',ex:['“Break the ice” is a common idiom.','She learned several English idioms.','Understanding idioms is often one of the hardest parts of learning a new language.']},
+{cat:'language',w:'slang',pos:'n.',en:'very informal words and expressions, often specific to a particular group',th:'คำแสลง',use:'ใช้กับ teenage, use',ex:['Teenagers use a lot of slang.','She didn’t understand the slang.','Slang changes so quickly that even native speakers can struggle to keep up.']},
+{cat:'language',w:'accent',pos:'n.',en:'a distinctive way of pronouncing words, associated with a region or country',th:'สำเนียง',use:'ใช้กับ strong, regional',ex:['He speaks with a strong accent.','Her regional accent is noticeable.','People often unconsciously make assumptions about someone based on their accent.']},
+{cat:'language',w:'articulate',pos:'adj./v.',en:'able to express ideas clearly and effectively',th:'พูดจาชัดเจน/แสดงความคิดได้ชัดเจน',use:'ใช้กับ speaker, clearly',ex:['She is an articulate speaker.','He articulated his concerns clearly.','Being articulate under pressure is an important skill in public debate.']},
+{cat:'language',w:'eloquent',pos:'adj.',en:'fluent and persuasive in speaking or writing',th:'คมคายในการพูด/สละสลวย',use:'ใช้กับ speech, deliver',ex:['He gave an eloquent speech.','Her writing is remarkably eloquent.','The eloquent speech moved much of the audience to tears.']},
+{cat:'language',w:'verbose',pos:'adj.',en:'using more words than necessary; wordy',th:'ใช้คำมากเกินความจำเป็น',use:'ใช้กับ avoid, report',ex:['The report was too verbose.','He avoided being verbose.','Editors often trim verbose sentences to make writing clearer and more direct.']},
+{cat:'language',w:'concise',pos:'adj.',en:'giving information clearly using few words',th:'กระชับ',use:'ตรงข้ามกับ verbose',ex:['Keep your answer concise.','She wrote a concise summary.','A concise report is often more persuasive than a long, detailed one.']},
+{cat:'language',w:'connotation',pos:'n.',en:'an idea or feeling that a word suggests beyond its literal meaning',th:'ความหมายแฝง',use:'ใช้กับ negative, positive',ex:['The word has a negative connotation.','Choose words with a positive connotation.','Writers must be careful about the connotation of the words they choose.']},
+{cat:'language',w:'denotation',pos:'n.',en:'the literal or dictionary meaning of a word',th:'ความหมายตรงตัว',use:'ตรงข้ามกับ connotation',ex:['The denotation of the word is simple.','Dictionaries list a word’s denotation.','Unlike connotation, denotation refers only to a word’s literal, exact meaning.']},
+{cat:'language',w:'translate',pos:'v.',en:'to convert words from one language into another',th:'แปล',use:'ใช้กับ document, accurately',ex:['She translates documents for work.','The book was translated accurately.','Translating poetry accurately is especially difficult because tone and rhythm often get lost.']},
+{cat:'language',w:'interpreter',pos:'n.',en:'a person who translates spoken language in real time',th:'ล่าม',use:'ใช้กับ hire, work as',ex:['They hired an interpreter.','She works as a court interpreter.','A skilled interpreter must think and translate almost simultaneously.']},
+{cat:'language',w:'multilingual',pos:'adj.',en:'able to speak or use several languages',th:'หลายภาษา',use:'ใช้กับ society, staff',ex:['The company hired multilingual staff.','It is a multilingual society.','Multilingual employees are highly valued in international business settings.']},
+{cat:'language',w:'native speaker',pos:'phrase',en:'a person who has spoken a particular language since early childhood',th:'เจ้าของภาษา',use:'ใช้กับ sound like, learn from',ex:['He learned English from a native speaker.','She sounds like a native speaker.','Even native speakers sometimes disagree about correct grammar usage.']},
+{cat:'language',w:'linguistic',pos:'adj.',en:'relating to language or the study of language',th:'ทางภาษาศาสตร์',use:'ใช้กับ diversity, ability',ex:['The country has great linguistic diversity.','She has strong linguistic ability.','Linguistic diversity within a single country can present real challenges for education policy.']},
+{cat:'language',w:'mother tongue',pos:'phrase',en:'the language a person first learns to speak as a child',th:'ภาษาแม่',use:'ใช้กับ speak, learn in',ex:['Spanish is her mother tongue.','Children learn best in their mother tongue.','Research suggests children learn foreign languages more easily once their mother tongue is strong.']},
+
+// ============ ENERGY & INDUSTRY (25) ============
+{cat:'energy',w:'manufacturing',pos:'n.',en:'the process of making goods, typically on a large scale using machinery',th:'การผลิตในภาคอุตสาหกรรม',use:'ใช้กับ industry, sector',ex:['Manufacturing creates many jobs.','The factory handles car manufacturing.','The country’s manufacturing sector has grown significantly over the past decade.']},
+{cat:'energy',w:'output',pos:'n.',en:'the amount of something produced by a person, machine, or industry',th:'ผลผลิต/ปริมาณที่ผลิตได้',use:'ใช้กับ industrial, increase',ex:['Factory output increased last year.','They measured daily output.','Automation has significantly increased the factory’s overall production output.']},
+{cat:'energy',w:'assembly line',pos:'phrase',en:'a series of workers and machines that each perform a specific task to build a product',th:'สายการผลิต',use:'ใช้กับ work on, modern',ex:['He works on the assembly line.','The car is built on an assembly line.','The modern assembly line allows manufacturers to produce goods far more efficiently.']},
+{cat:'energy',w:'raw material',pos:'phrase',en:'a basic material used to produce goods before it is processed',th:'วัตถุดิบ',use:'ใช้กับ import, source',ex:['The factory imports raw material.','They source raw materials locally.','Rising costs of raw materials have squeezed profit margins across the industry.']},
+{cat:'energy',w:'nuclear power',pos:'phrase',en:'electricity generated using nuclear reactions',th:'พลังงานนิวเคลียร์',use:'ใช้กับ generate, rely on',ex:['The country relies on nuclear power.','Nuclear power generates electricity.','Several countries are reconsidering nuclear power as a low-carbon energy source.']},
+{cat:'energy',w:'hydroelectric',pos:'adj.',en:'relating to electricity generated using the force of moving water',th:'เกี่ยวกับพลังงานน้ำ',use:'ใช้กับ dam, power',ex:['The dam produces hydroelectric power.','Hydroelectric energy is renewable.','The hydroelectric dam supplies electricity to millions of households.']},
+{cat:'energy',w:'turbine',pos:'n.',en:'a machine that generates power by using a moving flow of air, water, or steam',th:'กังหัน (ผลิตไฟฟ้า)',use:'ใช้กับ wind, install',ex:['Wind turbines generate electricity.','They installed new turbines.','Each wind turbine can generate enough electricity to power hundreds of homes.']},
+{cat:'energy',w:'grid',pos:'n.',en:'a network of power lines used to distribute electricity across an area',th:'โครงข่ายไฟฟ้า',use:'ใช้กับ power, connect to',ex:['The house is connected to the grid.','The power grid failed during the storm.','Upgrading the aging power grid is essential to support renewable energy sources.']},
+{cat:'energy',w:'consumption',pos:'n.',en:'the amount of something used, especially energy or resources',th:'การบริโภค/การใช้ (พลังงาน)',use:'ใช้กับ energy, reduce',ex:['Energy consumption rose in summer.','They tried to reduce consumption.','Household energy consumption typically peaks during the hottest months of the year.']},
+{cat:'energy',w:'efficiency',pos:'n.',en:'the ability to achieve results with minimal waste of time, energy, or resources',th:'ประสิทธิภาพ',use:'ใช้กับ energy, improve',ex:['The new engine improves efficiency.','Energy efficiency saves money.','Improving energy efficiency in buildings can significantly reduce national electricity demand.']},
+{cat:'energy',w:'combustion',pos:'n.',en:'the process of burning something, especially to produce energy',th:'การเผาไหม้',use:'ใช้กับ engine, internal',ex:['Combustion powers the engine.','Internal combustion engines burn fuel.','Modern engineers are working to design engines with cleaner, more efficient combustion.']},
+{cat:'energy',w:'byproduct',pos:'n.',en:'something produced as an additional result of a main process, often unintended',th:'ผลพลอยได้/ของเสียจากกระบวนการผลิต',use:'ใช้กับ harmful, industrial',ex:['Smoke is a byproduct of burning fuel.','The factory manages harmful byproducts.','Carbon dioxide is a natural byproduct of burning fossil fuels.']},
+{cat:'energy',w:'industrialization',pos:'n.',en:'the development of industries in a country or region on a wide scale',th:'การพัฒนาสู่ความเป็นอุตสาหกรรม',use:'ใช้กับ rapid, drive',ex:['Rapid industrialization changed the economy.','Industrialization increased pollution.','Rapid industrialization transformed the once-agricultural country within a single generation.']},
+{cat:'energy',w:'mechanization',pos:'n.',en:'the process of introducing machines to do work previously done by hand',th:'การใช้เครื่องจักรแทนแรงงานคน',use:'ใช้กับ agricultural, increase',ex:['Mechanization increased farm output.','Agricultural mechanization reduced labor needs.','Mechanization dramatically reduced the number of workers needed on modern farms.']},
+{cat:'energy',w:'labor-intensive',pos:'adj.',en:'requiring a large amount of human labor relative to other resources',th:'ใช้แรงงานมาก',use:'ตรงข้ามกับ capital-intensive',ex:['Farming is often labor-intensive.','The process is highly labor-intensive.','Labor-intensive industries tend to employ far more workers than automated ones.']},
+{cat:'energy',w:'capital-intensive',pos:'adj.',en:'requiring a large amount of money invested in equipment or infrastructure relative to labor',th:'ใช้เงินทุนมาก',use:'ตรงข้ามกับ labor-intensive',ex:['Mining is a capital-intensive industry.','The project is capital-intensive.','Capital-intensive industries often require significant upfront investment before turning a profit.']},
+{cat:'energy',w:'procurement',pos:'n.',en:'the process of obtaining goods or services, especially for a business or organization',th:'การจัดซื้อจัดหา',use:'ใช้กับ process, manage',ex:['The company manages procurement carefully.','Procurement costs rose sharply.','Efficient procurement processes help companies secure materials at the lowest possible cost.']},
+{cat:'energy',w:'warehouse',pos:'n.',en:'a large building used for storing goods before distribution',th:'คลังสินค้า',use:'ใช้กับ store, distribution',ex:['Goods are stored in a warehouse.','The company built a new warehouse.','The distribution warehouse ships thousands of orders to customers every single day.']},
+{cat:'energy',w:'inventory',pos:'n.',en:'a complete list or stock of goods held by a business',th:'สินค้าคงคลัง',use:'ใช้กับ manage, track',ex:['They track inventory carefully.','The store reduced excess inventory.','Poor inventory management can lead to costly shortages or wasted stock.']},
+{cat:'energy',w:'quality control',pos:'phrase',en:'a process used to ensure products meet a required standard before sale',th:'การควบคุมคุณภาพ',use:'ใช้กับ strict, process',ex:['The factory has strict quality control.','Quality control caught the defect.','Rigorous quality control helped the company maintain its reputation for reliability.']},
+{cat:'energy',w:'energy-intensive',pos:'adj.',en:'requiring large amounts of energy to operate or produce',th:'ใช้พลังงานมาก',use:'ใช้กับ process, industry',ex:['Steel production is energy-intensive.','Energy-intensive industries face rising costs.','The energy-intensive process consumes as much electricity as a small town.']},
+{cat:'energy',w:'non-renewable',pos:'adj.',en:'(of a resource) unable to be replaced once used up',th:'ใช้แล้วหมดไป (พลังงาน)',use:'ตรงข้ามกับ renewable',ex:['Coal is a non-renewable resource.','Non-renewable fuels will eventually run out.','Continued reliance on non-renewable resources raises serious long-term concerns.']},
+{cat:'energy',w:'wind farm',pos:'phrase',en:'a group of wind turbines used together to generate electricity',th:'ทุ่งกังหันลมผลิตไฟฟ้า',use:'ใช้กับ build, offshore',ex:['They built a large wind farm.','The offshore wind farm generates power.','The new offshore wind farm will supply electricity to thousands of homes.']},
+{cat:'energy',w:'biomass',pos:'n.',en:'organic material used as a renewable source of energy',th:'ชีวมวล',use:'ใช้กับ convert, burn',ex:['Biomass can be converted into fuel.','The plant burns biomass for energy.','Biomass energy is produced by burning organic materials like wood waste and crop residue.']},
+{cat:'energy',w:'carbon-neutral',pos:'adj.',en:'having a balance between carbon emissions produced and carbon removed or offset',th:'ปล่อยคาร์บอนสุทธิเป็นศูนย์',use:'ใช้กับ become, aim to be',ex:['The company aims to be carbon-neutral.','They achieved carbon-neutral status.','Many corporations have pledged to become carbon-neutral within the next decade.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

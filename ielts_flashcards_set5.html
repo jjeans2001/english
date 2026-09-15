@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 5</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'philosophy', name:'ปรัชญา-จริยธรรม', color:'#4A4A6E', light:'#E4E3EC'},
+  {id:'disaster', name:'ภัยพิบัติ-การจัดการฉุกเฉิน', color:'#B23A3A', light:'#F5DEDE'},
+  {id:'consumer', name:'พฤติกรรมผู้บริโภค-ค้าปลีก', color:'#C77F2E', light:'#F5E6D3'},
+  {id:'military', name:'การทหาร-ความมั่นคง', color:'#4B5320', light:'#E2E5D6'},
+  {id:'weather', name:'สภาพอากาศ-ภูมิอากาศ', color:'#3D7EA6', light:'#DCEAF3'},
+  {id:'physiology', name:'ร่างกาย-สรีรวิทยา', color:'#A13F5C', light:'#F1DEE4'},
+];
+
+const vocab = [
+
+// ============ PHILOSOPHY & ETHICS (25) ============
+{cat:'philosophy',w:'ethics',pos:'n.',en:'moral principles that govern a person’s behavior or the conducting of an activity',th:'จริยธรรม/จรรยาบรรณ',use:'ใช้กับ code of, professional',ex:['Doctors follow a code of ethics.','The company has strict business ethics.','Professional ethics require lawyers to keep client information confidential.']},
+{cat:'philosophy',w:'moral',pos:'adj.',en:'concerned with the principles of right and wrong behavior',th:'เกี่ยวกับศีลธรรม',use:'ใช้กับ obligation, dilemma',ex:['He felt a moral obligation to help.','It raised a difficult moral question.','She faced a moral dilemma between loyalty to her friend and telling the truth.']},
+{cat:'philosophy',w:'morality',pos:'n.',en:'principles concerning the distinction between right and wrong conduct',th:'ศีลธรรม',use:'ใช้กับ question, sense of',ex:['They debated questions of morality.','She has a strong sense of morality.','Philosophers have long debated whether morality is universal or culturally defined.']},
+{cat:'philosophy',w:'virtue',pos:'n.',en:'a positive moral quality regarded as good or admirable',th:'คุณธรรม',use:'ใช้กับ patience, practice',ex:['Patience is considered a virtue.','He values honesty as a virtue.','Ancient philosophers wrote extensively about which virtues lead to a good life.']},
+{cat:'philosophy',w:'vice',pos:'n.',en:'an immoral or bad habit or behavior',th:'อบายมุข/ความชั่วร้าย',use:'ตรงข้ามกับ virtue',ex:['Gambling was his only vice.','Vice and virtue are opposites.','Some argue that a small vice is harmless as long as it harms no one else.']},
+{cat:'philosophy',w:'dilemma',pos:'n.',en:'a situation requiring a choice between equally difficult options',th:'สถานการณ์กลืนไม่เข้าคายไม่ออก',use:'ใช้กับ ethical, face a',ex:['She faced a difficult dilemma.','It was an ethical dilemma.','Doctors sometimes face dilemmas where every available option carries a real risk.']},
+{cat:'philosophy',w:'utilitarianism',pos:'n.',en:'the ethical theory that the best action is the one that maximizes overall happiness',th:'แนวคิดประโยชน์นิยม',use:'ใช้กับ theory of, apply',ex:['He studied utilitarianism at university.','Utilitarianism focuses on outcomes.','Critics argue utilitarianism can justify harming a few to benefit the majority.']},
+{cat:'philosophy',w:'relativism',pos:'n.',en:'the view that truth or morality depends on perspective rather than being absolute',th:'สัมพัทธนิยม',use:'ใช้กับ moral, cultural',ex:['Moral relativism is a debated topic.','Cultural relativism respects differences.','Critics of relativism argue that some moral principles should apply universally.']},
+{cat:'philosophy',w:'conscience',pos:'n.',en:'an inner sense of right and wrong that guides behavior',th:'มโนธรรม',use:'ใช้กับ clear, guilty',ex:['He acted according to his conscience.','She had a guilty conscience.','A troubled conscience kept him awake long after the decision was made.']},
+{cat:'philosophy',w:'integrity',pos:'n.',en:'the quality of being honest and having strong moral principles',th:'ความซื่อสัตย์สุจริต/หลักการที่มั่นคง',use:'ใช้กับ maintain, professional',ex:['She acted with great integrity.','He maintained his integrity under pressure.','Maintaining professional integrity sometimes means refusing profitable but unethical work.']},
+{cat:'philosophy',w:'hypocrisy',pos:'n.',en:'the practice of claiming moral standards one does not actually follow',th:'ความหน้าซื่อใจคด',use:'ใช้กับ accuse of, expose',ex:['She accused him of hypocrisy.','The scandal exposed political hypocrisy.','Critics pointed to a clear hypocrisy between what the leader preached and how he behaved.']},
+{cat:'philosophy',w:'altruism',pos:'n.',en:'unselfish concern for the wellbeing of others',th:'ความเสียสละเพื่อผู้อื่น',use:'ใช้กับ act of, pure',ex:['Volunteering is an act of altruism.','True altruism expects nothing in return.','Scientists debate whether pure altruism exists or if all kindness carries some self-interest.']},
+{cat:'philosophy',w:'egoism',pos:'n.',en:'the belief that self-interest is the proper foundation of morality',th:'อัตตานิยม/การเห็นแก่ตัวเป็นหลักการ',use:'ตรงข้ามกับ altruism',ex:['He was accused of egoism.','Egoism prioritizes self-interest.','Ethical egoism holds that acting in one’s own interest is not only natural but morally correct.']},
+{cat:'philosophy',w:'free will',pos:'phrase',en:'the ability to choose one’s own actions without external constraint',th:'เจตจำนงเสรี',use:'ใช้กับ believe in, exercise',ex:['She believes in free will.','We exercise free will daily.','Philosophers continue to debate whether free will truly exists or is an illusion.']},
+{cat:'philosophy',w:'determinism',pos:'n.',en:'the belief that all events are determined by prior causes, leaving no room for free choice',th:'ตัดสินนิยม',use:'ตรงข้ามกับ free will',ex:['Determinism challenges the idea of choice.','He argued in favor of determinism.','Strict determinism suggests that every decision was already inevitable long before it was made.']},
+{cat:'philosophy',w:'existential',pos:'adj.',en:'relating to human existence and its meaning',th:'เกี่ยวกับการดำรงอยู่ (ปรัชญา)',use:'ใช้กับ crisis, question',ex:['He had an existential crisis.','The film raises existential questions.','Facing mortality often triggers deep existential reflection about the meaning of life.']},
+{cat:'philosophy',w:'metaphysical',pos:'adj.',en:'relating to abstract concepts such as existence, reality, and being',th:'อภิปรัชญา (เหนือธรรมชาติ/นามธรรม)',use:'ใช้กับ question, concept',ex:['They discussed metaphysical questions.','The idea is purely metaphysical.','Metaphysical questions about the nature of reality have puzzled philosophers for centuries.']},
+{cat:'philosophy',w:'epistemology',pos:'n.',en:'the branch of philosophy concerned with the nature and limits of knowledge',th:'ญาณวิทยา',use:'ใช้กับ study, branch of',ex:['Epistemology studies how we know things.','She specializes in epistemology.','Epistemology asks fundamental questions about what counts as genuine knowledge.']},
+{cat:'philosophy',w:'rhetoric',pos:'n.',en:'the art of persuasive speaking or writing',th:'วาทศิลป์',use:'ใช้กับ political, empty',ex:['The speech was full of rhetoric.','Political rhetoric can be persuasive.','Behind the passionate rhetoric, the policy itself remained vague and unclear.']},
+{cat:'philosophy',w:'fallacy',pos:'n.',en:'a mistaken belief or a flaw in reasoning',th:'การให้เหตุผลผิดพลาด/มายาคติ',use:'ใช้กับ logical, common',ex:['That’s a common fallacy.','The argument contains a logical fallacy.','Recognizing logical fallacies helps people evaluate arguments more critically.']},
+{cat:'philosophy',w:'conundrum',pos:'n.',en:'a confusing or difficult problem',th:'ปัญหาที่ยากจะแก้ไข/ปริศนาที่ซับซ้อน',use:'ใช้กับ face a, solve',ex:['They faced a difficult conundrum.','The riddle was a real conundrum.','Balancing economic growth with environmental protection remains a persistent conundrum for policymakers.']},
+{cat:'philosophy',w:'pragmatism',pos:'n.',en:'an approach that deals with problems in a practical rather than theoretical way',th:'แนวคิดปฏิบัตินิยม',use:'ใช้กับ political, practical',ex:['Pragmatism guided his decisions.','The policy reflects political pragmatism.','Pragmatism favors what works in practice over what sounds ideal in theory.']},
+{cat:'philosophy',w:'idealism',pos:'n.',en:'the belief in pursuing high standards or principles, sometimes regardless of practicality',th:'อุดมคตินิยม',use:'ตรงข้ามกับ pragmatism',ex:['Her idealism inspired others.','Youthful idealism often fades with age.','His idealism sometimes clashed with the harsh realities of practical politics.']},
+{cat:'philosophy',w:'nihilism',pos:'n.',en:'the belief that life is without inherent meaning, purpose, or value',th:'นิฮิลลิสม์',use:'ใช้กับ philosophical, embrace',ex:['The novel explores nihilism.','He fell into a kind of nihilism.','Nihilism suggests that traditional values and beliefs ultimately have no real foundation.']},
+{cat:'philosophy',w:'stoicism',pos:'n.',en:'the practice of enduring hardship without complaint, based on ancient philosophy',th:'แนวคิดสโตอิก (ความสงบนิ่งไม่หวั่นไหว)',use:'ใช้กับ practice, show',ex:['He faced the loss with stoicism.','Ancient stoicism teaches emotional control.','She responded to the crisis with remarkable stoicism, showing little visible distress.']},
+
+// ============ DISASTER & EMERGENCY MANAGEMENT (25) ============
+{cat:'disaster',w:'disaster',pos:'n.',en:'a sudden event causing great damage or loss of life',th:'ภัยพิบัติ',use:'ใช้กับ natural, cause',ex:['The flood was a natural disaster.','The disaster caused widespread damage.','Government agencies coordinated the response to the unfolding disaster.']},
+{cat:'disaster',w:'catastrophe',pos:'n.',en:'an extremely serious and often sudden event causing great suffering or damage',th:'หายนะ/ความเสียหายร้ายแรง',use:'ใช้กับ avert, environmental',ex:['They tried to avert catastrophe.','The oil spill was an environmental catastrophe.','Quick action by rescue teams helped prevent an even greater catastrophe.']},
+{cat:'disaster',w:'evacuate',pos:'v.',en:'to move people away from a dangerous place to somewhere safer',th:'อพยพออกจากพื้นที่',use:'ใช้กับ residents, immediately',ex:['Officials evacuated the town.','Residents were told to evacuate immediately.','Thousands of coastal residents were evacuated ahead of the approaching storm.']},
+{cat:'disaster',w:'shelter',pos:'n./v.',en:'a place giving protection from danger or bad weather; to provide such protection',th:'ที่พักพิง/ให้ที่พักพิง',use:'ใช้กับ emergency, take',ex:['They took shelter from the storm.','The center offers emergency shelter.','Emergency shelters quickly filled with families displaced by the flooding.']},
+{cat:'disaster',w:'casualty',pos:'n.',en:'a person killed or injured in an accident, disaster, or conflict',th:'ผู้บาดเจ็บหรือเสียชีวิต',use:'ใช้กับ number of, report',ex:['The storm caused several casualties.','Officials reported the number of casualties.','Emergency crews worked through the night to treat the growing number of casualties.']},
+{cat:'disaster',w:'fatality',pos:'n.',en:'a death caused by an accident, disaster, or disease',th:'ผู้เสียชีวิต',use:'ใช้กับ report, prevent',ex:['The crash resulted in one fatality.','Officials worked to prevent further fatalities.','Improved warning systems have significantly reduced fatalities from major storms.']},
+{cat:'disaster',w:'aftermath',pos:'n.',en:'the period following a harmful or unpleasant event',th:'ผลพวงหลังเหตุการณ์',use:'ใช้กับ in the, deal with',ex:['The city struggled in the aftermath.','They dealt with the storm’s aftermath.','Rebuilding continued for years in the aftermath of the devastating earthquake.']},
+{cat:'disaster',w:'relief',pos:'n.',en:'aid provided to people affected by a disaster or hardship',th:'ความช่วยเหลือบรรเทาทุกข์',use:'ใช้กับ disaster, provide',ex:['Aid workers provided disaster relief.','Relief supplies arrived quickly.','International organizations sent emergency relief to the flood-affected region.']},
+{cat:'disaster',w:'rescue',pos:'n./v.',en:'to save someone from danger; the act of saving someone',th:'การกู้ภัย/ช่วยเหลือ',use:'ใช้กับ team, operation',ex:['The team launched a rescue operation.','Firefighters rescued the trapped family.','The dramatic rescue was broadcast live on national television.']},
+{cat:'disaster',w:'preparedness',pos:'n.',en:'the state of being ready to deal with a possible emergency or crisis',th:'ความพร้อมรับมือ',use:'ใช้กับ disaster, improve',ex:['Disaster preparedness saves lives.','The city improved its preparedness.','Regular drills help improve community preparedness before a real emergency strikes.']},
+{cat:'disaster',w:'containment',pos:'n.',en:'the action of keeping something harmful under control and preventing it from spreading',th:'การควบคุมสถานการณ์ไม่ให้ลุกลาม',use:'ใช้กับ efforts, strategy',ex:['Firefighters focused on containment.','Containment efforts slowed the outbreak.','Officials prioritized containment to stop the wildfire from reaching nearby homes.']},
+{cat:'disaster',w:'contingency plan',pos:'phrase',en:'a plan prepared in advance for a possible emergency or unexpected event',th:'แผนสำรองรับมือเหตุฉุกเฉิน',use:'ใช้กับ prepare, have a',ex:['The company prepared a contingency plan.','They activated their contingency plan.','Every hospital is required to maintain a contingency plan for major emergencies.']},
+{cat:'disaster',w:'early warning system',pos:'phrase',en:'a system designed to detect and alert people to an approaching hazard',th:'ระบบเตือนภัยล่วงหน้า',use:'ใช้กับ install, rely on',ex:['The coast has an early warning system.','They rely on an early warning system.','An effective early warning system gave residents crucial minutes to evacuate.']},
+{cat:'disaster',w:'tsunami',pos:'n.',en:'a large, destructive sea wave caused by an earthquake or volcanic eruption',th:'คลื่นสึนามิ',use:'ใช้กับ trigger, warning',ex:['The earthquake triggered a tsunami.','A tsunami warning was issued.','The tsunami destroyed entire coastal communities within minutes.']},
+{cat:'disaster',w:'seismic',pos:'adj.',en:'relating to earthquakes or vibrations in the Earth’s crust',th:'เกี่ยวกับแผ่นดินไหว',use:'ใช้กับ activity, monitor',ex:['Scientists monitor seismic activity.','The region experiences seismic events.','Engineers designed the building to withstand strong seismic activity.']},
+{cat:'disaster',w:'wildfire',pos:'n.',en:'a large, uncontrolled fire that spreads quickly across vegetation',th:'ไฟป่า',use:'ใช้กับ spread, contain',ex:['The wildfire spread quickly.','Firefighters struggled to contain the wildfire.','Strong winds caused the wildfire to spread far faster than crews could contain it.']},
+{cat:'disaster',w:'humanitarian aid',pos:'phrase',en:'assistance provided to people in urgent need, especially during a crisis',th:'ความช่วยเหลือด้านมนุษยธรรม',use:'ใช้กับ send, deliver',ex:['Countries sent humanitarian aid.','Aid workers delivered humanitarian aid.','International humanitarian aid reached the affected region within days of the disaster.']},
+{cat:'disaster',w:'refugee',pos:'n.',en:'a person forced to leave their country due to war, persecution, or disaster',th:'ผู้ลี้ภัย',use:'ใช้กับ camp, flee',ex:['The refugees fled the conflict.','They set up a refugee camp.','Millions of refugees were forced to leave their homes during the crisis.']},
+{cat:'disaster',w:'crisis management',pos:'phrase',en:'the process of dealing with a sudden and unexpected emergency situation',th:'การบริหารจัดการภาวะวิกฤต',use:'ใช้กับ effective, team',ex:['The company practiced crisis management.','Effective crisis management saved lives.','Good crisis management requires clear communication under extreme time pressure.']},
+{cat:'disaster',w:'vulnerability',pos:'n.',en:'the state of being exposed to the possibility of harm',th:'ความเปราะบาง/ความเสี่ยงต่อภัย',use:'ใช้กับ reduce, assess',ex:['They assessed the area’s vulnerability.','Poverty increases vulnerability to disaster.','Reducing vulnerability requires stronger infrastructure and better emergency planning.']},
+{cat:'disaster',w:'structural damage',pos:'phrase',en:'harm caused to the framework or construction of a building',th:'ความเสียหายเชิงโครงสร้าง',use:'ใช้กับ suffer, assess',ex:['The building suffered structural damage.','Engineers assessed the structural damage.','Inspectors found severe structural damage that made the building unsafe to enter.']},
+{cat:'disaster',w:'first responder',pos:'phrase',en:'a person, such as a paramedic or firefighter, who is among the first to arrive at an emergency',th:'ผู้ปฏิบัติงานด่านหน้าในเหตุฉุกเฉิน',use:'ใช้กับ trained, arrive',ex:['First responders arrived quickly.','Trained first responders saved lives.','First responders often face significant trauma from the emergencies they attend.']},
+{cat:'disaster',w:'triage',pos:'n.',en:'the process of sorting patients by urgency of need for treatment during an emergency',th:'การคัดแยกผู้บาดเจ็บตามความรุนแรง',use:'ใช้กับ perform, system',ex:['Medics performed triage at the scene.','The hospital used a triage system.','Effective triage allowed doctors to treat the most critical patients first.']},
+{cat:'disaster',w:'search and rescue',pos:'phrase',en:'an operation to locate and help people in danger, such as after a disaster',th:'ปฏิบัติการค้นหาและกู้ภัย',use:'ใช้กับ operation, team',ex:['Search and rescue teams arrived.','They launched a search and rescue operation.','The search and rescue mission continued for days after the earthquake.']},
+{cat:'disaster',w:'mobilize',pos:'v.',en:'to organize people or resources quickly for a particular purpose, such as an emergency',th:'ระดมพล/เตรียมพร้อมปฏิบัติการ',use:'ใช้กับ resources, troops',ex:['The city mobilized resources quickly.','Volunteers were mobilized within hours.','Authorities mobilized emergency services as soon as the storm warning was issued.']},
+
+// ============ CONSUMER BEHAVIOR & RETAIL (25) ============
+{cat:'consumer',w:'consumerism',pos:'n.',en:'a preoccupation with buying goods and services',th:'บริโภคนิยม',use:'ใช้กับ modern, rise of',ex:['Modern consumerism drives spending.','Critics blame rising consumerism.','Rampant consumerism has been linked to increased waste and environmental damage.']},
+{cat:'consumer',w:'impulse buying',pos:'phrase',en:'the act of purchasing something spontaneously without prior planning',th:'การซื้อโดยไม่ได้วางแผน',use:'ใช้กับ encourage, avoid',ex:['Sales encourage impulse buying.','She tries to avoid impulse buying.','Store layouts are often designed specifically to encourage impulse buying.']},
+{cat:'consumer',w:'retailer',pos:'n.',en:'a business that sells goods directly to consumers',th:'ผู้ค้าปลีก',use:'ใช้กับ online, major',ex:['The retailer offered a discount.','Online retailers dominate the market.','Major retailers have shifted much of their business toward online sales.']},
+{cat:'consumer',w:'wholesale',pos:'adj./n.',en:'the selling of goods in large quantities, typically to be sold on by retailers',th:'ขายส่ง',use:'ใช้กับ price, buy',ex:['They buy goods at wholesale prices.','The shop sells wholesale only.','Buying wholesale allows small businesses to reduce their overall costs significantly.']},
+{cat:'consumer',w:'discount',pos:'n.',en:'a reduction in the usual price of something',th:'ส่วนลด',use:'ใช้กับ offer, apply',ex:['The store offered a discount.','She got a student discount.','Retailers often apply steep discounts during seasonal sales events.']},
+{cat:'consumer',w:'loyalty program',pos:'phrase',en:'a marketing strategy that rewards customers for repeated purchases',th:'โปรแกรมสมาชิกสะสมแต้ม',use:'ใช้กับ join, reward',ex:['She joined the store’s loyalty program.','Loyalty programs reward repeat customers.','The airline’s loyalty program offers free flights after enough points are earned.']},
+{cat:'consumer',w:'checkout',pos:'n.',en:'the place in a store where customers pay for goods',th:'จุดชำระเงิน',use:'ใช้กับ queue, self-service',ex:['The checkout line was long.','She used the self-service checkout.','Long checkout lines during holidays often frustrate shoppers.']},
+{cat:'consumer',w:'price point',pos:'phrase',en:'a particular level at which a product is priced',th:'ระดับราคา',use:'ใช้กับ set, competitive',ex:['They set a competitive price point.','The brand targets a low price point.','Finding the right price point is essential for attracting budget-conscious customers.']},
+{cat:'consumer',w:'bargain',pos:'n./v.',en:'a product sold cheaper than usual; to negotiate over a price',th:'ของราคาถูก/ต่อรองราคา',use:'ใช้กับ find, strike a',ex:['She found a great bargain.','He tried to bargain for a lower price.','Shoppers lined up early hoping to find the best bargains of the season.']},
+{cat:'consumer',w:'haggle',pos:'v.',en:'to negotiate the price of something, often persistently',th:'ต่อรองราคา',use:'ใช้กับ over price',ex:['He haggled over the price.','Tourists often haggle at markets.','In many local markets, haggling over prices is a normal and expected part of shopping.']},
+{cat:'consumer',w:'retail therapy',pos:'phrase',en:'the act of shopping to improve one’s mood, often after stress',th:'การช้อปปิ้งเพื่อผ่อนคลายอารมณ์',use:'ใช้กับ indulge in',ex:['She indulged in some retail therapy.','Retail therapy lifted her mood.','Many people turn to retail therapy as a quick way to relieve stress.']},
+{cat:'consumer',w:'window shopping',pos:'phrase',en:'the activity of looking at goods in shop windows without intending to buy',th:'การเดินดูสินค้าในร้านโดยไม่ซื้อ',use:'ใช้กับ go, enjoy',ex:['They went window shopping downtown.','She enjoys window shopping on weekends.','Window shopping allows people to browse trends without spending any money.']},
+{cat:'consumer',w:'customer satisfaction',pos:'phrase',en:'the degree to which customers are happy with a product or service',th:'ความพึงพอใจของลูกค้า',use:'ใช้กับ measure, improve',ex:['The company measures customer satisfaction.','They improved customer satisfaction scores.','High customer satisfaction often leads to repeat business and positive reviews.']},
+{cat:'consumer',w:'return policy',pos:'phrase',en:'a store’s rules regarding the return or exchange of purchased goods',th:'นโยบายการคืนสินค้า',use:'ใช้กับ flexible, strict',ex:['The store has a flexible return policy.','She checked the return policy first.','A generous return policy can encourage customers to make riskier purchases.']},
+{cat:'consumer',w:'warranty',pos:'n.',en:'a written guarantee promising to repair or replace a product if it is faulty',th:'การรับประกันสินค้า',use:'ใช้กับ extend, cover',ex:['The laptop comes with a warranty.','She extended the product’s warranty.','The warranty covers any manufacturing defects for a full two years.']},
+{cat:'consumer',w:'counterfeit',pos:'adj./n.',en:'made to imitate something genuine with the intent to deceive',th:'สินค้าปลอม/ลอกเลียนแบบ',use:'ใช้กับ goods, sell',ex:['They seized counterfeit goods.','He unknowingly bought a counterfeit watch.','Authorities cracked down on the sale of counterfeit designer handbags.']},
+{cat:'consumer',w:'planned obsolescence',pos:'phrase',en:'the practice of deliberately designing products to have a limited useful life',th:'การออกแบบให้สินค้าล้าสมัยหรือเสื่อมสภาพเร็ว',use:'ใช้กับ criticize, practice of',ex:['Critics accuse companies of planned obsolescence.','Planned obsolescence increases waste.','Consumer groups have criticized manufacturers for practicing planned obsolescence.']},
+{cat:'consumer',w:'disposable income',pos:'phrase',en:'the amount of money a person has left to spend or save after taxes',th:'รายได้ที่ใช้จ่ายได้อิสระหลังหักภาษี',use:'ใช้กับ increase, limited',ex:['Rising prices reduced disposable income.','They have more disposable income now.','Higher wages have increased consumers’ disposable income across the region.']},
+{cat:'consumer',w:'purchasing power',pos:'phrase',en:'the value of money measured by the amount of goods or services it can buy',th:'อำนาจซื้อ',use:'ใช้กับ increase, erode',ex:['Inflation erodes purchasing power.','Wages failed to match purchasing power.','Rising prices have significantly weakened consumers’ overall purchasing power.']},
+{cat:'consumer',w:'overconsumption',pos:'n.',en:'the excessive use or purchase of goods beyond what is needed',th:'การบริโภคเกินความจำเป็น',use:'ใช้กับ contribute to, reduce',ex:['Overconsumption harms the environment.','They try to reduce overconsumption.','Overconsumption of fast fashion has significantly increased global textile waste.']},
+{cat:'consumer',w:'minimalism',pos:'n.',en:'a lifestyle or style based on simplicity and owning fewer possessions',th:'แนวคิดมินิมอล/การใช้ชีวิตเรียบง่าย',use:'ใช้กับ embrace, lifestyle',ex:['She embraced minimalism at home.','Minimalism values quality over quantity.','Many young professionals have embraced minimalism as a reaction against consumerism.']},
+{cat:'consumer',w:'thrift',pos:'n.',en:'careful management of money, especially avoiding waste',th:'การประหยัด/มัธยัสถ์',use:'ใช้กับ store, practice',ex:['She shops at a thrift store.','Thrift was valued during the recession.','Thrift stores have become increasingly popular among budget-conscious shoppers.']},
+{cat:'consumer',w:'luxury goods',pos:'phrase',en:'expensive products not considered essential but desired for comfort or status',th:'สินค้าฟุ่มเฟือย',use:'ใช้กับ market, afford',ex:['The store sells luxury goods.','Few can afford luxury goods.','Demand for luxury goods often falls sharply during economic downturns.']},
+{cat:'consumer',w:'impulse control',pos:'phrase',en:'the ability to resist sudden urges to act, especially when spending money',th:'การควบคุมแรงกระตุ้น',use:'ใช้กับ lack, exercise',ex:['He lacks impulse control while shopping.','Budgeting requires strong impulse control.','Developing better impulse control can help shoppers stick to a fixed budget.']},
+{cat:'consumer',w:'point of sale',pos:'phrase',en:'the location or system where a retail transaction is completed',th:'จุดขาย (ระบบขาย ณ จุดชำระเงิน)',use:'ใช้กับ system, terminal',ex:['The store upgraded its point of sale system.','Data is collected at the point of sale.','The new point of sale system processes transactions much faster than the old one.']},
+
+// ============ MILITARY & SECURITY (25) ============
+{cat:'military',w:'military',pos:'adj./n.',en:'relating to soldiers, weapons, and armed forces',th:'ทางทหาร/กองทัพ',use:'ใช้กับ force, base',ex:['The military protects the border.','They built a new military base.','The country significantly increased its military spending this year.']},
+{cat:'military',w:'warfare',pos:'n.',en:'the activity of fighting a war between countries or groups',th:'สงคราม/การทำสงคราม',use:'ใช้กับ modern, guerrilla',ex:['Modern warfare relies on technology.','They studied guerrilla warfare.','Cyber warfare has become an increasingly important part of modern conflict.']},
+{cat:'military',w:'combat',pos:'n.',en:'fighting between armed forces',th:'การสู้รบ',use:'ใช้กับ engage in, front-line',ex:['Soldiers engaged in combat.','He served in front-line combat.','Years of combat left many soldiers with lasting psychological trauma.']},
+{cat:'military',w:'troops',pos:'n.',en:'soldiers, especially members of an organized military force',th:'กองกำลังทหาร',use:'ใช้กับ deploy, withdraw',ex:['The country deployed troops.','Troops withdrew after the ceasefire.','Additional troops were sent to reinforce the border region.']},
+{cat:'military',w:'deployment',pos:'n.',en:'the movement of military forces into position for action',th:'การส่งกำลังไปประจำการ',use:'ใช้กับ military, order',ex:['The government ordered a deployment.','Military deployment took weeks.','The deployment of additional forces raised tensions along the border.']},
+{cat:'military',w:'artillery',pos:'n.',en:'large-caliber guns used in warfare',th:'ปืนใหญ่/อาวุธหนัก',use:'ใช้กับ heavy, fire',ex:['Heavy artillery shelled the city.','They positioned the artillery carefully.','Artillery fire could be heard for miles around the besieged town.']},
+{cat:'military',w:'weaponry',pos:'n.',en:'weapons considered collectively',th:'อาวุธยุทโธปกรณ์',use:'ใช้กับ advanced, supply',ex:['The army has advanced weaponry.','Countries supply weaponry to allies.','Access to modern weaponry has significantly changed the balance of regional power.']},
+{cat:'military',w:'ammunition',pos:'n.',en:'a supply of bullets and shells for firing from weapons',th:'กระสุนและวัตถุระเบิด',use:'ใช้กับ supply, run out of',ex:['Soldiers ran low on ammunition.','They resupplied troops with ammunition.','Cutting off the enemy’s ammunition supply proved decisive in the campaign.']},
+{cat:'military',w:'ceasefire',pos:'n.',en:'a temporary halt to fighting agreed upon by opposing sides',th:'การหยุดยิง',use:'ใช้กับ agree to, violate',ex:['Both sides agreed to a ceasefire.','The ceasefire was later violated.','International pressure eventually forced both sides to accept a fragile ceasefire.']},
+{cat:'military',w:'armistice',pos:'n.',en:'a formal agreement between opposing sides to stop fighting',th:'สนธิสัญญาสงบศึก',use:'ใช้กับ sign, declare',ex:['The countries signed an armistice.','The armistice ended years of fighting.','The armistice brought fighting to a halt, though a full peace treaty took years longer.']},
+{cat:'military',w:'insurgency',pos:'n.',en:'an active revolt or uprising against an established authority',th:'การก่อความไม่สงบ/กบฏ',use:'ใช้กับ suppress, growing',ex:['The government tried to suppress the insurgency.','A growing insurgency spread across the region.','The prolonged insurgency destabilized the country for nearly a decade.']},
+{cat:'military',w:'militia',pos:'n.',en:'a group of civilians organized to act as a military force',th:'กองกำลังกึ่งทหาร',use:'ใช้กับ armed, local',ex:['A local militia guarded the town.','Armed militias controlled parts of the country.','The militia clashed repeatedly with government forces over the disputed territory.']},
+{cat:'military',w:'reconnaissance',pos:'n.',en:'the gathering of military information by surveying an area',th:'การลาดตระเวนสำรวจ',use:'ใช้กับ conduct, mission',ex:['They conducted reconnaissance missions.','The drone gathered reconnaissance data.','Reconnaissance revealed enemy positions before the main assault began.']},
+{cat:'military',w:'strategic',pos:'adj.',en:'relating to the achievement of long-term or overall goals, especially in military planning',th:'เชิงยุทธศาสตร์',use:'ใช้กับ location, importance',ex:['The port has strategic importance.','They made a strategic decision.','The island’s strategic location made it a target for both sides.']},
+{cat:'military',w:'tactical',pos:'adj.',en:'relating to specific, immediate actions taken to achieve a short-term objective',th:'เชิงยุทธวิธี',use:'ใช้กับ advantage, decision',ex:['They gained a tactical advantage.','It was a tactical retreat.','The commander made a tactical decision to withdraw troops from the exposed position.']},
+{cat:'military',w:'national security',pos:'phrase',en:'the protection of a nation from external and internal threats',th:'ความมั่นคงแห่งชาติ',use:'ใช้กับ threat to, protect',ex:['The leak threatened national security.','They prioritize national security.','The new policy was justified on the grounds of protecting national security.']},
+{cat:'military',w:'intelligence',pos:'n.',en:'secret information gathered about an enemy or potential threat',th:'ข่าวกรอง (ทางทหาร/ความมั่นคง)',use:'ใช้กับ gather, military',ex:['Agents gathered intelligence secretly.','Military intelligence warned of an attack.','Accurate intelligence played a crucial role in preventing the planned attack.']},
+{cat:'military',w:'espionage',pos:'n.',en:'the practice of spying to obtain secret information',th:'การจารกรรม',use:'ใช้กับ accuse of, corporate',ex:['He was accused of espionage.','Corporate espionage is a growing concern.','The agent was arrested on charges of espionage against the government.']},
+{cat:'military',w:'terrorism',pos:'n.',en:'the use of violence and intimidation to achieve political aims',th:'การก่อการร้าย',use:'ใช้กับ combat, act of',ex:['The attack was an act of terrorism.','Governments work to combat terrorism.','International cooperation is essential in the ongoing fight against terrorism.']},
+{cat:'military',w:'counterterrorism',pos:'n.',en:'actions taken to prevent or respond to terrorism',th:'การต่อต้านการก่อการร้าย',use:'ใช้กับ measures, unit',ex:['The agency leads counterterrorism efforts.','New counterterrorism measures were introduced.','Counterterrorism units worked closely with international intelligence agencies.']},
+{cat:'military',w:'defense budget',pos:'phrase',en:'the money a government allocates for military spending',th:'งบประมาณด้านกลาโหม',use:'ใช้กับ increase, cut',ex:['The country increased its defense budget.','They proposed cuts to the defense budget.','A larger defense budget allowed the military to modernize its equipment.']},
+{cat:'military',w:'arms race',pos:'phrase',en:'a competition between nations to build up increasingly powerful weapons',th:'การแข่งขันสะสมอาวุธ',use:'ใช้กับ escalate, trigger',ex:['The arms race escalated quickly.','Tensions triggered a new arms race.','The arms race between the two superpowers lasted for decades.']},
+{cat:'military',w:'nuclear deterrence',pos:'phrase',en:'the strategy of preventing attack by maintaining the threat of a nuclear response',th:'การป้องปรามด้วยอาวุธนิวเคลียร์',use:'ใช้กับ policy of, rely on',ex:['The policy relies on nuclear deterrence.','Nuclear deterrence shaped Cold War strategy.','Critics argue nuclear deterrence is an increasingly unstable basis for global security.']},
+{cat:'military',w:'veteran',pos:'n.',en:'a person who has served in the armed forces, especially during a war',th:'ทหารผ่านศึก',use:'ใช้กับ war, support',ex:['The war veteran received support.','Veterans often face reintegration challenges.','Many veterans struggle with mental health issues after returning from combat.']},
+{cat:'military',w:'conscription',pos:'n.',en:'the compulsory enrollment of people into the armed forces',th:'การเกณฑ์ทหาร',use:'ใช้กับ mandatory, introduce',ex:['The country introduced conscription.','Mandatory conscription remains controversial.','Several countries have reintroduced conscription in response to rising security concerns.']},
+
+// ============ WEATHER & CLIMATE SCIENCE (25) ============
+{cat:'weather',w:'meteorology',pos:'n.',en:'the scientific study of weather and atmospheric conditions',th:'อุตุนิยมวิทยา',use:'ใช้กับ study, field of',ex:['She studies meteorology.','Meteorology helps predict storms.','Advances in meteorology have significantly improved the accuracy of weather forecasts.']},
+{cat:'weather',w:'precipitation',pos:'n.',en:'water that falls from clouds as rain, snow, sleet, or hail',th:'หยาดน้ำฟ้า (ฝน หิมะ ฯลฯ)',use:'ใช้กับ heavy, measure',ex:['Heavy precipitation caused flooding.','They measured annual precipitation.','Unusually heavy precipitation this season has raised concerns about flooding.']},
+{cat:'weather',w:'humidity',pos:'n.',en:'the amount of water vapor present in the air',th:'ความชื้น',use:'ใช้กับ high, level of',ex:['The humidity felt uncomfortable.','High humidity makes it feel hotter.','Tropical regions typically experience high humidity throughout most of the year.']},
+{cat:'weather',w:'atmospheric pressure',pos:'phrase',en:'the force exerted by the weight of the atmosphere at a given point',th:'ความกดอากาศ',use:'ใช้กับ drop, measure',ex:['Atmospheric pressure dropped suddenly.','They measured atmospheric pressure.','A rapid drop in atmospheric pressure often signals an approaching storm.']},
+{cat:'weather',w:'barometric',pos:'adj.',en:'relating to atmospheric pressure, as measured by a barometer',th:'เกี่ยวกับความกดอากาศ',use:'ใช้กับ pressure, reading',ex:['The barometric reading fell sharply.','Barometric pressure affects weather.','A sudden barometric drop warned meteorologists of the approaching hurricane.']},
+{cat:'weather',w:'monsoon',pos:'n.',en:'a seasonal wind bringing heavy rainfall to certain regions',th:'มรสุม',use:'ใช้กับ season, arrive',ex:['The monsoon season begins in June.','Heavy rain arrived with the monsoon.','Farmers depend heavily on the monsoon for their annual harvest.']},
+{cat:'weather',w:'cyclone',pos:'n.',en:'a large system of winds rotating around a center of low pressure, often bringing storms',th:'พายุไซโคลน',use:'ใช้กับ hit, strong',ex:['A cyclone hit the coast.','The strong cyclone damaged homes.','The cyclone forced thousands of residents to evacuate before it made landfall.']},
+{cat:'weather',w:'hurricane',pos:'n.',en:'a powerful tropical storm with very strong winds, common in the Atlantic and Pacific',th:'พายุเฮอริเคน',use:'ใช้กับ category, make landfall',ex:['The hurricane made landfall.','It was a category five hurricane.','Residents boarded up windows as the hurricane approached the coastline.']},
+{cat:'weather',w:'typhoon',pos:'n.',en:'a tropical storm occurring in the region of the Indian or western Pacific Ocean',th:'พายุไต้ฝุ่น',use:'ใช้กับ strike, powerful',ex:['A typhoon struck the island.','The powerful typhoon caused flooding.','The typhoon destroyed thousands of homes along the coast.']},
+{cat:'weather',w:'weather front',pos:'phrase',en:'the boundary between two different air masses, often bringing a change in weather',th:'แนวปะทะอากาศ',use:'ใช้กับ cold, approach',ex:['A cold weather front approached.','The weather front brought rain.','A fast-moving weather front caused temperatures to drop sharply overnight.']},
+{cat:'weather',w:'forecast',pos:'n./v.',en:'a prediction of future weather conditions',th:'การพยากรณ์อากาศ/พยากรณ์',use:'ใช้กับ accurate, check',ex:['Check the forecast before traveling.','The forecast predicted rain.','Meteorologists updated the forecast as the storm’s path became clearer.']},
+{cat:'weather',w:'climate pattern',pos:'phrase',en:'a recurring or characteristic arrangement of weather conditions over time',th:'รูปแบบภูมิอากาศ',use:'ใช้กับ shift, study',ex:['Scientists study climate patterns.','Climate patterns have shifted recently.','Long-term climate patterns are becoming harder to predict due to global warming.']},
+{cat:'weather',w:'temperate',pos:'adj.',en:'(of a climate or region) mild, without extremes of hot or cold',th:'อากาศเย็นสบาย/ไม่รุนแรง',use:'ใช้กับ climate, zone',ex:['The region has a temperate climate.','Temperate zones have four seasons.','Crops thrive well in the country’s mild, temperate climate.']},
+{cat:'weather',w:'arid',pos:'adj.',en:'having very little rainfall; extremely dry',th:'แห้งแล้ง',use:'ใช้กับ region, climate',ex:['The desert is extremely arid.','Few plants survive in arid regions.','Farming is nearly impossible in such an arid climate without irrigation.']},
+{cat:'weather',w:'tropical',pos:'adj.',en:'relating to the hot, humid regions near the equator',th:'เขตร้อน',use:'ใช้กับ climate, rainforest',ex:['The island has a tropical climate.','Tropical rainforests are biodiverse.','Tropical regions experience heavy rainfall and consistently warm temperatures.']},
+{cat:'weather',w:'polar',pos:'adj.',en:'relating to the regions near the North or South Pole',th:'เขตขั้วโลก',use:'ใช้กับ ice cap, region',ex:['Polar ice caps are melting.','Few animals survive in polar regions.','Rising temperatures have accelerated the melting of polar ice caps.']},
+{cat:'weather',w:'permafrost',pos:'n.',en:'a layer of soil that remains permanently frozen',th:'ชั้นดินเยือกแข็งคงตัว',use:'ใช้กับ melt, thaw',ex:['Permafrost is beginning to melt.','Thawing permafrost releases gases.','Scientists warn that melting permafrost could release large amounts of trapped methane.']},
+{cat:'weather',w:'glacier',pos:'n.',en:'a large mass of slowly moving ice found in mountainous or polar regions',th:'ธารน้ำแข็ง',use:'ใช้กับ melt, retreat',ex:['The glacier is melting rapidly.','Scientists study the retreating glacier.','Many mountain glaciers have retreated significantly over the past fifty years.']},
+{cat:'weather',w:'sea level rise',pos:'phrase',en:'the increase in the average height of the ocean’s surface, often linked to climate change',th:'ระดับน้ำทะเลที่สูงขึ้น',use:'ใช้กับ cause, threaten',ex:['Sea level rise threatens coastal cities.','Scientists monitor sea level rise closely.','Continued sea level rise could displace millions of people living near coastlines.']},
+{cat:'weather',w:'heatwave',pos:'n.',en:'a prolonged period of unusually hot weather',th:'คลื่นความร้อน',use:'ใช้กับ severe, endure',ex:['The city endured a severe heatwave.','A heatwave strained the power grid.','The record-breaking heatwave led to a sharp rise in hospital admissions.']},
+{cat:'weather',w:'downpour',pos:'n.',en:'a heavy fall of rain',th:'ฝนตกหนัก',use:'ใช้กับ sudden, caught in',ex:['They were caught in a downpour.','A sudden downpour flooded the streets.','The unexpected downpour forced organizers to cancel the outdoor event.']},
+{cat:'weather',w:'thunderstorm',pos:'n.',en:'a storm with thunder, lightning, and usually heavy rain',th:'พายุฝนฟ้าคะนอง',use:'ใช้กับ severe, warn of',ex:['A thunderstorm rolled in quickly.','They warned of severe thunderstorms.','The thunderstorm knocked out power across much of the city.']},
+{cat:'weather',w:'turbulence',pos:'n.',en:'violent or unsteady movement of air, especially affecting aircraft',th:'ความปั่นป่วนของอากาศ',use:'ใช้กับ experience, severe',ex:['The flight experienced turbulence.','Severe turbulence alarmed passengers.','Pilots try to avoid areas of severe turbulence whenever possible.']},
+{cat:'weather',w:'overcast',pos:'adj.',en:'(of the sky) covered with clouds; dull and gray',th:'ท้องฟ้ามืดครึ้ม',use:'ใช้กับ sky, day',ex:['The sky was overcast all day.','It was a cold, overcast morning.','Despite the overcast sky, the rain held off for the entire event.']},
+{cat:'weather',w:'climatic',pos:'adj.',en:'relating to climate',th:'เกี่ยวกับภูมิอากาศ',use:'ใช้กับ condition, change',ex:['Climatic conditions affect farming.','The region faces climatic change.','Climatic conditions in the area have shifted noticeably over the past two decades.']},
+
+// ============ HUMAN BODY & PHYSIOLOGY (25) ============
+{cat:'physiology',w:'anatomy',pos:'n.',en:'the scientific study of the structure of the body',th:'กายวิภาคศาสตร์',use:'ใช้กับ study, human',ex:['She studies human anatomy.','Anatomy explains how organs work.','Understanding basic anatomy is essential before beginning medical training.']},
+{cat:'physiology',w:'physiology',pos:'n.',en:'the scientific study of how the body and its parts function',th:'สรีรวิทยา',use:'ใช้กับ study, human',ex:['He studies exercise physiology.','Physiology explains bodily functions.','Physiology helps explain why the body reacts differently under stress.']},
+{cat:'physiology',w:'skeletal',pos:'adj.',en:'relating to the bones or skeleton of the body',th:'เกี่ยวกับโครงกระดูก',use:'ใช้กับ system, structure',ex:['The skeletal system supports the body.','X-rays reveal skeletal structure.','The skeletal system protects vital organs while allowing the body to move.']},
+{cat:'physiology',w:'musculoskeletal',pos:'adj.',en:'relating to the muscles and skeleton together',th:'เกี่ยวกับกล้ามเนื้อและกระดูก',use:'ใช้กับ system, injury',ex:['He suffered a musculoskeletal injury.','The musculoskeletal system enables movement.','Musculoskeletal injuries are common among athletes who train intensively.']},
+{cat:'physiology',w:'cardiovascular',pos:'adj.',en:'relating to the heart and blood vessels',th:'เกี่ยวกับหัวใจและหลอดเลือด',use:'ใช้กับ system, disease',ex:['Exercise improves cardiovascular health.','Cardiovascular disease is a major concern.','Regular cardiovascular exercise reduces the risk of heart disease significantly.']},
+{cat:'physiology',w:'respiratory',pos:'adj.',en:'relating to breathing and the lungs',th:'เกี่ยวกับระบบหายใจ',use:'ใช้กับ system, illness',ex:['Smoking harms the respiratory system.','She has a respiratory illness.','Air pollution significantly increases the risk of respiratory disease.']},
+{cat:'physiology',w:'nervous system',pos:'phrase',en:'the network of nerves and cells that carries signals throughout the body',th:'ระบบประสาท',use:'ใช้กับ central, affect',ex:['The nervous system controls movement.','Stress affects the nervous system.','The central nervous system coordinates nearly every function in the body.']},
+{cat:'physiology',w:'circulatory system',pos:'phrase',en:'the system of the heart and blood vessels that moves blood through the body',th:'ระบบไหลเวียนโลหิต',use:'ใช้กับ affect, healthy',ex:['The circulatory system carries oxygen.','Diet affects the circulatory system.','A healthy circulatory system is essential for delivering oxygen to every organ.']},
+{cat:'physiology',w:'hormone',pos:'n.',en:'a chemical substance produced in the body that regulates specific bodily functions',th:'ฮอร์โมน',use:'ใช้กับ release, level',ex:['The body releases stress hormones.','Hormone levels change with age.','Fluctuating hormone levels can significantly affect mood and energy.']},
+{cat:'physiology',w:'gland',pos:'n.',en:'an organ that produces and releases substances such as hormones',th:'ต่อม',use:'ใช้กับ thyroid, produce',ex:['The thyroid gland regulates metabolism.','Glands produce important hormones.','An overactive gland can cause a range of unexpected health symptoms.']},
+{cat:'physiology',w:'tissue',pos:'n.',en:'a group of cells in an organism that perform a similar function',th:'เนื้อเยื่อ',use:'ใช้กับ damage, muscle',ex:['The injury damaged muscle tissue.','Scar tissue forms after healing.','Doctors examined the tissue sample under a microscope.']},
+{cat:'physiology',w:'vital organ',pos:'phrase',en:'an organ essential for maintaining life, such as the heart or lungs',th:'อวัยวะสำคัญที่จำเป็นต่อชีวิต',use:'ใช้กับ damage, protect',ex:['The accident damaged a vital organ.','Ribs protect vital organs.','Surgeons worked quickly to repair the damaged vital organ.']},
+{cat:'physiology',w:'reflex',pos:'n.',en:'an automatic, involuntary response of the body to a stimulus',th:'ปฏิกิริยาสะท้อนกลับ',use:'ใช้กับ quick, test',ex:['The doctor tested his reflexes.','Quick reflexes prevented an accident.','Doctors tap the knee to test a patient’s basic reflexes.']},
+{cat:'physiology',w:'pulse',pos:'n.',en:'the regular beating of blood through the arteries, felt at points on the body',th:'ชีพจร',use:'ใช้กับ check, rapid',ex:['The nurse checked his pulse.','Her pulse rate was rapid.','A resting pulse rate can indicate overall cardiovascular fitness.']},
+{cat:'physiology',w:'blood pressure',pos:'phrase',en:'the force of blood pushing against the walls of the arteries',th:'ความดันโลหิต',use:'ใช้กับ high, monitor',ex:['He has high blood pressure.','Doctors monitor blood pressure regularly.','Consistently high blood pressure increases the risk of serious heart disease.']},
+{cat:'physiology',w:'digestion',pos:'n.',en:'the process by which the body breaks down food into nutrients',th:'การย่อยอาหาร',use:'ใช้กับ aid, slow',ex:['Fiber aids digestion.','Stress can slow digestion.','Eating slowly can significantly improve digestion and reduce discomfort.']},
+{cat:'physiology',w:'enzyme',pos:'n.',en:'a protein that speeds up chemical reactions in the body',th:'เอนไซม์',use:'ใช้กับ digestive, produce',ex:['Digestive enzymes break down food.','The body produces many enzymes.','A lack of certain enzymes can cause difficulty digesting particular foods.']},
+{cat:'physiology',w:'antibody',pos:'n.',en:'a protein produced by the immune system to fight infection',th:'แอนติบอดี',use:'ใช้กับ produce, immune',ex:['The body produces antibodies.','Vaccines trigger antibody production.','Antibodies help the immune system recognize and fight future infections.']},
+{cat:'physiology',w:'gene',pos:'n.',en:'a unit of hereditary information passed from parents to offspring',th:'ยีน',use:'ใช้กับ inherit, mutate',ex:['Children inherit genes from parents.','Scientists study a specific gene.','A single altered gene can significantly increase the risk of certain diseases.']},
+{cat:'physiology',w:'mutation',pos:'n.',en:'a change in the genetic structure of an organism',th:'การกลายพันธุ์',use:'ใช้กับ genetic, cause',ex:['The mutation caused the disease.','Genetic mutations occur naturally.','Certain genetic mutations can be passed down through multiple generations.']},
+{cat:'physiology',w:'puberty',pos:'n.',en:'the period during which a child’s body develops into an adult body, capable of reproduction',th:'วัยเจริญพันธุ์',use:'ใช้กับ reach, during',ex:['She reached puberty at twelve.','The body changes during puberty.','Hormonal changes during puberty affect both physical growth and mood.']},
+{cat:'physiology',w:'hormonal',pos:'adj.',en:'relating to hormones or their effects on the body',th:'เกี่ยวกับฮอร์โมน',use:'ใช้กับ change, imbalance',ex:['Hormonal changes affect mood.','She experienced a hormonal imbalance.','Hormonal fluctuations can significantly affect sleep and energy levels.']},
+{cat:'physiology',w:'dexterity',pos:'n.',en:'skill in performing tasks, especially using the hands',th:'ความคล่องแคล่วในการใช้มือ',use:'ใช้กับ manual, require',ex:['Surgery requires great dexterity.','She has impressive manual dexterity.','Fine motor tasks like sewing require considerable hand dexterity.']},
+{cat:'physiology',w:'motor skills',pos:'phrase',en:'the ability to coordinate muscle movements, especially learned during childhood',th:'ทักษะการเคลื่อนไหวของร่างกาย',use:'ใช้กับ develop, fine',ex:['Children develop motor skills early.','Fine motor skills improve with practice.','Playing with building blocks helps toddlers develop fine motor skills.']},
+{cat:'physiology',w:'sensory',pos:'adj.',en:'relating to the senses, such as sight, hearing, or touch',th:'เกี่ยวกับประสาทสัมผัส',use:'ใช้กับ input, perception',ex:['The brain processes sensory input.','Sensory perception varies by person.','Sensory toys help young children develop through touch and exploration.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

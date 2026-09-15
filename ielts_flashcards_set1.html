@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 1</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'environment', name:'สิ่งแวดล้อม', color:'#3F6B4C', light:'#E3EEE5'},
+  {id:'education',   name:'การศึกษา',    color:'#3A4E8C', light:'#E4E7F3'},
+  {id:'technology',  name:'เทคโนโลยี',   color:'#2C7873', light:'#DFEFEE'},
+  {id:'health',      name:'สุขภาพ',      color:'#9C3D54', light:'#F3E1E5'},
+  {id:'economy',     name:'เศรษฐกิจ-สังคม', color:'#A9762F', light:'#F3E9D9'},
+  {id:'academic',    name:'ศัพท์วิชาการ-โต้แย้ง', color:'#6A4C93', light:'#EFE7F5'},
+];
+
+const vocab = [
+// ============ ENVIRONMENT (25) ============
+{cat:'environment',w:'sustainable',pos:'adj.',en:'able to continue over a long period without causing damage or permanently using up resources',th:'ยั่งยืน — ดำเนินต่อไปได้โดยไม่ทำลายทรัพยากรในระยะยาว',use:'มักใช้คู่กับ development, growth, energy, practice',ex:['We should buy products from <mark>sustainable</mark> farms.','The city invested in sustainable public transport to cut emissions.','Balancing economic growth with environmental protection is the core challenge of sustainable development policy.']},
+{cat:'environment',w:'renewable',pos:'adj.',en:'(of energy or resources) able to be replaced naturally and not permanently used up',th:'หมุนเวียนได้ / ใช้แล้วไม่หมด (เช่น พลังงาน)',use:'ใช้คู่กับ energy, resource, source',ex:['Solar power is a <mark>renewable</mark> source of energy.','More countries are switching to renewable energy to reduce fossil fuel use.','Government subsidies have accelerated the transition toward renewable infrastructure across the manufacturing sector.']},
+{cat:'environment',w:'emission',pos:'n.',en:'a substance, especially gas, that is released into the air',th:'การปล่อย (ก๊าซ/มลพิษ)',use:'มักอยู่รูปพหูพจน์ emissions, ใช้กับ carbon, greenhouse gas',ex:['Cars produce harmful emissions.','The factory reduced its carbon emissions by installing new filters.','International agreements aim to cap national emission levels to limit global temperature rise.']},
+{cat:'environment',w:'deforestation',pos:'n.',en:'the cutting down and clearing of trees or forests',th:'การตัดไม้ทำลายป่า',use:'มักใช้เป็นสาเหตุของปัญหาสิ่งแวดล้อมอื่นๆ',ex:['Deforestation destroys animal homes.','Widespread deforestation in the region has led to soil erosion.','Large-scale deforestation for agriculture has been linked to declining rainfall patterns in tropical areas.']},
+{cat:'environment',w:'biodiversity',pos:'n.',en:'the variety of plant and animal life in a particular habitat or in the world',th:'ความหลากหลายทางชีวภาพ',use:'ใช้กับ loss of, threat to, protect',ex:['The rainforest has amazing biodiversity.','Pollution is a major threat to marine biodiversity.','Conservationists argue that protecting biodiversity is essential for maintaining stable, resilient ecosystems.']},
+{cat:'environment',w:'ecosystem',pos:'n.',en:'a community of living things interacting with their physical environment',th:'ระบบนิเวศ',use:'ใช้กับ fragile, disrupt, balance of',ex:['A pond is a small ecosystem.','Overfishing can disrupt the entire marine ecosystem.','Human activity has disturbed the delicate balance of coastal ecosystems worldwide.']},
+{cat:'environment',w:'conservation',pos:'n.',en:'the protection and careful management of the environment and natural resources',th:'การอนุรักษ์',use:'ใช้กับ wildlife, energy, efforts',ex:['Conservation helps protect endangered animals.','The park runs conservation programs to protect local species.','Long-term conservation efforts require cooperation between governments, scientists, and local communities.']},
+{cat:'environment',w:'depletion',pos:'n.',en:'a reduction in the amount of something, especially a natural resource',th:'การร่อยหรอ/หมดไปของทรัพยากร',use:'ใช้กับ resource, ozone',ex:['Depletion of fish stocks worries fishermen.','Ozone depletion increases harmful UV radiation reaching the Earth.','Rapid depletion of groundwater reserves threatens agricultural sustainability in arid regions.']},
+{cat:'environment',w:'contamination',pos:'n.',en:'the process of making something impure or polluted, especially with a harmful substance',th:'การปนเปื้อน',use:'ใช้กับ water, soil, air',ex:['Contamination made the river water unsafe.','Chemical contamination of the soil harmed local crops.','Industrial contamination of groundwater supplies has raised serious public health concerns in the region.']},
+{cat:'environment',w:'degradation',pos:'n.',en:'the process of something becoming worse, especially in quality or condition',th:'ความเสื่อมโทรม',use:'ใช้กับ environmental, land, soil',ex:['Environmental degradation harms wildlife.','Land degradation reduces the amount of farmable soil.','Continued environmental degradation has accelerated species loss faster than scientists predicted.']},
+{cat:'environment',w:'mitigate',pos:'v.',en:'to make a harmful or serious situation less severe',th:'บรรเทา / ลดผลกระทบ',use:'ใช้กับ risk, effect, impact + of',ex:['Trees help mitigate flooding.','New policies aim to mitigate the effects of climate change.','Engineers designed flood barriers to mitigate the risk of coastal damage during storms.']},
+{cat:'environment',w:'deplete',pos:'v.',en:'to greatly reduce the amount of something that is available',th:'ทำให้ลดลง/หมดไป',use:'มักใช้ passive: be depleted',ex:['Farming can deplete the soil.','Overfishing has depleted many fish populations.','Natural gas reserves are being depleted faster than new sources can be discovered.']},
+{cat:'environment',w:'hazardous',pos:'adj.',en:'risky or dangerous, especially to health or safety',th:'เป็นอันตราย',use:'ใช้กับ waste, material, chemical',ex:['The factory produces hazardous waste.','Workers must wear protection when handling hazardous chemicals.','Improper disposal of hazardous industrial waste can contaminate groundwater for decades.']},
+{cat:'environment',w:'carbon footprint',pos:'phrase',en:'the total amount of greenhouse gases produced by a person, organization, or activity',th:'ปริมาณคาร์บอนที่ปล่อยจากกิจกรรมของบุคคล/องค์กร',use:'ใช้กับ reduce, leave a small/large',ex:['Riding a bike reduces your carbon footprint.','The company measured its carbon footprint to find ways to cut emissions.','Air travel contributes significantly to an individual’s overall carbon footprint compared to other transport modes.']},
+{cat:'environment',w:'habitat',pos:'n.',en:'the natural home or environment of an animal or plant',th:'ถิ่นที่อยู่อาศัยตามธรรมชาติ',use:'ใช้กับ destroy, natural, loss of',ex:['Birds build nests in their habitat.','Logging destroys the natural habitat of many species.','Coastal development continues to erode critical habitat for migratory bird populations.']},
+{cat:'environment',w:'drought',pos:'n.',en:'a long period of unusually low rainfall that leads to a shortage of water',th:'ภัยแล้ง',use:'ใช้กับ severe, prolonged, suffer from',ex:['The farm suffered during the drought.','A severe drought destroyed most of the region’s crops.','Prolonged droughts linked to climate change have devastated agricultural output across East Africa.']},
+{cat:'environment',w:'erosion',pos:'n.',en:'the gradual wearing away of soil or rock by wind, water, or other natural forces',th:'การกัดเซาะ',use:'ใช้กับ soil, coastal, prevent',ex:['Wind causes erosion on hills.','Tree roots help prevent soil erosion.','Coastal erosion has already claimed several villages along the eroding shoreline.']},
+{cat:'environment',w:'scarcity',pos:'n.',en:'the state of not having enough of something that is needed',th:'ความขาดแคลน',use:'ใช้กับ water, food, resource',ex:['Water scarcity is a big problem.','Food scarcity forced families to migrate to the city.','Growing water scarcity in the region has heightened tensions between neighboring countries over shared rivers.']},
+{cat:'environment',w:'toxic',pos:'adj.',en:'poisonous or harmful to living things',th:'เป็นพิษ',use:'ใช้กับ chemical, waste, gas',ex:['The gas is toxic to breathe.','Toxic waste was dumped illegally near the village.','Prolonged exposure to toxic industrial fumes has been linked to serious respiratory illness.']},
+{cat:'environment',w:'endangered',pos:'adj.',en:'(of a species) seriously at risk of becoming extinct',th:'ใกล้สูญพันธุ์',use:'ใช้กับ species, animal',ex:['The panda is an endangered species.','Hunting has made this animal endangered.','Poaching remains the single greatest threat to several critically endangered large mammal species.']},
+{cat:'environment',w:'greenhouse effect',pos:'phrase',en:'the trapping of the sun’s warmth in a planet’s atmosphere by certain gases',th:'ปรากฏการณ์เรือนกระจก',use:'อธิบายสาเหตุของ global warming',ex:['The greenhouse effect warms the Earth.','Carbon dioxide contributes to the greenhouse effect.','Human-produced gases have intensified the natural greenhouse effect, driving unprecedented global warming.']},
+{cat:'environment',w:'pesticide',pos:'n.',en:'a chemical substance used to kill insects or other pests that damage crops',th:'ยาฆ่าแมลง',use:'ใช้กับ spray, use, harmful',ex:['Farmers spray pesticide on crops.','Pesticide residue can remain on fruit and vegetables.','Overuse of pesticides has been shown to harm bee populations essential for pollination.']},
+{cat:'environment',w:'sewage',pos:'n.',en:'waste water and human waste that is carried away in drains or sewers',th:'น้ำเสีย/สิ่งปฏิกูล',use:'ใช้กับ treat, dispose of, system',ex:['Sewage flowed into the river.','The city built a plant to treat sewage safely.','Untreated sewage discharged into rivers remains a leading cause of waterborne disease in developing regions.']},
+{cat:'environment',w:'landfill',pos:'n.',en:'a site where waste is buried under layers of earth',th:'หลุมฝังกลบขยะ',use:'ใช้กับ waste ends up in, reduce',ex:['Trash is buried in a landfill.','Recycling helps reduce waste sent to landfills.','Most single-use plastics eventually end up in overflowing municipal landfills that take centuries to decompose.']},
+{cat:'environment',w:'fossil fuel',pos:'phrase',en:'a natural fuel such as coal, oil, or gas, formed from the remains of ancient organisms',th:'เชื้อเพลิงฟอสซิล (น้ำมัน ถ่านหิน ก๊าซ)',use:'ตรงข้ามกับ renewable energy',ex:['Cars usually run on fossil fuel.','Burning fossil fuels releases carbon dioxide.','Reducing dependency on fossil fuels is central to most national climate strategies.']},
+
+// ============ EDUCATION (25) ============
+{cat:'education',w:'curriculum',pos:'n.',en:'the subjects and content that are taught in a school or course',th:'หลักสูตร',use:'ใช้กับ design, revise, include in',ex:['Math is part of the school curriculum.','The university revised its curriculum to include more technology courses.','Critics argue the national curriculum places too little emphasis on critical thinking skills.']},
+{cat:'education',w:'literacy',pos:'n.',en:'the ability to read and write',th:'ความสามารถในการอ่านเขียน / ความรู้ความเข้าใจ',use:'ใช้กับ rate, digital, financial',ex:['Literacy rates have improved in the country.','Digital literacy is now taught alongside traditional subjects.','Improving adult literacy remains a key priority for governments tackling long-term poverty.']},
+{cat:'education',w:'pedagogy',pos:'n.',en:'the method and practice of teaching',th:'วิธีการสอน / การจัดการเรียนการสอน',use:'คำเชิงวิชาการ มักใช้ในบริบทวิจัยการศึกษา',ex:['The teacher studied new pedagogy methods.','Modern pedagogy focuses more on student participation.','The reform introduced a student-centered pedagogy that shifted away from rote memorization.']},
+{cat:'education',w:'academic',pos:'adj.',en:'relating to education, schools, or scholarly study',th:'ทางวิชาการ',use:'ใช้กับ performance, achievement, staff',ex:['She has strong academic results.','His academic performance improved after tutoring.','Universities increasingly measure success by academic output rather than teaching quality alone.']},
+{cat:'education',w:'enrollment',pos:'n.',en:'the act of officially registering for a course or institution',th:'การลงทะเบียนเรียน',use:'ใช้กับ rate, increase, figures',ex:['Enrollment at the school grew this year.','University enrollment rates have risen steadily since 2010.','Declining birth rates are expected to reduce school enrollment figures over the next decade.']},
+{cat:'education',w:'tuition',pos:'n.',en:'the fee charged for instruction, especially at a college or university',th:'ค่าเล่าเรียน',use:'ใช้กับ fees, rising, pay',ex:['Tuition fees are expensive at that college.','Many students take loans to pay tuition.','Rising tuition costs have made higher education increasingly inaccessible to low-income families.']},
+{cat:'education',w:'scholarship',pos:'n.',en:'a grant of money awarded to a student because of academic or other achievement',th:'ทุนการศึกษา',use:'ใช้กับ apply for, award, win',ex:['She won a scholarship to study abroad.','He applied for a scholarship to cover his tuition.','Merit-based scholarships are often criticized for favoring students who already have access to resources.']},
+{cat:'education',w:'vocational',pos:'adj.',en:'relating to the skills and knowledge needed for a particular job or trade',th:'เกี่ยวกับอาชีพ/สายอาชีพ',use:'ใช้กับ training, education, school',ex:['He chose a vocational course in cooking.','Vocational training prepares students for specific jobs.','Governments are promoting vocational education as an alternative to traditional university pathways.']},
+{cat:'education',w:'cognitive',pos:'adj.',en:'relating to the mental processes of thinking, understanding, and learning',th:'เกี่ยวกับการรับรู้/กระบวนการคิด',use:'ใช้กับ development, skill, ability',ex:['Reading helps a child’s cognitive development.','Puzzles improve cognitive skills in children.','Researchers found a strong link between early bilingual education and enhanced cognitive flexibility.']},
+{cat:'education',w:'comprehension',pos:'n.',en:'the ability to understand something, especially written or spoken language',th:'ความเข้าใจ (ในการอ่าน/ฟัง)',use:'ใช้กับ reading, listening, test',ex:['The test checks reading comprehension.','Her listening comprehension improved after months of practice.','Poor reading comprehension in early grades is a strong predictor of later academic struggles.']},
+{cat:'education',w:'assessment',pos:'n.',en:'the process of judging or evaluating a student’s ability or performance',th:'การประเมินผล',use:'ใช้กับ conduct, formative/summative',ex:['Teachers give assessments every term.','The school introduced a new form of continuous assessment.','Formative assessment allows teachers to adjust instruction before a final summative evaluation.']},
+{cat:'education',w:'accreditation',pos:'n.',en:'official recognition that a school or program meets required standards',th:'การรับรองมาตรฐาน (สถาบัน/หลักสูตร)',use:'ใช้กับ receive, lose, seek',ex:['The college has official accreditation.','The program lost its accreditation last year.','Institutions must undergo periodic review to maintain their accreditation status.']},
+{cat:'education',w:'plagiarism',pos:'n.',en:'the act of copying someone else’s work or ideas and presenting them as your own',th:'การลอกเลียนผลงาน',use:'ใช้กับ commit, detect, penalty for',ex:['Plagiarism is not allowed at school.','The software detects plagiarism in student essays.','Universities have adopted strict penalties for plagiarism to safeguard academic integrity.']},
+{cat:'education',w:'undergraduate',pos:'n./adj.',en:'a student studying for a first degree at a university',th:'นักศึกษาปริญญาตรี',use:'ตรงข้าม postgraduate',ex:['She is an undergraduate student.','Undergraduate courses usually take four years.','The undergraduate program was redesigned to include more hands-on laboratory work.']},
+{cat:'education',w:'postgraduate',pos:'n./adj.',en:'relating to study undertaken after a first university degree',th:'ระดับบัณฑิตศึกษา (โท/เอก)',use:'ใช้กับ study, degree, research',ex:['He is doing postgraduate study.','Postgraduate degrees often require independent research.','Funding for postgraduate research has declined sharply over the past five years.']},
+{cat:'education',w:'mentor',pos:'n./v.',en:'an experienced person who advises and guides someone less experienced',th:'พี่เลี้ยง/ผู้ให้คำปรึกษา',use:'ใช้เป็นคำนามหรือกริยาก็ได้',ex:['Her mentor gave her career advice.','Senior staff mentor new employees during training.','Effective mentoring programs have been shown to significantly improve student retention rates.']},
+{cat:'education',w:'proficiency',pos:'n.',en:'a high degree of skill or competence in something',th:'ความชำนาญ/ความสามารถในทักษะ',use:'ใช้กับ language, level of',ex:['His English proficiency is high.','The job requires proficiency in two languages.','Employers increasingly demand digital proficiency alongside traditional technical qualifications.']},
+{cat:'education',w:'aptitude',pos:'n.',en:'a natural ability or talent for learning or doing something',th:'ความถนัด/แวว',use:'ใช้กับ test, show, for a subject',ex:['She has an aptitude for math.','The school gives an aptitude test to new students.','Career counselors use aptitude tests to help students identify suitable fields of study.']},
+{cat:'education',w:'rote learning',pos:'phrase',en:'a method of learning by repeating information until it is memorized, without deep understanding',th:'การเรียนแบบท่องจำ',use:'มักใช้ในเชิงวิจารณ์ระบบการศึกษา',ex:['Rote learning means memorizing without understanding.','Many schools still rely heavily on rote learning.','Critics argue rote learning discourages creativity and independent problem-solving in students.']},
+{cat:'education',w:'syllabus',pos:'n.',en:'an outline of the topics to be covered in a course of study',th:'ประมวลรายวิชา',use:'ใช้กับ follow, cover, revise',ex:['The teacher handed out the syllabus.','We need to cover the whole syllabus before exams.','The revised syllabus places greater emphasis on practical application over theory.']},
+{cat:'education',w:'tutorial',pos:'n.',en:'a small class in which a teacher gives focused instruction to one student or a small group',th:'ชั้นเรียนติวเสริม/บทเรียนเฉพาะกลุ่มเล็ก',use:'ใช้กับ attend, hold',ex:['I attended a math tutorial after class.','The professor holds weekly tutorials for struggling students.','Small-group tutorials allow for more personalized feedback than large lecture halls permit.']},
+{cat:'education',w:'scholarly',pos:'adj.',en:'relating to serious academic study and research',th:'เชิงวิชาการ/มีความรู้ลึกซึ้ง',use:'ใช้กับ article, work, research',ex:['She read a scholarly article.','His scholarly work is highly respected.','The journal only publishes scholarly research that has passed rigorous peer review.']},
+{cat:'education',w:'discipline',pos:'n.',en:'a particular branch or field of academic study',th:'สาขาวิชา (ในบริบทวิชาการ)',use:'ใช้กับ academic, cross-, field of',ex:['History is an academic discipline.','The project combines several academic disciplines.','Interdisciplinary research draws on methods from multiple academic disciplines simultaneously.']},
+{cat:'education',w:'faculty',pos:'n.',en:'a group of university departments concerned with a major division of knowledge',th:'คณะวิชา / คณาจารย์',use:'ใช้กับ member, of Science/Arts',ex:['She teaches in the Faculty of Science.','Faculty members meet weekly to discuss courses.','The faculty voted to introduce a new interdisciplinary degree program.']},
+{cat:'education',w:'extracurricular',pos:'adj.',en:'(of an activity) done outside the normal school or college curriculum',th:'นอกหลักสูตร/กิจกรรมเสริม',use:'ใช้กับ activity, involvement in',ex:['She joins many extracurricular activities.','Sports are a popular extracurricular activity.','Admissions officers increasingly value extracurricular involvement alongside academic grades.']},
+
+// ============ TECHNOLOGY (25) ============
+{cat:'technology',w:'innovation',pos:'n.',en:'the introduction of new ideas, methods, or products',th:'นวัตกรรม',use:'ใช้กับ technological, drive, foster',ex:['The company is known for innovation.','Technological innovation has changed how we shop.','Sustained investment in research is essential to drive long-term innovation.']},
+{cat:'technology',w:'automation',pos:'n.',en:'the use of machines or technology to do work that was previously done by people',th:'การใช้ระบบอัตโนมัติ',use:'ใช้กับ workplace, factory, replace jobs',ex:['Automation is used in many factories.','Automation has replaced some manual jobs.','Increasing workplace automation raises concerns about long-term job displacement.']},
+{cat:'technology',w:'artificial intelligence',pos:'phrase',en:'the ability of a computer or machine to perform tasks that normally require human intelligence',th:'ปัญญาประดิษฐ์',use:'มักย่อว่า AI',ex:['Artificial intelligence powers voice assistants.','Companies are investing heavily in artificial intelligence.','Regulators are debating how to govern artificial intelligence without stifling innovation.']},
+{cat:'technology',w:'algorithm',pos:'n.',en:'a set of step-by-step rules or instructions followed by a computer to solve a problem',th:'อัลกอริทึม/ขั้นตอนวิธีการคำนวณ',use:'ใช้กับ design, run, search',ex:['The app uses a simple algorithm.','Engineers designed a new search algorithm.','Social media algorithms are often criticized for promoting sensational content.']},
+{cat:'technology',w:'digitalization',pos:'n.',en:'the process of converting information or processes into digital form',th:'การเปลี่ยนสู่ระบบดิจิทัล',use:'ใช้กับ process of, drive',ex:['Digitalization changed how banks operate.','The pandemic sped up digitalization in many industries.','Digitalization of public services has improved efficiency but excluded citizens without internet access.']},
+{cat:'technology',w:'infrastructure',pos:'n.',en:'the basic physical systems and structures needed for a society or organization to function',th:'โครงสร้างพื้นฐาน',use:'ใช้กับ digital, build, invest in',ex:['The country needs better internet infrastructure.','The government invested in digital infrastructure.','Weak infrastructure in rural areas continues to hinder economic development.']},
+{cat:'technology',w:'connectivity',pos:'n.',en:'the state of being connected, especially to the internet or a network',th:'การเชื่อมต่อ',use:'ใช้กับ internet, improve',ex:['Connectivity is poor in remote villages.','New towers improved mobile connectivity.','Improved connectivity has allowed remote workers to relocate away from major cities.']},
+{cat:'technology',w:'obsolete',pos:'adj.',en:'no longer used or useful because something newer has replaced it',th:'ล้าสมัย',use:'ใช้กับ become, make',ex:['Old phones quickly become obsolete.','New software made the old system obsolete.','Rapid technological change has made many manufacturing skills obsolete within a single generation.']},
+{cat:'technology',w:'malfunction',pos:'n./v.',en:'a failure to work correctly, especially of a machine or system',th:'ทำงานผิดพลาด',use:'ใช้เป็นนามหรือกริยา',ex:['The machine had a malfunction.','The printer malfunctioned during the meeting.','A software malfunction caused the flight-booking system to crash for several hours.']},
+{cat:'technology',w:'breakthrough',pos:'n.',en:'an important discovery or development that leads to significant progress',th:'ความก้าวหน้าครั้งสำคัญ',use:'ใช้กับ scientific, major, achieve',ex:['Scientists made a medical breakthrough.','The lab achieved a major breakthrough in battery technology.','This breakthrough could fundamentally change how doctors diagnose diseases early.']},
+{cat:'technology',w:'surveillance',pos:'n.',en:'close observation or monitoring of a person, place, or activity',th:'การเฝ้าระวัง/สอดส่อง',use:'ใช้กับ camera, state, mass',ex:['Cameras provide surveillance of the street.','The city uses surveillance to reduce crime.','Mass surveillance programs have sparked debate over privacy rights versus national security.']},
+{cat:'technology',w:'cybersecurity',pos:'n.',en:'measures taken to protect computer systems and data from digital attacks',th:'ความมั่นคงปลอดภัยไซเบอร์',use:'ใช้กับ threat, invest in, measure',ex:['The bank improved its cybersecurity.','Companies invest heavily in cybersecurity training.','Weak cybersecurity measures left thousands of customer records exposed to hackers.']},
+{cat:'technology',w:'encryption',pos:'n.',en:'the process of converting information into a code to prevent unauthorized access',th:'การเข้ารหัสข้อมูล',use:'ใช้กับ data, strong, break',ex:['Encryption keeps messages private.','The app uses strong encryption for user data.','End-to-end encryption prevents even the service provider from reading user messages.']},
+{cat:'technology',w:'bandwidth',pos:'n.',en:'the amount of data that can be transmitted over a network in a given time',th:'แบนด์วิดท์/ความจุในการส่งข้อมูล',use:'ใช้กับ limited, increase',ex:['Slow bandwidth makes videos buffer.','The office upgraded its internet bandwidth.','Limited bandwidth in rural regions continues to slow the adoption of online learning.']},
+{cat:'technology',w:'glitch',pos:'n.',en:'a small, usually temporary fault or problem, especially in a machine or system',th:'ข้อผิดพลาดเล็กน้อยของระบบ',use:'ใช้กับ minor, technical, fix',ex:['A glitch froze the screen.','A technical glitch delayed the launch.','Engineers traced the outage to a minor glitch in the update code.']},
+{cat:'technology',w:'prototype',pos:'n.',en:'an early, working model of a product used for testing before full production',th:'ต้นแบบ',use:'ใช้กับ build, test, develop',ex:['They built a prototype of the robot.','Engineers tested the new prototype in the lab.','The team spent months refining the prototype before mass production began.']},
+{cat:'technology',w:'upgrade',pos:'n./v.',en:'an improved or newer version of something, especially technology',th:'การอัปเกรด/ปรับปรุงให้ดีขึ้น',use:'ใช้ได้ทั้งนามและกริยา',ex:['She got a phone upgrade.','The company upgraded its computer systems.','The software upgrade introduced several security patches alongside new features.']},
+{cat:'technology',w:'streamline',pos:'v.',en:'to make a process or system simpler and more efficient',th:'ทำให้กระบวนการง่ายและมีประสิทธิภาพขึ้น',use:'ใช้กับ process, operation, workflow',ex:['The new app streamlines shopping.','Automation streamlined the factory’s production process.','The reforms were designed to streamline bureaucratic procedures and cut waiting times.']},
+{cat:'technology',w:'interface',pos:'n.',en:'the point at which a user interacts with a computer or system',th:'หน้าจอ/ส่วนติดต่อผู้ใช้',use:'ใช้กับ user, design, simple',ex:['The app has a simple interface.','Designers improved the user interface.','A cluttered interface can frustrate users even when the underlying features are excellent.']},
+{cat:'technology',w:'virtual',pos:'adj.',en:'existing or occurring through computer technology rather than physically',th:'เสมือนจริง/ผ่านระบบดิจิทัล',use:'ใช้กับ reality, meeting, classroom',ex:['We had a virtual meeting.','Virtual reality is used in gaming.','Virtual classrooms became essential during periods when in-person schooling was impossible.']},
+{cat:'technology',w:'simulate',pos:'v.',en:'to create a model or imitation of a real situation or process',th:'จำลอง',use:'ใช้กับ condition, environment, scenario',ex:['The game simulates driving.','Scientists simulate weather patterns using computers.','Researchers used software to simulate how the virus spreads in crowded spaces.']},
+{cat:'technology',w:'optimize',pos:'v.',en:'to make something as effective or efficient as possible',th:'ปรับให้เหมาะสมที่สุด',use:'ใช้กับ performance, process, for',ex:['They optimized the website for phones.','Engineers optimized the engine for fuel efficiency.','The team optimized the algorithm to reduce processing time by half.']},
+{cat:'technology',w:'integrate',pos:'v.',en:'to combine two or more things so that they work together as a whole',th:'ผสานรวม',use:'ใช้กับ system, technology, into',ex:['The app integrates with your calendar.','The company integrated new software into its systems.','Integrating renewable energy into the existing power grid presents significant technical challenges.']},
+{cat:'technology',w:'scalable',pos:'adj.',en:'able to be easily expanded or increased in size or capacity',th:'ขยายขนาดได้',use:'ใช้กับ solution, model, business',ex:['The business model is scalable.','They built a scalable system for growth.','Investors favored the startup because its cloud-based solution was highly scalable.']},
+{cat:'technology',w:'redundant',pos:'adj.',en:'no longer needed, especially because a duplicate or backup already exists',th:'ซ้ำซ้อน/ไม่จำเป็น (ในบริบทระบบ)',use:'ใช้กับ system, data, process',ex:['They removed redundant code.','The system has redundant backups for safety.','Redundant servers ensure the website stays online even if one fails.']},
+
+// ============ HEALTH (25) ============
+{cat:'health',w:'obesity',pos:'n.',en:'the condition of being significantly overweight, to the extent that health is negatively affected',th:'ภาวะอ้วน/น้ำหนักเกินมาตรฐาน',use:'ใช้กับ rate of, childhood, tackle',ex:['Obesity is a growing health issue.','Childhood obesity rates have risen sharply.','Public health campaigns aim to tackle obesity through diet and exercise education.']},
+{cat:'health',w:'malnutrition',pos:'n.',en:'a condition caused by not getting enough proper nutrients',th:'ภาวะทุพโภชนาการ',use:'ใช้กับ suffer from, widespread',ex:['Many children suffer from malnutrition.','Malnutrition weakens the immune system.','Widespread malnutrition remains one of the leading causes of child mortality worldwide.']},
+{cat:'health',w:'epidemic',pos:'n.',en:'a widespread occurrence of a disease within a population at a particular time',th:'โรคระบาด',use:'ใช้กับ outbreak of, spread, contain',ex:['The flu epidemic spread fast.','Officials worked to contain the epidemic.','Health authorities declared an epidemic after cases doubled within two weeks.']},
+{cat:'health',w:'immunity',pos:'n.',en:'the body’s ability to resist a particular infection or disease',th:'ภูมิคุ้มกัน',use:'ใช้กับ build, develop, natural',ex:['Vaccines build immunity.','The body develops immunity over time.','Herd immunity is achieved when a sufficient proportion of a population becomes immune.']},
+{cat:'health',w:'chronic',pos:'adj.',en:'(of an illness) persisting for a long time or constantly recurring',th:'เรื้อรัง',use:'ใช้กับ illness, disease, condition',ex:['He has a chronic illness.','Chronic diseases require long-term treatment.','Managing chronic conditions places a significant burden on healthcare systems.']},
+{cat:'health',w:'diagnosis',pos:'n.',en:'the identification of the nature of an illness through examination',th:'การวินิจฉัยโรค',use:'ใช้กับ receive, accurate, early',ex:['The doctor gave a diagnosis.','An early diagnosis improves treatment outcomes.','Misdiagnosis can delay treatment and worsen a patient’s condition significantly.']},
+{cat:'health',w:'prescription',pos:'n.',en:'a doctor’s written instruction for a patient to receive medicine',th:'ใบสั่งยา',use:'ใช้กับ write, fill, require',ex:['The doctor wrote a prescription.','This medicine requires a prescription.','Over-prescription of antibiotics has contributed to rising rates of drug resistance.']},
+{cat:'health',w:'therapy',pos:'n.',en:'treatment intended to relieve or heal a physical or mental condition',th:'การบำบัดรักษา',use:'ใช้กับ physical, undergo',ex:['She attends physical therapy weekly.','He is undergoing therapy after surgery.','Combining medication with therapy often produces better long-term outcomes than either alone.']},
+{cat:'health',w:'rehabilitation',pos:'n.',en:'the process of helping someone recover normal health or function after illness or injury',th:'การฟื้นฟูสมรรถภาพ',use:'ใช้กับ program, centre, undergo',ex:['He joined a rehabilitation program.','The centre offers rehabilitation for injured athletes.','A structured rehabilitation program significantly speeds recovery after major surgery.']},
+{cat:'health',w:'sedentary',pos:'adj.',en:'characterized by sitting or physical inactivity for much of the time',th:'อยู่นิ่ง/ไม่เคลื่อนไหว (วิถีชีวิต)',use:'ใช้กับ lifestyle, job',ex:['A sedentary lifestyle harms health.','Office work is often quite sedentary.','A sedentary lifestyle combined with poor diet significantly raises cardiovascular risk.']},
+{cat:'health',w:'wellbeing',pos:'n.',en:'the state of being comfortable, healthy, or happy',th:'สุขภาวะโดยรวม',use:'ใช้กับ mental, physical, promote',ex:['Sleep is important for wellbeing.','The program promotes student mental wellbeing.','Employers are increasingly investing in initiatives that support employee wellbeing.']},
+{cat:'health',w:'stress-related',pos:'adj.',en:'caused or made worse by mental or emotional strain',th:'เกี่ยวข้องกับความเครียด',use:'ใช้กับ illness, disorder',ex:['He suffers from stress-related headaches.','Stress-related illness is common among workers.','Stress-related disorders have become one of the leading causes of workplace absence.']},
+{cat:'health',w:'hygiene',pos:'n.',en:'practices that help maintain health and prevent disease, especially through cleanliness',th:'สุขอนามัย',use:'ใช้กับ personal, poor, standard',ex:['Good hygiene prevents illness.','Poor hygiene can spread infections.','Improving sanitation and hygiene standards dramatically reduces disease transmission in crowded areas.']},
+{cat:'health',w:'contagious',pos:'adj.',en:'(of a disease) able to spread easily from one person to another through contact',th:'ติดต่อได้ง่าย',use:'ใช้กับ disease, highly',ex:['The flu is contagious.','This is a highly contagious disease.','The virus proved far more contagious than health officials initially predicted.']},
+{cat:'health',w:'vaccination',pos:'n.',en:'the act of giving someone a vaccine to protect them from a disease',th:'การฉีดวัคซีน',use:'ใช้กับ programme, rate, receive',ex:['Vaccination protects against disease.','The country launched a national vaccination programme.','Low vaccination rates in some regions have led to the resurgence of preventable diseases.']},
+{cat:'health',w:'symptom',pos:'n.',en:'a physical or mental sign that indicates the presence of a disease',th:'อาการของโรค',use:'ใช้กับ show, common, early',ex:['A fever is a common symptom.','She showed symptoms of the flu.','Recognizing early symptoms allows patients to seek treatment before the condition worsens.']},
+{cat:'health',w:'deficiency',pos:'n.',en:'a lack or shortage of something needed, especially a nutrient',th:'ภาวะขาด (สารอาหาร/วิตามิน)',use:'ใช้กับ vitamin, iron, cause',ex:['Iron deficiency causes tiredness.','A vitamin D deficiency is common in winter.','Nutrient deficiencies during childhood can have lasting effects on physical and cognitive development.']},
+{cat:'health',w:'metabolism',pos:'n.',en:'the chemical processes in the body that convert food into energy',th:'ระบบเมแทบอลิซึม/การเผาผลาญ',use:'ใช้กับ fast, slow, boost',ex:['Exercise can boost your metabolism.','His metabolism slowed down with age.','A person’s metabolism is influenced by genetics, age, and muscle mass.']},
+{cat:'health',w:'stamina',pos:'n.',en:'the physical or mental strength to sustain effort over a long period',th:'ความอดทน/พละกำลังที่ต่อเนื่อง',use:'ใช้กับ build, lack',ex:['Running builds stamina.','He lacked the stamina to finish the race.','Athletes train for months to build the stamina required for endurance events.']},
+{cat:'health',w:'fatigue',pos:'n.',en:'extreme tiredness resulting from mental or physical exertion',th:'ความอ่อนล้า/เหนื่อยล้า',use:'ใช้กับ suffer from, chronic',ex:['She felt fatigue after the trip.','Chronic fatigue affected his work.','Mental fatigue from constant screen use can reduce concentration and productivity.']},
+{cat:'health',w:'anxiety',pos:'n.',en:'a feeling of worry, nervousness, or unease about something',th:'ความวิตกกังวล',use:'ใช้กับ suffer from, cause, level of',ex:['Exams can cause anxiety.','He suffers from anxiety before exams.','Rising academic pressure has been linked to increased anxiety levels among students.']},
+{cat:'health',w:'depression',pos:'n.',en:'a medical condition marked by persistent sadness and loss of interest in activities',th:'ภาวะซึมเศร้า (ในบริบททางการแพทย์)',use:'ใช้กับ suffer from, treat, symptoms of',ex:['He was treated for depression.','Depression affects millions worldwide.','Untreated depression can significantly affect a person’s ability to function at work or school.']},
+{cat:'health',w:'insomnia',pos:'n.',en:'the habitual inability to fall asleep or stay asleep',th:'ภาวะนอนไม่หลับ',use:'ใช้กับ suffer from, chronic',ex:['Stress can cause insomnia.','He suffers from chronic insomnia.','Persistent insomnia is often linked to underlying stress or anxiety disorders.']},
+{cat:'health',w:'addiction',pos:'n.',en:'a strong, often uncontrollable need to do or use something',th:'การเสพติด',use:'ใช้กับ overcome, struggle with',ex:['He struggled with addiction.','The clinic helps people overcome addiction.','Overcoming addiction typically requires long-term support rather than a single treatment.']},
+{cat:'health',w:'longevity',pos:'n.',en:'long life or long duration',th:'การมีอายุยืนยาว',use:'ใช้กับ increase, average',ex:['Exercise can improve longevity.','Better healthcare has increased average longevity.','Researchers study diet and lifestyle factors that may contribute to human longevity.']},
+
+// ============ ECONOMY & SOCIETY (25) ============
+{cat:'economy',w:'inflation',pos:'n.',en:'a general rise in prices and a fall in the purchasing value of money',th:'ภาวะเงินเฟ้อ',use:'ใช้กับ rate, rise, control',ex:['Inflation makes prices rise.','The government tried to control inflation.','Rising inflation has eroded the purchasing power of many low-income households.']},
+{cat:'economy',w:'recession',pos:'n.',en:'a period of temporary economic decline during which trade and industry are reduced',th:'ภาวะเศรษฐกิจถดถอย',use:'ใช้กับ enter, economic, during',ex:['The country entered a recession.','Many people lost jobs during the recession.','Economists predicted the recession would last at least two years.']},
+{cat:'economy',w:'revenue',pos:'n.',en:'income generated from business activities or taxes',th:'รายได้ (ขององค์กร/รัฐ)',use:'ใช้กับ generate, tax, annual',ex:['The shop’s revenue increased.','Tourism generates significant revenue.','Declining tax revenue has forced the government to cut public spending.']},
+{cat:'economy',w:'subsidy',pos:'n.',en:'money given by a government or organization to reduce the cost of something',th:'เงินอุดหนุน',use:'ใช้กับ government, provide, cut',ex:['Farmers receive a government subsidy.','The subsidy helps lower energy costs.','Removing fuel subsidies caused prices to rise sharply overnight.']},
+{cat:'economy',w:'unemployment',pos:'n.',en:'the state of not having a paying job despite being available to work',th:'การว่างงาน',use:'ใช้กับ rate, benefit, rise',ex:['Unemployment rose last year.','The government offers unemployment benefits.','Youth unemployment remains persistently high despite overall economic growth.']},
+{cat:'economy',w:'workforce',pos:'n.',en:'the total number of people employed or available for work',th:'กำลังแรงงาน',use:'ใช้กับ skilled, enter, shrink',ex:['She joined the workforce at 20.','The country needs a skilled workforce.','An aging workforce presents long-term challenges for industries reliant on physical labor.']},
+{cat:'economy',w:'commodity',pos:'n.',en:'a raw material or primary product that can be bought and sold',th:'สินค้าโภคภัณฑ์',use:'ใช้กับ price of, trade, raw',ex:['Oil is a valuable commodity.','Commodity prices fluctuate often.','Global commodity prices are highly sensitive to political instability in producing regions.']},
+{cat:'economy',w:'consumer',pos:'n.',en:'a person who buys goods or services',th:'ผู้บริโภค',use:'ใช้กับ behaviour, demand, protect',ex:['Consumers want cheaper products.','Consumer demand shapes the market.','Shifting consumer behaviour toward online shopping has transformed the retail industry.']},
+{cat:'economy',w:'investment',pos:'n.',en:'the act of putting money into something in order to earn a financial return',th:'การลงทุน',use:'ใช้กับ foreign, attract, long-term',ex:['The company made a big investment.','The region attracted foreign investment.','Long-term investment in education tends to yield significant economic returns.']},
+{cat:'economy',w:'entrepreneur',pos:'n.',en:'a person who starts and runs a business, taking on financial risk',th:'ผู้ประกอบการ',use:'ใช้กับ young, successful, aspiring',ex:['She is a young entrepreneur.','Many entrepreneurs start with little capital.','Access to funding remains one of the biggest obstacles facing aspiring entrepreneurs.']},
+{cat:'economy',w:'monopoly',pos:'n.',en:'complete control of a market or industry by a single company',th:'การผูกขาด',use:'ใช้กับ hold, break, create',ex:['The company holds a monopoly.','Regulators worked to break the monopoly.','Antitrust laws exist to prevent large firms from creating harmful monopolies.']},
+{cat:'economy',w:'disparity',pos:'n.',en:'a noticeable and often unfair difference between people or things',th:'ความเหลื่อมล้ำ/ความแตกต่าง',use:'ใช้กับ income, wide, growing',ex:['There is a wage disparity.','Income disparity keeps growing.','The widening income disparity between urban and rural areas fuels social tension.']},
+{cat:'economy',w:'inequality',pos:'n.',en:'an unfair difference in status, rights, or opportunities between people',th:'ความไม่เท่าเทียม',use:'ใช้กับ social, income, tackle',ex:['Inequality affects education access.','Governments try to reduce inequality.','Rising inequality has become a central issue in political debate across many countries.']},
+{cat:'economy',w:'poverty',pos:'n.',en:'the state of not having enough money to meet basic needs',th:'ความยากจน',use:'ใช้กับ line, reduce, extreme',ex:['Many families live in poverty.','The program aims to reduce poverty.','Millions remain below the poverty line despite decades of economic growth.']},
+{cat:'economy',w:'welfare',pos:'n.',en:'financial or other assistance provided by the state to people in need',th:'สวัสดิการ',use:'ใช้กับ system, benefit, state',ex:['The welfare system helps the poor.','She receives welfare benefits.','Debate continues over how generous a country’s welfare system should be.']},
+{cat:'economy',w:'taxation',pos:'n.',en:'the system by which a government collects money from people and businesses',th:'ระบบภาษี',use:'ใช้กับ system, level of, progressive',ex:['Taxation funds public services.','The country has high taxation.','Progressive taxation places a greater burden on higher earners than on the poor.']},
+{cat:'economy',w:'bureaucracy',pos:'n.',en:'a system of government or organization with many rules and complex administrative procedures',th:'ระบบราชการ/ขั้นตอนที่ซับซ้อน',use:'ใช้กับ cut, reduce, excessive',ex:['Bureaucracy slows down permits.','The firm struggled with excessive bureaucracy.','Cutting red tape and bureaucracy was central to the government’s economic reform plan.']},
+{cat:'economy',w:'regulation',pos:'n.',en:'an official rule made by an authority to control how something is done',th:'กฎระเบียบ',use:'ใช้กับ strict, enforce, tighten',ex:['New regulation protects consumers.','The industry follows strict regulation.','Tighter financial regulation followed the collapse of several major banks.']},
+{cat:'economy',w:'globalization',pos:'n.',en:'the process by which businesses and cultures become interconnected worldwide',th:'โลกาภิวัตน์',use:'ใช้กับ effect of, drive',ex:['Globalization connects world markets.','Globalization has changed how businesses operate.','Critics argue globalization has widened the gap between rich and poor nations.']},
+{cat:'economy',w:'urbanization',pos:'n.',en:'the process by which more people come to live in cities',th:'การกลายเป็นเมือง/การขยายตัวของเมือง',use:'ใช้กับ rapid, rate of',ex:['Urbanization increased city populations.','Rapid urbanization strains housing supply.','Rapid urbanization has outpaced infrastructure development in many fast-growing cities.']},
+{cat:'economy',w:'demographic',pos:'adj./n.',en:'relating to the structure of a population, such as age or income',th:'ทางประชากรศาสตร์ / กลุ่มประชากร',use:'ใช้กับ shift, trend, target',ex:['The demographic is mostly young.','Demographic shifts affect the job market.','An aging demographic poses significant challenges for pension and healthcare systems.']},
+{cat:'economy',w:'migration',pos:'n.',en:'the movement of people from one place to another in order to live or work',th:'การอพยพย้ายถิ่น',use:'ใช้กับ rural-urban, mass, cause',ex:['Migration to cities increased.','Drought caused mass migration.','Rural-to-urban migration has reshaped the demographic makeup of major cities.']},
+{cat:'economy',w:'income',pos:'n.',en:'money received, especially on a regular basis, from work or investment',th:'รายได้',use:'ใช้กับ household, disposable, gap',ex:['Household income rose slightly.','The income gap keeps widening.','A significant portion of disposable income now goes toward housing costs alone.']},
+{cat:'economy',w:'GDP',pos:'n. (abbr.)',en:'the total value of goods and services produced by a country in a given period',th:'ผลิตภัณฑ์มวลรวมในประเทศ',use:'ย่อจาก gross domestic product',ex:['GDP measures economic output.','The country’s GDP grew last quarter.','Economists debate whether GDP alone accurately reflects a nation’s overall wellbeing.']},
+{cat:'economy',w:'trade deficit',pos:'phrase',en:'a situation in which a country imports more than it exports',th:'การขาดดุลการค้า',use:'ตรงข้ามกับ trade surplus',ex:['The country has a trade deficit.','A trade deficit means more imports than exports.','A persistent trade deficit can put downward pressure on a country’s currency.']},
+
+// ============ ACADEMIC / ARGUMENT (25) ============
+{cat:'academic',w:'significant',pos:'adj.',en:'large or important enough to be noticed or to have an effect',th:'มีนัยสำคัญ/สำคัญมาก',use:'ใช้กับ impact, increase, role',ex:['There was a significant change.','The policy had a significant impact on prices.','Researchers found a statistically significant correlation between the two variables.']},
+{cat:'academic',w:'crucial',pos:'adj.',en:'extremely important, especially for the success of something',th:'สำคัญยิ่งยวด/จำเป็นอย่างมาก',use:'ใช้กับ role, factor, decision',ex:['Sleep is crucial for health.','Funding plays a crucial role in research.','Early intervention is crucial in preventing the condition from worsening.']},
+{cat:'academic',w:'demonstrate',pos:'v.',en:'to show something clearly, especially through evidence or example',th:'แสดงให้เห็น/พิสูจน์',use:'ใช้แทน show ในบริบทวิชาการ',ex:['The study demonstrates a clear trend.','Data demonstrates rising temperatures.','The findings demonstrate a strong relationship between diet and long-term health outcomes.']},
+{cat:'academic',w:'factor',pos:'n.',en:'something that contributes to a particular result or situation',th:'ปัจจัย',use:'ใช้กับ contributing, key, determine',ex:['Diet is one factor in health.','Several factors caused the delay.','Economic and cultural factors together determine consumer purchasing decisions.']},
+{cat:'academic',w:'implement',pos:'v.',en:'to put a plan, decision, or system into effect',th:'นำไปปฏิบัติ/บังคับใช้',use:'ใช้กับ policy, plan, measure',ex:['The school implemented a new rule.','The government implemented stricter laws.','Authorities struggled to implement the reforms due to limited funding and staff.']},
+{cat:'academic',w:'consequently',pos:'adv.',en:'as a result of something; therefore',th:'ดังนั้น/เป็นผลตามมา',use:'ใช้เชื่อมประโยคแสดงเหตุผล-ผลลัพธ์',ex:['It rained; consequently, we stayed home.','Prices rose; consequently, sales fell.','The factory closed, and consequently thousands of workers lost their jobs.']},
+{cat:'academic',w:'controversial',pos:'adj.',en:'causing disagreement or strong differences of opinion',th:'เป็นที่ถกเถียง',use:'ใช้กับ issue, topic, decision',ex:['It’s a controversial topic.','The decision was highly controversial.','Genetic modification remains one of the most controversial issues in modern agriculture.']},
+{cat:'academic',w:'perspective',pos:'n.',en:'a particular way of viewing or thinking about something',th:'มุมมอง',use:'ใช้กับ from a ... perspective, offer a',ex:['I see it from a different perspective.','Each writer offers a unique perspective.','Considering the issue from an economic perspective reveals trade-offs policymakers often overlook.']},
+{cat:'academic',w:'justify',pos:'v.',en:'to give a good reason for an action or decision',th:'ให้เหตุผลสนับสนุน',use:'ใช้กับ action, decision, claim',ex:['He justified his decision.','The cost is hard to justify.','The report failed to justify the enormous budget allocated to the project.']},
+{cat:'academic',w:'advocate',pos:'v./n.',en:'to publicly support or argue in favor of something',th:'สนับสนุน / ผู้สนับสนุน',use:'ใช้เป็นกริยาหรือนามได้',ex:['She advocates for equal pay.','He is an advocate of renewable energy.','Many economists advocate reforming the tax system to reduce inequality.']},
+{cat:'academic',w:'undermine',pos:'v.',en:'to weaken or damage something gradually, especially confidence or authority',th:'บั่นทอน/ทำลายความน่าเชื่อถือ',use:'ใช้กับ confidence, effort, trust',ex:['Cheating undermines trust.','The scandal undermined public confidence.','Persistent delays undermined the government’s credibility on the reform.']},
+{cat:'academic',w:'inevitable',pos:'adj.',en:'certain to happen and impossible to avoid',th:'หลีกเลี่ยงไม่ได้',use:'ใช้กับ change, become, seem',ex:['Change is inevitable.','Some job losses seemed inevitable.','Given current trends, further price increases appear almost inevitable.']},
+{cat:'academic',w:'contradict',pos:'v.',en:'to state the opposite of, or be inconsistent with, something else',th:'ขัดแย้งกัน',use:'ใช้กับ evidence, statement, each other',ex:['His story contradicts the facts.','The two reports contradict each other.','New evidence directly contradicts the initial findings of the study.']},
+{cat:'academic',w:'correlation',pos:'n.',en:'a mutual relationship between two or more things',th:'ความสัมพันธ์เชิงสถิติ',use:'ใช้กับ strong, positive/negative',ex:['There’s a correlation between diet and health.','Researchers found a strong correlation.','A correlation does not necessarily indicate a direct causal relationship.']},
+{cat:'academic',w:'hypothesis',pos:'n.',en:'a proposed explanation, based on limited evidence, that can be tested further',th:'สมมติฐาน',use:'ใช้กับ test, propose, support',ex:['Scientists tested their hypothesis.','The data supported the hypothesis.','Further experiments are needed before the hypothesis can be confirmed with confidence.']},
+{cat:'academic',w:'substantial',pos:'adj.',en:'large in amount, size, or importance',th:'มาก/มากพอสมควร',use:'ใช้กับ amount, increase, evidence',ex:['She made a substantial donation.','There was a substantial increase in sales.','Substantial evidence now supports the link between the two conditions.']},
+{cat:'academic',w:'comprehensive',pos:'adj.',en:'complete and including everything necessary',th:'ครอบคลุม/ครบถ้วน',use:'ใช้กับ study, review, plan',ex:['They did a comprehensive study.','The report offers a comprehensive review.','A comprehensive plan would need to address funding, staffing, and infrastructure simultaneously.']},
+{cat:'academic',w:'ambiguous',pos:'adj.',en:'open to more than one interpretation; not clearly defined',th:'คลุมเครือ/มีความหมายไม่ชัด',use:'ใช้กับ statement, result, wording',ex:['The instructions were ambiguous.','His answer was ambiguous.','The wording of the policy remains ambiguous enough to allow multiple interpretations.']},
+{cat:'academic',w:'plausible',pos:'adj.',en:'seeming reasonable or probable',th:'น่าเชื่อถือ/เป็นไปได้',use:'ใช้กับ explanation, theory',ex:['That’s a plausible explanation.','The theory sounds plausible.','Researchers proposed a plausible mechanism to explain the unexpected results.']},
+{cat:'academic',w:'skeptical',pos:'adj.',en:'having doubts about the truth or value of something',th:'ขี้สงสัย/ไม่เชื่อง่าย',use:'ใช้กับ remain, be, of/about',ex:['She was skeptical of the claim.','Experts remain skeptical about the results.','Many scientists remain skeptical of claims that lack peer-reviewed evidence.']},
+{cat:'academic',w:'coherent',pos:'adj.',en:'logical, clear, and consistent',th:'มีเหตุผลสอดคล้อง/เข้าใจง่าย',use:'ใช้กับ argument, plan, explanation',ex:['He gave a coherent answer.','The essay lacks a coherent argument.','A coherent policy framework requires clear, consistent goals across departments.']},
+{cat:'academic',w:'explicit',pos:'adj.',en:'stated clearly and in detail, leaving no room for doubt',th:'ชัดเจน/ระบุตรงไปตรงมา',use:'ตรงข้ามกับ implicit',ex:['The rules are explicit.','She gave explicit instructions.','The contract makes no explicit mention of who bears responsibility for delays.']},
+{cat:'academic',w:'implicit',pos:'adj.',en:'implied or understood without being directly stated',th:'โดยนัย/ไม่ได้ระบุตรงๆ',use:'ตรงข้ามกับ explicit',ex:['There was an implicit warning.','The agreement carries implicit trust.','The policy carries an implicit assumption that all households have internet access.']},
+{cat:'academic',w:'nuance',pos:'n.',en:'a subtle difference in meaning, tone, or feeling',th:'ความแตกต่างที่ละเอียดอ่อน',use:'ใช้กับ subtle, capture, miss',ex:['The translation missed some nuance.','Good writers capture subtle nuance.','A short summary inevitably loses much of the nuance present in the original argument.']},
+{cat:'academic',w:'paradox',pos:'n.',en:'a statement or situation that seems contradictory but may contain some truth',th:'ความขัดแย้งในตัวเอง/ปฏิทรรศน์',use:'ใช้กับ apparent, resolve',ex:['It seems like a paradox.','Researchers tried to resolve the paradox.','The findings present an apparent paradox: higher spending did not improve outcomes.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Advanced Vocabulary — คำศัพท์เตรียมสอบ IELTS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F3EC;
+    --paper-line:#E4DFD2;
+    --ink:#2B2822;
+    --ink-soft:#6B6558;
+    --card-bg:#FFFDF8;
+    --shadow:rgba(43,40,34,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Noto Sans Thai','Inter',sans-serif;
+    background:
+      repeating-linear-gradient(180deg, transparent, transparent 35px, var(--paper-line) 36px),
+      var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{margin-bottom:22px;}
+  .title-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,5vw,34px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .set-badge{
+    font-size:11.5px;font-weight:700;color:#fff;background:var(--ink);
+    padding:4px 10px;border-radius:20px;letter-spacing:.02em;
+    transform:translateY(-2px);
+  }
+  .title-th{font-family:'Noto Serif Thai',serif;font-size:16px;color:var(--ink-soft);margin:4px 0 0;}
+  .meta-line{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+
+  /* Search */
+  .search-box{margin:18px 0 14px;position:relative;}
+  .search-box input{
+    width:100%;
+    padding:11px 14px 11px 38px;
+    border-radius:10px;
+    border:1.5px solid var(--paper-line);
+    background:var(--card-bg);
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .search-box input:focus{border-color:var(--ink-soft);}
+  .search-box::before{
+    content:"🔍";
+    position:absolute;left:13px;top:50%;transform:translateY(-50%);
+    font-size:14px;opacity:.55;
+  }
+
+  /* Category tabs styled like binder index tabs */
+  .tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    padding-bottom:6px;
+    margin-bottom:20px;
+    scrollbar-width:thin;
+  }
+  .tab{
+    flex:0 0 auto;
+    padding:8px 14px;
+    border-radius:8px 8px 0 0;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    color:#fff;
+    opacity:.55;
+    transition:opacity .15s ease, transform .12s ease;
+    white-space:nowrap;
+  }
+  .tab:hover{opacity:.8;}
+  .tab.active{opacity:1;transform:translateY(-2px);}
+
+  /* Flashcard */
+  .card-stage{
+    perspective:1400px;
+    margin-bottom:16px;
+  }
+  .card{
+    position:relative;
+    width:100%;
+    min-height:340px;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .card.flipped{transform:rotateY(180deg);}
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border-radius:16px;
+    background:var(--card-bg);
+    box-shadow:0 10px 30px var(--shadow), 0 1px 0 rgba(255,255,255,.6) inset;
+    border-left:7px solid var(--accent, #6A4C93);
+    padding:30px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .face-back{transform:rotateY(180deg);overflow-y:auto;}
+
+  .cat-chip{
+    align-self:flex-start;
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--accent, #6A4C93);
+    background:var(--accent-light, #EFE7F5);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:16px;
+    letter-spacing:.02em;
+  }
+  .word-front{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(32px,7vw,44px);
+    line-height:1.1;
+    margin:0 0 8px;
+  }
+  .pos{font-size:14px;color:var(--ink-soft);font-style:italic;margin-bottom:auto;}
+  .flip-hint{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--paper-line);
+  }
+
+  .word-back{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .en-def{
+    font-size:14px;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1.6;
+    padding-left:1px;
+  }
+  .en-def-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .th-meaning{
+    font-family:'Noto Serif Thai',serif;
+    font-size:16px;
+    color:var(--ink);
+    margin:0 0 14px;
+    line-height:1.55;
+  }
+  .th-meaning-label{
+    font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    font-family:'Noto Sans Thai',sans-serif;
+    color:var(--accent,#6A4C93);margin-right:6px;
+  }
+  .usage{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    line-height:1.6;
+  }
+  .usage b{color:var(--ink);}
+  .ex-label{font-size:12px;font-weight:700;color:var(--accent,#6A4C93);letter-spacing:.03em;margin-bottom:8px;}
+  .ex-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ex-list li{
+    font-size:14px;
+    line-height:1.55;
+    padding-left:22px;
+    position:relative;
+  }
+  .ex-list li::before{
+    content:attr(data-n);
+    position:absolute;left:0;top:1px;
+    font-size:11px;font-weight:700;
+    color:#fff;background:var(--accent,#6A4C93);
+    width:16px;height:16px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .ex-list mark{
+    background:var(--accent-light,#EFE7F5);
+    color:var(--accent,#6A4C93);
+    padding:0 3px;
+    border-radius:3px;
+    font-weight:600;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-top:18px;
+  }
+  .nav-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    width:44px;height:44px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:background .15s ease;
+    flex:0 0 auto;
+  }
+  .nav-btn:hover{background:var(--paper);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    flex:1;
+  }
+  .counter b{color:var(--ink);}
+  .shuffle-btn{
+    background:var(--card-bg);
+    border:1.5px solid var(--paper-line);
+    border-radius:10px;
+    padding:0 16px;height:44px;
+    font-size:13px;font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    color:var(--ink);
+    display:flex;align-items:center;gap:6px;
+    flex:0 0 auto;
+  }
+  .shuffle-btn:hover{background:var(--paper);}
+
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:14px;
+  }
+
+  @media (max-width:480px){
+    .face{padding:24px 20px;}
+    .controls{flex-wrap:wrap;}
+    .counter{order:3;width:100%;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title-row">
+      <h1>IELTS Advanced Vocabulary</h1>
+      <span class="set-badge">ชุดที่ 7</span>
+    </div>
+    <p class="title-th">คำศัพท์ขั้นสูง 150 คำ แบ่งตามหัวข้อ พร้อมคำจำกัดความภาษาอังกฤษ ความหมายไทย วิธีใช้ และตัวอย่างประโยค 3 ระดับ</p>
+    <p class="meta-line" id="metaLine"></p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ค้นหาคำศัพท์ หรือ พิมพ์คำแปลไทย...">
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="card-stage">
+    <div class="card" id="card">
+      <div class="face face-front" id="faceFront"></div>
+      <div class="face face-back" id="faceBack"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" title="คำก่อนหน้า">←</button>
+    <div class="counter" id="counter"></div>
+    <button class="nav-btn" id="nextBtn" title="คำถัดไป">→</button>
+  </div>
+  <div class="controls" style="margin-top:10px;justify-content:center;">
+    <button class="shuffle-btn" id="shuffleBtn">🔀 สุ่มลำดับ</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {id:'marine', name:'ชีววิทยาทางทะเล-นิเวศวิทยา', color:'#1D6E7A', light:'#DCEBEC'},
+  {id:'architecture', name:'สถาปัตยกรรม-การออกแบบ', color:'#6E6250', light:'#E9E4DB'},
+  {id:'childhood', name:'พัฒนาการเด็ก-การเลี้ยงดู', color:'#D4845E', light:'#F5E2D6'},
+  {id:'aging', name:'ผู้สูงวัย-การดูแลผู้สูงอายุ', color:'#5C6B73', light:'#E2E6E8'},
+  {id:'fashion', name:'แฟชั่น-อุตสาหกรรมสิ่งทอ', color:'#B23E76', light:'#F2DCE7'},
+  {id:'sportsmed', name:'เวชศาสตร์การกีฬา-การบาดเจ็บ', color:'#C4562E', light:'#F5E0D6'},
+];
+
+const vocab = [
+
+// ============ MARINE BIOLOGY & ECOLOGY (25) ============
+{cat:'marine',w:'marine',pos:'adj.',en:'relating to the sea or ocean',th:'ทางทะเล',use:'ใช้กับ life, ecosystem, biology',ex:['Marine life is diverse.','She studies marine biology.','Marine ecosystems face growing pressure from pollution and overfishing.']},
+{cat:'marine',w:'coral reef',pos:'phrase',en:'an underwater structure formed by colonies of coral, home to diverse marine life',th:'แนวปะการัง',use:'ใช้กับ protect, bleach',ex:['The coral reef attracts divers.','Pollution damaged the coral reef.','Coral reefs support an estimated quarter of all marine species.']},
+{cat:'marine',w:'species',pos:'n.',en:'a group of organisms capable of interbreeding, sharing common characteristics',th:'สปีชีส์/ชนิดพันธุ์',use:'ใช้กับ endangered, discover',ex:['Scientists discovered a new species.','The species is now endangered.','Several marine species have adapted to survive in extremely deep water.']},
+{cat:'marine',w:'predator',pos:'n.',en:'an animal that hunts and kills other animals for food',th:'ผู้ล่า',use:'ใช้กับ top, natural',ex:['The shark is a top predator.','Predators keep populations balanced.','Removing a key predator can seriously disrupt an entire ecosystem.']},
+{cat:'marine',w:'prey',pos:'n.',en:'an animal hunted or killed by another for food',th:'เหยื่อ',use:'ใช้กับ hunt, become',ex:['The lion hunts its prey.','Small fish often become prey.','Camouflage helps prey avoid being detected by nearby predators.']},
+{cat:'marine',w:'food chain',pos:'phrase',en:'a sequence of organisms, each dependent on the next as a source of food',th:'ห่วงโซ่อาหาร',use:'ใช้กับ disrupt, top of',ex:['Sharks sit atop the food chain.','Pollution disrupts the food chain.','Removing one species can cause the entire food chain to collapse.']},
+{cat:'marine',w:'food web',pos:'phrase',en:'a complex network of interconnected food chains within an ecosystem',th:'ใยอาหาร',use:'ใช้กับ complex, study',ex:['Scientists study the ocean’s food web.','The food web is highly complex.','A healthy food web depends on maintaining balance across many species.']},
+{cat:'marine',w:'plankton',pos:'n.',en:'tiny organisms that drift in water, forming the base of most aquatic food chains',th:'แพลงก์ตอน',use:'ใช้กับ feed on, bloom',ex:['Whales feed on plankton.','Plankton blooms color the water.','Plankton forms the essential foundation of nearly every marine food chain.']},
+{cat:'marine',w:'coastal',pos:'adj.',en:'relating to or located near the coast',th:'ชายฝั่ง',use:'ใช้กับ area, erosion',ex:['Coastal areas face erosion.','She lives in a coastal town.','Rising sea levels increasingly threaten coastal communities around the world.']},
+{cat:'marine',w:'aquatic',pos:'adj.',en:'living or growing in water',th:'ในน้ำ/เกี่ยวกับน้ำ',use:'ใช้กับ life, plant',ex:['Aquatic life thrives in the lake.','Aquatic plants purify water.','The aquarium houses a wide variety of aquatic species.']},
+{cat:'marine',w:'marine life',pos:'phrase',en:'organisms that live in the sea, including fish, plants, and other creatures',th:'สิ่งมีชีวิตในทะเล',use:'ใช้กับ diverse, protect',ex:['The reef supports diverse marine life.','Plastic pollution harms marine life.','Protecting marine life requires international cooperation across many countries.']},
+{cat:'marine',w:'overfishing',pos:'n.',en:'the practice of catching fish faster than populations can replenish themselves',th:'การจับปลาเกินขนาด',use:'ใช้กับ cause, prevent',ex:['Overfishing depleted local stocks.','Regulations aim to prevent overfishing.','Overfishing has pushed several commercial fish populations toward collapse.']},
+{cat:'marine',w:'bycatch',pos:'n.',en:'unwanted marine animals accidentally caught while fishing for a different species',th:'สัตว์น้ำที่ติดมาโดยไม่ตั้งใจจากการจับปลา',use:'ใช้กับ reduce, discard',ex:['Bycatch is often discarded.','New nets reduce bycatch.','Reducing bycatch has become a major goal of sustainable fishing practices.']},
+{cat:'marine',w:'coral bleaching',pos:'phrase',en:'the whitening of coral caused by stress, often from rising ocean temperatures',th:'ปะการังฟอกขาว',use:'ใช้กับ cause, widespread',ex:['Warming oceans cause coral bleaching.','Widespread coral bleaching alarmed scientists.','Repeated coral bleaching events have devastated reef systems worldwide.']},
+{cat:'marine',w:'invasive species',pos:'phrase',en:'a non-native organism that spreads rapidly and harms its new environment',th:'สิ่งมีชีวิตต่างถิ่นรุกราน',use:'ใช้กับ introduce, threaten',ex:['The invasive species harmed local fish.','Ships accidentally introduced invasive species.','Invasive species can threaten native wildlife that has no natural defenses against them.']},
+{cat:'marine',w:'symbiosis',pos:'n.',en:'a close, long-term relationship between two different species, often mutually beneficial',th:'ภาวะพึ่งพาอาศัยกัน',use:'ใช้กับ mutual, example of',ex:['Clownfish live in symbiosis with anemones.','It’s a classic example of symbiosis.','Symbiosis allows both species involved to benefit from the close relationship.']},
+{cat:'marine',w:'migratory',pos:'adj.',en:'regularly moving from one region to another, especially seasonally',th:'ที่อพยพย้ายถิ่นตามฤดูกาล',use:'ใช้กับ species, pattern',ex:['Whales are migratory animals.','Scientists track migratory patterns.','Migratory species often travel thousands of kilometers between breeding grounds.']},
+{cat:'marine',w:'spawning',pos:'n.',en:'the process by which fish or other aquatic animals release eggs to reproduce',th:'การวางไข่ (ปลา/สัตว์น้ำ)',use:'ใช้กับ season, site',ex:['Salmon return to spawn upstream.','The spawning season begins in spring.','Protecting spawning sites is essential for maintaining healthy fish populations.']},
+{cat:'marine',w:'marine sanctuary',pos:'phrase',en:'a protected area of ocean where marine life is safeguarded from harmful human activity',th:'เขตอนุรักษ์ทางทะเล',use:'ใช้กับ establish, protect',ex:['They established a marine sanctuary.','The sanctuary protects endangered species.','Marine sanctuaries allow damaged ecosystems the chance to slowly recover.']},
+{cat:'marine',w:'ocean acidification',pos:'phrase',en:'the ongoing decrease in ocean pH caused by absorption of excess carbon dioxide',th:'ภาวะกรดในมหาสมุทร',use:'ใช้กับ cause, threaten',ex:['Ocean acidification harms shellfish.','Scientists study ocean acidification.','Ocean acidification threatens organisms that rely on calcium carbonate to build their shells.']},
+{cat:'marine',w:'deep sea',pos:'phrase',en:'the lowest layer of the ocean, characterized by darkness and extreme pressure',th:'ทะเลลึก',use:'ใช้กับ explore, creature',ex:['Deep sea creatures fascinate scientists.','They explored the deep sea.','Much of the deep sea remains completely unexplored by scientists.']},
+{cat:'marine',w:'tidal',pos:'adj.',en:'relating to the regular rise and fall of the sea’s surface caused by the moon’s gravity',th:'เกี่ยวกับกระแสน้ำขึ้นลง',use:'ใช้กับ pool, energy',ex:['Children explore tidal pools.','The plant generates tidal energy.','Tidal pools provide a unique habitat for many small coastal creatures.']},
+{cat:'marine',w:'estuary',pos:'n.',en:'the area where a river meets the sea, mixing fresh and salt water',th:'ปากแม่น้ำ (บริเวณน้ำจืดผสมน้ำเค็ม)',use:'ใช้กับ protect, rich in',ex:['The estuary supports many species.','They worked to protect the estuary.','Estuaries are rich, biologically productive habitats for countless young fish.']},
+{cat:'marine',w:'keystone species',pos:'phrase',en:'a species that has a disproportionately large effect on its ecosystem relative to its abundance',th:'สิ่งมีชีวิตแกนหลักของระบบนิเวศ',use:'ใช้กับ identify, protect',ex:['Sea otters are a keystone species.','Protecting keystone species helps whole ecosystems.','Removing a single keystone species can trigger the collapse of an entire ecosystem.']},
+{cat:'marine',w:'bioluminescence',pos:'n.',en:'the production of light by living organisms, especially seen in deep-sea creatures',th:'การเรืองแสงทางชีวภาพ',use:'ใช้กับ produce, observe',ex:['Some fish produce bioluminescence.','Divers observed rare bioluminescence.','Many deep-sea creatures rely on bioluminescence to attract prey or mates in the dark.']},
+
+// ============ ARCHITECTURE & DESIGN (25) ============
+{cat:'architecture',w:'blueprint',pos:'n.',en:'a detailed technical drawing or plan for a building or structure',th:'พิมพ์เขียว (แบบก่อสร้าง)',use:'ใช้กับ draw up, follow',ex:['The architect drew up a blueprint.','Builders followed the blueprint exactly.','Every construction project begins with a carefully detailed blueprint.']},
+{cat:'architecture',w:'facade',pos:'n.',en:'the front exterior of a building, especially its main face',th:'ด้านหน้าอาคาร',use:'ใช้กับ restore, ornate',ex:['They restored the building’s facade.','The facade features ornate carvings.','The historic facade was carefully preserved during the recent renovation.']},
+{cat:'architecture',w:'load-bearing',pos:'adj.',en:'(of a wall or structure) designed to support the weight of a building',th:'รับน้ำหนัก (โครงสร้าง)',use:'ใช้กับ wall, remove',ex:['That is a load-bearing wall.','They cannot remove a load-bearing wall.','Removing a load-bearing wall without proper support can cause the structure to collapse.']},
+{cat:'architecture',w:'architect',pos:'n.',en:'a person who designs buildings and oversees their construction',th:'สถาปนิก',use:'ใช้กับ hire, renowned',ex:['They hired an architect.','The renowned architect designed the museum.','The architect balanced aesthetic beauty with practical structural requirements.']},
+{cat:'architecture',w:'green building',pos:'phrase',en:'a building designed to reduce environmental impact through efficient use of resources',th:'อาคารสีเขียว (เป็นมิตรกับสิ่งแวดล้อม)',use:'ใช้กับ design, certify',ex:['They designed a green building.','The office achieved green building certification.','Green buildings often use solar panels and efficient insulation to reduce energy use.']},
+{cat:'architecture',w:'floor plan',pos:'phrase',en:'a scale diagram showing the layout of rooms in a building from above',th:'ผังพื้น',use:'ใช้กับ design, review',ex:['They reviewed the floor plan.','The floor plan includes three bedrooms.','A well-designed floor plan maximizes natural light and usable space.']},
+{cat:'architecture',w:'ornamentation',pos:'n.',en:'decorative details added to a building or object',th:'ลวดลายประดับตกแต่ง',use:'ใช้กับ elaborate, remove',ex:['The building has elaborate ornamentation.','Modern design removes unnecessary ornamentation.','Victorian architecture is known for its highly detailed ornamentation.']},
+{cat:'architecture',w:'geometric',pos:'adj.',en:'based on simple shapes and regular patterns, such as lines and angles',th:'เชิงเรขาคณิต',use:'ใช้กับ pattern, design',ex:['The building has geometric patterns.','She prefers geometric design.','The facade features bold geometric shapes arranged in a repeating pattern.']},
+{cat:'architecture',w:'symmetry',pos:'n.',en:'a balanced arrangement in which both sides mirror each other',th:'ความสมมาตร',use:'ใช้กับ create, perfect',ex:['The design has perfect symmetry.','Architects value symmetry.','Classical buildings often rely heavily on symmetry to appear balanced and grand.']},
+{cat:'architecture',w:'asymmetrical',pos:'adj.',en:'lacking symmetry; unequal on either side',th:'ไม่สมมาตร',use:'ตรงข้ามกับ symmetrical',ex:['The house has an asymmetrical design.','Modern buildings often look asymmetrical.','The asymmetrical facade gives the building a striking, unconventional appearance.']},
+{cat:'architecture',w:'cantilever',pos:'n.',en:'a long structural element extending horizontally, supported only at one end',th:'โครงสร้างยื่น',use:'ใช้กับ design, extend',ex:['The balcony uses a cantilever design.','The roof cantilevers over the entrance.','Engineers used a dramatic cantilever to extend the building far beyond its base.']},
+{cat:'architecture',w:'foundation',pos:'n.',en:'the lower part of a structure that transfers its weight to the ground',th:'ฐานราก',use:'ใช้กับ lay, strong',ex:['Workers laid the foundation.','A strong foundation is essential.','Engineers inspected the foundation before construction could safely continue.']},
+{cat:'architecture',w:'scaffolding',pos:'n.',en:'a temporary structure used to support workers and materials during construction',th:'นั่งร้าน (โครงสร้างชั่วคราว)',use:'ใช้กับ erect, remove',ex:['Workers erected scaffolding.','The scaffolding was removed after completion.','Scaffolding surrounded the entire building throughout the lengthy restoration.']},
+{cat:'architecture',w:'restoration',pos:'n.',en:'the process of returning a building or object to its original condition',th:'การบูรณะ',use:'ใช้กับ historical, undergo',ex:['The palace underwent restoration.','Historical restoration takes years.','The careful restoration preserved every original architectural detail.']},
+{cat:'architecture',w:'landmark',pos:'n.',en:'a recognizable structure or feature that identifies a location',th:'สถานที่สำคัญที่เป็นเอกลักษณ์',use:'ใช้กับ historic, become a',ex:['The tower is a city landmark.','It became a historic landmark.','The building has stood as a beloved local landmark for over a century.']},
+{cat:'architecture',w:'urban design',pos:'phrase',en:'the design and shaping of the physical features of towns and cities',th:'การออกแบบผังเมือง',use:'ใช้กับ shape, principles of',ex:['Urban design shapes city life.','They studied urban design principles.','Good urban design encourages walking and reduces reliance on private cars.']},
+{cat:'architecture',w:'modernist',pos:'adj.',en:'relating to a design style emphasizing simplicity, function, and minimal decoration',th:'แนวโมเดิร์นนิสต์',use:'ใช้กับ style, building',ex:['The house has a modernist style.','Modernist buildings favor clean lines.','The modernist skyscraper contrasted sharply with the surrounding historic architecture.']},
+{cat:'architecture',w:'vernacular architecture',pos:'phrase',en:'building style based on local traditions, materials, and needs rather than formal design',th:'สถาปัตยกรรมพื้นถิ่น',use:'ใช้กับ study, traditional',ex:['They studied vernacular architecture.','Vernacular architecture reflects local climate.','Vernacular architecture often adapts naturally to local weather and available materials.']},
+{cat:'architecture',w:'spatial',pos:'adj.',en:'relating to the arrangement and use of physical space',th:'เชิงพื้นที่',use:'ใช้กับ awareness, planning',ex:['The design shows careful spatial planning.','Architects need strong spatial awareness.','Good spatial planning makes even a small apartment feel open and comfortable.']},
+{cat:'architecture',w:'proportion',pos:'n.',en:'the relationship in size or amount between different parts of a design',th:'สัดส่วน',use:'ใช้กับ balance, sense of',ex:['The building has balanced proportion.','Good design relies on proportion.','A strong sense of proportion is essential when designing a visually harmonious building.']},
+{cat:'architecture',w:'construction',pos:'n.',en:'the process of building something, especially a structure',th:'การก่อสร้าง',use:'ใช้กับ begin, complete',ex:['Construction began last month.','They completed construction on time.','Construction of the new bridge took significantly longer than originally planned.']},
+{cat:'architecture',w:'prefabricated',pos:'adj.',en:'(of building parts) manufactured in advance and assembled on-site',th:'สำเร็จรูป (ผลิตล่วงหน้าจากโรงงาน)',use:'ใช้กับ house, component',ex:['They built a prefabricated house.','Prefabricated components saved time.','Prefabricated housing has become increasingly popular for its speed and lower cost.']},
+{cat:'architecture',w:'eco-friendly',pos:'adj.',en:'designed to cause minimal harm to the environment',th:'เป็นมิตรกับสิ่งแวดล้อม',use:'ใช้กับ material, design',ex:['They used eco-friendly materials.','The design is entirely eco-friendly.','Eco-friendly building materials are becoming standard in new residential construction.']},
+{cat:'architecture',w:'structural integrity',pos:'phrase',en:'the ability of a structure to withstand its intended load without failing',th:'ความมั่นคงแข็งแรงของโครงสร้าง',use:'ใช้กับ ensure, compromise',ex:['Engineers checked structural integrity.','The fire compromised structural integrity.','Regular inspections help ensure the building’s long-term structural integrity.']},
+{cat:'architecture',w:'dome',pos:'n.',en:'a rounded roof or ceiling shaped like the upper half of a sphere',th:'โดม',use:'ใช้กับ glass, build',ex:['The building has a glass dome.','They built an enormous dome.','The cathedral’s magnificent dome remains one of the city’s most recognizable landmarks.']},
+
+// ============ CHILDHOOD DEVELOPMENT & PARENTING (25) ============
+{cat:'childhood',w:'developmental milestone',pos:'phrase',en:'a key stage in a child’s physical, mental, or social development',th:'พัฒนาการที่สำคัญตามช่วงวัย',use:'ใช้กับ reach, track',ex:['The baby reached a developmental milestone.','Parents track developmental milestones.','Missing several developmental milestones can be an early sign a child needs extra support.']},
+{cat:'childhood',w:'toddler',pos:'n.',en:'a young child who has recently learned to walk, typically aged one to three',th:'เด็กวัยหัดเดิน',use:'ใช้กับ active, supervise',ex:['The toddler learned to walk.','Toddlers require constant supervision.','Toddlers are naturally curious and eager to explore their surroundings.']},
+{cat:'childhood',w:'infancy',pos:'n.',en:'the earliest period of a child’s life, typically from birth to about two years old',th:'วัยทารก',use:'ใช้กับ during, early',ex:['Bonding happens during infancy.','She was adopted in infancy.','Experiences during infancy can significantly shape a child’s later emotional development.']},
+{cat:'childhood',w:'cognitive development',pos:'phrase',en:'the growth of a child’s ability to think, reason, and understand',th:'พัฒนาการด้านสติปัญญา',use:'ใช้กับ support, stage of',ex:['Reading supports cognitive development.','Every child passes through stages of cognitive development.','Play is now recognized as essential to healthy cognitive development in young children.']},
+{cat:'childhood',w:'attachment',pos:'n.',en:'the close emotional bond formed between a child and a caregiver',th:'ความผูกพันระหว่างพ่อแม่ลูก',use:'ใช้กับ secure, form',ex:['Babies form attachment with caregivers.','Secure attachment builds confidence.','A secure attachment in early childhood strongly predicts healthier relationships later in life.']},
+{cat:'childhood',w:'positive discipline',pos:'phrase',en:'a parenting approach that guides behavior through encouragement rather than punishment',th:'การอบรมสั่งสอนเชิงบวก',use:'ใช้กับ practice, teach',ex:['She practices positive discipline.','Positive discipline avoids punishment.','Positive discipline focuses on teaching children rather than simply punishing mistakes.']},
+{cat:'childhood',w:'screen time',pos:'phrase',en:'the amount of time spent using devices such as phones, tablets, or televisions',th:'เวลาที่ใช้กับหน้าจอ',use:'ใช้กับ limit, excessive',ex:['Parents limit screen time.','Excessive screen time worries experts.','Pediatricians recommend limiting screen time for very young children.']},
+{cat:'childhood',w:'play-based learning',pos:'phrase',en:'an educational approach in which children learn primarily through play',th:'การเรียนรู้ผ่านการเล่น',use:'ใช้กับ promote, use',ex:['The preschool uses play-based learning.','Play-based learning builds early skills.','Play-based learning helps young children develop social and problem-solving skills naturally.']},
+{cat:'childhood',w:'early intervention',pos:'phrase',en:'support provided to a young child as soon as a developmental concern is identified',th:'การให้ความช่วยเหลือแต่เนิ่นๆ',use:'ใช้กับ receive, benefit from',ex:['The child received early intervention.','Early intervention improves outcomes.','Early intervention services can significantly help children with developmental delays.']},
+{cat:'childhood',w:'peer interaction',pos:'phrase',en:'social engagement between children of similar age',th:'การปฏิสัมพันธ์กับเพื่อนวัยเดียวกัน',use:'ใช้กับ encourage, lack of',ex:['The nursery encourages peer interaction.','Limited peer interaction can affect social skills.','Regular peer interaction helps children learn important skills like sharing and cooperation.']},
+{cat:'childhood',w:'tantrum',pos:'n.',en:'a sudden outburst of anger or frustration, common in young children',th:'อาการงอแง/โมโหร้าย (ในเด็ก)',use:'ใช้กับ throw a, handle',ex:['The toddler threw a tantrum.','Parents learn to handle tantrums calmly.','Tantrums are a normal part of early childhood emotional development.']},
+{cat:'childhood',w:'separation anxiety',pos:'phrase',en:'distress experienced by a young child when separated from a parent or caregiver',th:'ความวิตกกังวลเมื่อต้องแยกจากพ่อแม่',use:'ใช้กับ experience, common',ex:['The child showed separation anxiety.','Separation anxiety is common at daycare drop-off.','Mild separation anxiety typically fades as children grow more independent.']},
+{cat:'childhood',w:'role model',pos:'phrase',en:'a person whose behavior is imitated or looked up to by others, especially children',th:'แบบอย่างที่ดี',use:'ใช้กับ act as, positive',ex:['Parents act as role models.','She was a positive role model.','Children naturally imitate the behavior of the role models around them.']},
+{cat:'childhood',w:'permissive parenting',pos:'phrase',en:'a parenting style with few rules and high tolerance for a child’s behavior',th:'การเลี้ยงดูแบบตามใจ',use:'ตรงข้ามกับ authoritative parenting',ex:['He grew up with permissive parenting.','Permissive parenting sets few limits.','Studies suggest permissive parenting can sometimes lead to poorer self-discipline.']},
+{cat:'childhood',w:'authoritative parenting',pos:'phrase',en:'a parenting style that combines clear rules with warmth and open communication',th:'การเลี้ยงดูแบบมีเหตุผลและขอบเขตชัดเจน',use:'ตรงข้ามกับ permissive parenting',ex:['Experts often recommend authoritative parenting.','Authoritative parenting balances rules with warmth.','Authoritative parenting is generally linked to more confident, well-adjusted children.']},
+{cat:'childhood',w:'helicopter parenting',pos:'phrase',en:'a parenting style involving excessive supervision and control over a child’s life',th:'การเลี้ยงดูแบบปกป้องเกินไป (จับตาดูตลอดเวลา)',use:'ใช้กับ criticize, tendency toward',ex:['Critics warn against helicopter parenting.','Helicopter parenting can limit independence.','Helicopter parenting may prevent children from learning to solve their own problems.']},
+{cat:'childhood',w:'nature versus nurture',pos:'phrase',en:'the ongoing debate over whether genetics or environment shapes human development more',th:'ธรรมชาติกับการเลี้ยงดู (ถกเถียงว่าอะไรมีอิทธิพลมากกว่า)',use:'ใช้กับ debate, classic',ex:['Scientists debate nature versus nurture.','It’s a classic nature versus nurture question.','Most researchers now agree that both nature and nurture interact to shape development.']},
+{cat:'childhood',w:'developmental delay',pos:'phrase',en:'a condition in which a child does not reach expected milestones at the typical age',th:'พัฒนาการล่าช้า',use:'ใช้กับ diagnose, identify',ex:['The doctor diagnosed a developmental delay.','Early screening can identify developmental delay.','Addressing a developmental delay early often leads to better long-term outcomes.']},
+{cat:'childhood',w:'language acquisition',pos:'phrase',en:'the process by which children learn to understand and produce language',th:'การเรียนรู้ภาษาของเด็ก',use:'ใช้กับ study, natural',ex:['Researchers study language acquisition.','Language acquisition happens rapidly in early childhood.','Exposure to multiple languages can enrich a child’s overall language acquisition.']},
+{cat:'childhood',w:'imaginative play',pos:'phrase',en:'play in which children use their imagination to create scenarios, roles, or stories',th:'การเล่นจินตนาการ',use:'ใช้กับ encourage, engage in',ex:['Children engage in imaginative play.','Toys encourage imaginative play.','Imaginative play helps children develop creativity and problem-solving skills.']},
+{cat:'childhood',w:'school readiness',pos:'phrase',en:'the skills and abilities a child needs to succeed when starting formal schooling',th:'ความพร้อมสำหรับการเข้าโรงเรียน',use:'ใช้กับ assess, prepare for',ex:['Preschool builds school readiness.','Teachers assess school readiness.','School readiness includes both academic skills and social-emotional maturity.']},
+{cat:'childhood',w:'emotional regulation',pos:'phrase',en:'the ability to manage and respond to emotional experiences appropriately',th:'การควบคุมอารมณ์',use:'ใช้กับ teach, develop',ex:['Parents teach emotional regulation.','Children slowly develop emotional regulation.','Teaching emotional regulation early helps children manage frustration more effectively.']},
+{cat:'childhood',w:'responsive parenting',pos:'phrase',en:'a parenting approach that promptly and sensitively responds to a child’s needs and signals',th:'การเลี้ยงดูที่ตอบสนองต่อความต้องการของเด็ก',use:'ใช้กับ practice, encourage',ex:['She practices responsive parenting.','Responsive parenting builds trust.','Responsive parenting helps infants develop a strong sense of security.']},
+{cat:'childhood',w:'adolescence',pos:'n.',en:'the period of development between childhood and adulthood',th:'วัยรุ่น',use:'ใช้กับ during, transition through',ex:['He is going through adolescence.','Adolescence brings many changes.','Adolescence is often marked by significant emotional and social change.']},
+{cat:'childhood',w:'rite of passage',pos:'phrase',en:'a ceremony or event marking an important transition in a person’s life',th:'พิธีกรรมผ่านช่วงวัย',use:'ใช้กับ traditional, mark a',ex:['Graduation is a rite of passage.','Many cultures have coming-of-age rites of passage.','The ceremony served as an important rite of passage into adulthood.']},
+
+// ============ AGING & ELDERLY CARE (25) ============
+{cat:'aging',w:'aging population',pos:'phrase',en:'a population with an increasing proportion of older people',th:'ประชากรสูงอายุ',use:'ใช้กับ face, address',ex:['The country faces an aging population.','Governments must address the aging population.','An aging population puts growing pressure on healthcare and pension systems.']},
+{cat:'aging',w:'elderly',pos:'adj./n.',en:'relating to or referring to older people, typically those in later life',th:'ผู้สูงอายุ',use:'ใช้กับ care for, population',ex:['They care for elderly relatives.','The elderly need special support.','Caring for the elderly often falls disproportionately on family members.']},
+{cat:'aging',w:'senior citizen',pos:'phrase',en:'an elderly person, often eligible for certain benefits or discounts',th:'พลเมืองอาวุโส',use:'ใช้กับ discount, benefit',ex:['Senior citizens get a discount.','The center offers senior citizen programs.','Many public services offer reduced fares for senior citizens.']},
+{cat:'aging',w:'dependency ratio',pos:'phrase',en:'the ratio of dependents, such as children and the elderly, to the working-age population',th:'อัตราส่วนการพึ่งพิง',use:'ใช้กับ rise, calculate',ex:['The dependency ratio is rising.','Economists calculate the dependency ratio.','A rising dependency ratio places greater financial strain on the working population.']},
+{cat:'aging',w:'retirement home',pos:'phrase',en:'a residential facility where elderly people live and receive care',th:'บ้านพักคนชรา',use:'ใช้กับ move into, live in',ex:['She moved into a retirement home.','He lives in a retirement home.','Choosing a retirement home is often a difficult decision for the whole family.']},
+{cat:'aging',w:'assisted living',pos:'phrase',en:'housing for elderly people that provides some support with daily activities',th:'ที่พักพร้อมความช่วยเหลือ (สำหรับผู้สูงอายุ)',use:'ใช้กับ facility, choose',ex:['They chose an assisted living facility.','Assisted living offers meals and support.','Assisted living allows seniors to remain independent while receiving necessary help.']},
+{cat:'aging',w:'dementia',pos:'n.',en:'a decline in mental ability severe enough to interfere with daily life, common in old age',th:'ภาวะสมองเสื่อม',use:'ใช้กับ diagnose, symptom of',ex:['Her grandmother has dementia.','Doctors diagnosed early dementia.','Dementia gradually affects memory, thinking, and the ability to perform daily tasks.']},
+{cat:'aging',w:'cognitive decline',pos:'phrase',en:'a gradual reduction in mental abilities such as memory and reasoning',th:'ความเสื่อมถอยด้านสติปัญญา',use:'ใช้กับ experience, slow',ex:['He experiences mild cognitive decline.','Exercise may slow cognitive decline.','Cognitive decline can range from mild forgetfulness to severe memory loss.']},
+{cat:'aging',w:'mobility',pos:'n.',en:'the ability to move freely and easily',th:'ความสามารถในการเคลื่อนไหว',use:'ใช้กับ limited, maintain',ex:['Her mobility has declined.','Physical therapy maintains mobility.','Limited mobility can make everyday tasks significantly more difficult for elderly people.']},
+{cat:'aging',w:'independence',pos:'n.',en:'the ability to live and act without needing help from others',th:'ความสามารถในการพึ่งพาตนเอง',use:'ใช้กับ maintain, lose',ex:['She values her independence.','Illness caused him to lose independence.','Maintaining independence for as long as possible is a key goal in elderly care.']},
+{cat:'aging',w:'frailty',pos:'n.',en:'a state of physical weakness, especially common in older age',th:'ความอ่อนแอ/บอบบางทางร่างกาย',use:'ใช้กับ increasing, sign of',ex:['Frailty increases fall risk.','Doctors assessed her frailty.','Increasing frailty often makes older adults more vulnerable to illness and injury.']},
+{cat:'aging',w:'palliative care',pos:'phrase',en:'specialized medical care focused on relieving pain and suffering rather than curing illness',th:'การดูแลแบบประคับประคอง',use:'ใช้กับ receive, provide',ex:['He received palliative care.','The hospital provides palliative care.','Palliative care focuses on comfort and quality of life rather than aggressive treatment.']},
+{cat:'aging',w:'long-term care',pos:'phrase',en:'ongoing care provided to people who need assistance with daily living over an extended period',th:'การดูแลระยะยาว',use:'ใช้กับ require, plan for',ex:['She requires long-term care.','Families should plan for long-term care.','Long-term care costs can place significant financial strain on families.']},
+{cat:'aging',w:'social isolation',pos:'phrase',en:'a lack of meaningful contact with other people',th:'ภาวะโดดเดี่ยวทางสังคม',use:'ใช้กับ experience, reduce',ex:['Many elderly people experience social isolation.','Community programs reduce social isolation.','Social isolation among the elderly has been linked to serious health problems.']},
+{cat:'aging',w:'ageism',pos:'n.',en:'discrimination or prejudice against people based on their age',th:'การเลือกปฏิบัติทางอายุ',use:'ใช้กับ face, combat',ex:['Older workers sometimes face ageism.','The campaign aims to combat ageism.','Ageism in the workplace can unfairly limit opportunities for older employees.']},
+{cat:'aging',w:'elder abuse',pos:'phrase',en:'mistreatment or harm inflicted on an elderly person',th:'การทำร้าย/ทารุณกรรมผู้สูงอายุ',use:'ใช้กับ report, prevent',ex:['The center reports suspected elder abuse.','Laws aim to prevent elder abuse.','Elder abuse often goes unreported because victims fear losing their independence.']},
+{cat:'aging',w:'life expectancy',pos:'phrase',en:'the average number of years a person is expected to live',th:'อายุขัยเฉลี่ย',use:'ใช้กับ increase, average',ex:['Life expectancy has increased.','The average life expectancy varies by country.','Improved healthcare has significantly raised average life expectancy worldwide.']},
+{cat:'aging',w:'geriatric',pos:'adj.',en:'relating to the medical care of elderly people',th:'เกี่ยวกับเวชศาสตร์ผู้สูงอายุ',use:'ใช้กับ care, specialist',ex:['She sees a geriatric specialist.','Geriatric care addresses age-related conditions.','Geriatric medicine focuses specifically on the unique health needs of older adults.']},
+{cat:'aging',w:'caregiver burden',pos:'phrase',en:'the physical, emotional, and financial strain experienced by someone caring for another person',th:'ภาระของผู้ดูแล',use:'ใช้กับ experience, reduce',ex:['Family members experience caregiver burden.','Support groups help reduce caregiver burden.','Caregiver burden can lead to significant stress and burnout over time.']},
+{cat:'aging',w:'aging in place',pos:'phrase',en:'the ability of an older person to continue living safely in their own home',th:'การใช้ชีวิตในบ้านเดิมขณะสูงอายุ',use:'ใช้กับ prefer, support',ex:['Many seniors prefer aging in place.','The program supports aging in place.','Home modifications can make aging in place safer for elderly residents.']},
+{cat:'aging',w:'hospice',pos:'n.',en:'a facility or service providing care for people who are terminally ill',th:'สถานดูแลผู้ป่วยระยะสุดท้าย',use:'ใช้กับ enter, care',ex:['He entered hospice care.','The hospice offers comfort and support.','Hospice care focuses on dignity and comfort during a person’s final stage of life.']},
+{cat:'aging',w:'degenerative disease',pos:'phrase',en:'an illness that causes progressive deterioration of the body’s structure or function',th:'โรคเสื่อมถอย (ที่แย่ลงตามเวลา)',use:'ใช้กับ diagnose, manage',ex:['He was diagnosed with a degenerative disease.','Doctors help manage the degenerative disease.','Degenerative diseases often worsen gradually over many years.']},
+{cat:'aging',w:'companionship',pos:'n.',en:'the feeling of friendship and comfort from spending time with others',th:'มิตรภาพ/การมีเพื่อนอยู่ด้วย',use:'ใช้กับ provide, need',ex:['The dog provides companionship.','Elderly people often need companionship.','Regular companionship can significantly improve emotional wellbeing in old age.']},
+{cat:'aging',w:'active aging',pos:'phrase',en:'the process of remaining physically, socially, and mentally engaged in later life',th:'การสูงวัยอย่างกระฉับกระเฉง',use:'ใช้กับ promote, encourage',ex:['The program promotes active aging.','Active aging improves quality of life.','Active aging encourages older adults to stay physically and socially engaged.']},
+{cat:'aging',w:'multigenerational household',pos:'phrase',en:'a household in which more than two generations of a family live together',th:'ครัวเรือนหลายช่วงวัยอยู่ร่วมกัน',use:'ใช้กับ live in, common in',ex:['They live in a multigenerational household.','Multigenerational households are common in some cultures.','Multigenerational households can provide built-in support for both children and elderly relatives.']},
+
+// ============ FASHION & TEXTILE INDUSTRY (25) ============
+{cat:'fashion',w:'textile',pos:'n.',en:'a type of cloth or woven fabric',th:'สิ่งทอ',use:'ใช้กับ industry, produce',ex:['The factory produces textiles.','The textile industry employs millions.','Textile production has a significant environmental footprint worldwide.']},
+{cat:'fashion',w:'fabric',pos:'n.',en:'cloth made by weaving or knitting fibers together',th:'ผ้า',use:'ใช้กับ choose, durable',ex:['She chose a soft fabric.','The fabric is durable and light.','Designers carefully select fabric based on both comfort and appearance.']},
+{cat:'fashion',w:'garment',pos:'n.',en:'an item of clothing',th:'ชิ้นเสื้อผ้า',use:'ใช้กับ produce, design',ex:['The factory produces garments quickly.','She designs custom garments.','Each garment passes through several stages before reaching the final customer.']},
+{cat:'fashion',w:'fast fashion',pos:'phrase',en:'cheap, trendy clothing produced quickly to match current fashion trends',th:'แฟชั่นด่วน (ผลิตเร็ว ราคาถูก)',use:'ใช้กับ criticize, contribute to',ex:['Critics criticize fast fashion.','Fast fashion contributes to waste.','Fast fashion has been widely criticized for its impact on both workers and the environment.']},
+{cat:'fashion',w:'ethical fashion',pos:'phrase',en:'clothing produced in a way that considers worker welfare and environmental impact',th:'แฟชั่นที่มีจริยธรรม',use:'ใช้กับ promote, choose',ex:['She supports ethical fashion.','The brand promotes ethical fashion.','Ethical fashion brands often pay closer attention to fair wages and sustainable materials.']},
+{cat:'fashion',w:'haute couture',pos:'phrase',en:'high-end, custom-made fashion designed and sewn by hand for individual clients',th:'แฟชั่นชั้นสูง (ตัดเย็บพิเศษ)',use:'ใช้กับ show, design',ex:['The designer showcased haute couture.','Haute couture is made by hand.','Haute couture pieces are often handmade and can take hundreds of hours to complete.']},
+{cat:'fashion',w:'silhouette',pos:'n.',en:'the overall outline or shape of a garment or figure',th:'เส้นทรงเสื้อผ้า/รูปทรง',use:'ใช้กับ create, flattering',ex:['The dress has a flattering silhouette.','Designers experiment with silhouette.','The new collection features a dramatically different silhouette from last season.']},
+{cat:'fashion',w:'trend',pos:'n.',en:'a general direction in which something is developing or changing, especially in fashion',th:'เทรนด์/กระแสนิยม',use:'ใช้กับ follow, set',ex:['She follows the latest trend.','The designer set a new trend.','Fashion trends often circle back and become popular again years later.']},
+{cat:'fashion',w:'runway',pos:'n.',en:'a long platform used for fashion shows, on which models display clothing',th:'รันเวย์ (เวทีเดินแบบ)',use:'ใช้กับ walk the, show',ex:['Models walked the runway.','The runway show attracted crowds.','Designers reveal their latest collections on the runway each season.']},
+{cat:'fashion',w:'designer label',pos:'phrase',en:'a brand name associated with a well-known fashion designer',th:'ตราสินค้าดีไซเนอร์',use:'ใช้กับ wear, expensive',ex:['She wore a designer label.','Designer labels are often expensive.','Counterfeit products often imitate popular designer labels without permission.']},
+{cat:'fashion',w:'textile waste',pos:'phrase',en:'discarded clothing and fabric that ends up unused or thrown away',th:'ขยะสิ่งทอ',use:'ใช้กับ reduce, generate',ex:['Fast fashion generates textile waste.','They aim to reduce textile waste.','Recycling programs help address the growing problem of textile waste.']},
+{cat:'fashion',w:'synthetic fiber',pos:'phrase',en:'fiber made from chemical processes rather than natural sources',th:'เส้นใยสังเคราะห์',use:'ใช้กับ produce, use',ex:['Polyester is a synthetic fiber.','Manufacturers use synthetic fiber widely.','Synthetic fiber is generally cheaper to produce than natural alternatives.']},
+{cat:'fashion',w:'natural fiber',pos:'phrase',en:'fiber derived from plants or animals, such as cotton or wool',th:'เส้นใยธรรมชาติ',use:'ใช้กับ prefer, source',ex:['Cotton is a natural fiber.','She prefers clothing made from natural fiber.','Natural fiber tends to be more breathable than most synthetic alternatives.']},
+{cat:'fashion',w:'dye',pos:'n./v.',en:'a substance used to add color to fabric; to color fabric using such a substance',th:'สีย้อม/ย้อมสี',use:'ใช้กับ natural, fabric',ex:['They use natural dye.','Workers dye the fabric by hand.','Traditional dye techniques often use plant-based materials rather than chemicals.']},
+{cat:'fashion',w:'tailor',pos:'n./v.',en:'a person who makes or alters clothing; to adjust clothing to fit properly',th:'ช่างตัดเสื้อ/ตัดเย็บให้พอดี',use:'ใช้กับ visit, custom',ex:['She visited a local tailor.','The suit was tailored perfectly.','A skilled tailor can transform a plain garment into something truly elegant.']},
+{cat:'fashion',w:'embroidery',pos:'n.',en:'decorative stitching on fabric using thread',th:'งานปัก',use:'ใช้กับ intricate, add',ex:['The dress features intricate embroidery.','She added embroidery by hand.','Traditional embroidery techniques are often passed down through generations.']},
+{cat:'fashion',w:'accessory',pos:'n.',en:'an item worn or carried to complement an outfit, such as jewelry or a bag',th:'เครื่องประดับ/ของตกแต่ง',use:'ใช้กับ match, wear',ex:['She matched her accessories carefully.','He wore a simple accessory.','The right accessory can completely transform a simple outfit.']},
+{cat:'fashion',w:'seasonal collection',pos:'phrase',en:'a set of fashion designs released for a particular time of year',th:'คอลเลกชันตามฤดูกาล',use:'ใช้กับ launch, release',ex:['The brand launched a seasonal collection.','They release a new seasonal collection twice a year.','The seasonal collection reflected current color and style trends.']},
+{cat:'fashion',w:'garment worker',pos:'phrase',en:'a person employed to manufacture clothing, often in a factory',th:'แรงงานในอุตสาหกรรมเสื้อผ้า',use:'ใช้กับ protect, employ',ex:['Millions work as garment workers.','Laws aim to protect garment workers.','Garment workers often face long hours and difficult working conditions.']},
+{cat:'fashion',w:'sweatshop',pos:'n.',en:'a factory where workers are employed for long hours in poor conditions and low pay',th:'โรงงานที่เอาเปรียบแรงงาน',use:'ใช้กับ operate, expose',ex:['Journalists exposed the sweatshop.','The company denied using sweatshops.','Reports of sweatshop conditions have pressured many brands to change their practices.']},
+{cat:'fashion',w:'brand identity',pos:'phrase',en:'the distinct image and values a company presents to customers',th:'อัตลักษณ์ของแบรนด์',use:'ใช้กับ build, strong',ex:['The label built a strong brand identity.','Consistent branding creates a clear brand identity.','A strong brand identity helps a fashion label stand out in a crowded market.']},
+{cat:'fashion',w:'knockoff',pos:'n.',en:'a cheap imitation of a popular or expensive product',th:'ของเลียนแบบ (ราคาถูก)',use:'ใช้กับ sell, buy',ex:['The market sold cheap knockoffs.','She bought a knockoff handbag.','Knockoffs often copy the design of luxury items without matching their quality.']},
+{cat:'fashion',w:'vintage',pos:'adj.',en:'denoting clothing or items from an earlier era, valued for their style or quality',th:'แนวเก่า/ย้อนยุค',use:'ใช้กับ shop, style',ex:['She loves vintage clothing.','He shops at vintage stores.','Vintage fashion has become increasingly popular among younger shoppers.']},
+{cat:'fashion',w:'upcycling',pos:'n.',en:'the process of creatively reusing old materials to make something of higher value',th:'การแปรรูปของเก่าให้มีมูลค่าเพิ่ม',use:'ใช้กับ practice, creative',ex:['She practices creative upcycling.','Upcycling reduces textile waste.','Upcycling old clothing has become a popular way to reduce fashion waste.']},
+{cat:'fashion',w:'apparel industry',pos:'phrase',en:'the sector of business involved in designing, manufacturing, and selling clothing',th:'อุตสาหกรรมเครื่องนุ่งห่ม',use:'ใช้กับ global, regulate',ex:['The apparel industry employs millions.','They work to regulate the apparel industry.','The global apparel industry faces increasing pressure to adopt more sustainable practices.']},
+
+// ============ SPORTS MEDICINE & INJURY (25) ============
+{cat:'sportsmed',w:'strain',pos:'n.',en:'an injury to a muscle caused by overstretching or overuse',th:'การบาดเจ็บของกล้ามเนื้อ (ยืดเกิน)',use:'ใช้กับ suffer, muscle',ex:['He suffered a muscle strain.','The strain healed within weeks.','Overtraining without adequate rest often leads to a muscle strain.']},
+{cat:'sportsmed',w:'sprain',pos:'n.',en:'an injury caused by stretching or tearing ligaments around a joint',th:'การบาดเจ็บของเอ็นข้อต่อ (พลิก/แพลง)',use:'ใช้กับ ankle, suffer',ex:['She suffered an ankle sprain.','The sprain caused swelling.','A severe sprain can take weeks or even months to fully heal.']},
+{cat:'sportsmed',w:'fracture',pos:'n.',en:'a break or crack in a bone',th:'กระดูกแตกหัก',use:'ใช้กับ suffer, hairline',ex:['He suffered a leg fracture.','The X-ray revealed a hairline fracture.','A stress fracture often develops gradually rather than from a single sudden injury.']},
+{cat:'sportsmed',w:'concussion',pos:'n.',en:'a brain injury caused by a blow to the head, often resulting in temporary confusion',th:'การกระทบกระเทือนสมอง',use:'ใช้กับ suffer, symptoms of',ex:['He suffered a concussion.','Symptoms of concussion include dizziness.','Athletes who suffer a concussion should be evaluated before returning to play.']},
+{cat:'sportsmed',w:'physical therapy',pos:'phrase',en:'treatment involving exercises and techniques to restore movement and function after injury',th:'กายภาพบำบัด',use:'ใช้กับ undergo, attend',ex:['She underwent physical therapy.','He attends physical therapy weekly.','Physical therapy is often essential for a full recovery after a serious injury.']},
+{cat:'sportsmed',w:'overuse injury',pos:'phrase',en:'an injury caused by repeated stress on a part of the body over time',th:'การบาดเจ็บจากการใช้งานซ้ำๆ เกินไป',use:'ใช้กับ develop, prevent',ex:['Runners often develop overuse injuries.','Rest can prevent overuse injuries.','Overuse injuries typically develop gradually rather than from a single incident.']},
+{cat:'sportsmed',w:'tendonitis',pos:'n.',en:'inflammation of a tendon, often caused by repetitive movement',th:'เอ็นอักเสบ',use:'ใช้กับ develop, chronic',ex:['He developed tendonitis in his elbow.','Chronic tendonitis limited his training.','Tendonitis is common among athletes who repeat the same motion frequently.']},
+{cat:'sportsmed',w:'ligament',pos:'n.',en:'a band of tough tissue connecting bones at a joint',th:'เอ็นยึดข้อต่อ',use:'ใช้กับ tear, injure',ex:['She tore a knee ligament.','Ligament injuries require careful treatment.','A torn ligament often requires surgery followed by lengthy rehabilitation.']},
+{cat:'sportsmed',w:'cartilage',pos:'n.',en:'flexible connective tissue found in joints, cushioning bones',th:'กระดูกอ่อน',use:'ใช้กับ damage, wear down',ex:['The injury damaged his cartilage.','Cartilage cushions the joints.','Years of high-impact sport gradually wore down the cartilage in her knees.']},
+{cat:'sportsmed',w:'dislocation',pos:'n.',en:'the displacement of a bone from its normal position at a joint',th:'ข้อเคลื่อนหลุด',use:'ใช้กับ shoulder, suffer',ex:['He suffered a shoulder dislocation.','The dislocation required immediate treatment.','A dislocated joint should never be forced back into place without medical guidance.']},
+{cat:'sportsmed',w:'warm-up',pos:'n.',en:'a period of light exercise done before intense physical activity',th:'การอบอุ่นร่างกาย',use:'ใช้กับ do a, proper',ex:['Athletes do a warm-up before racing.','A proper warm-up prevents injury.','Skipping the warm-up significantly increases the risk of pulling a muscle.']},
+{cat:'sportsmed',w:'cool-down',pos:'n.',en:'a period of light exercise done after intense physical activity to help the body recover',th:'การผ่อนคลายร่างกายหลังออกกำลังกาย',use:'ใช้กับ do a, skip',ex:['She does a cool-down after running.','Skipping the cool-down can increase soreness.','A proper cool-down helps the body gradually return to its resting state.']},
+{cat:'sportsmed',w:'cross-training',pos:'n.',en:'training in different types of exercise to improve overall fitness and reduce injury risk',th:'การฝึกซ้อมหลากหลายรูปแบบ',use:'ใช้กับ incorporate, benefit from',ex:['Runners benefit from cross-training.','She incorporates cross-training into her routine.','Cross-training helps athletes strengthen different muscle groups and avoid overuse injuries.']},
+{cat:'sportsmed',w:'sports psychology',pos:'phrase',en:'the study of how psychological factors affect athletic performance and recovery',th:'จิตวิทยาการกีฬา',use:'ใช้กับ study, apply',ex:['She studies sports psychology.','Coaches apply sports psychology techniques.','Sports psychology helps athletes manage pressure and recover mentally after injury.']},
+{cat:'sportsmed',w:'performance-enhancing drug',pos:'phrase',en:'a substance used illegally to improve athletic performance',th:'สารกระตุ้นเพื่อเพิ่มสมรรถภาพ',use:'ใช้กับ ban, test for',ex:['The athlete tested positive for performance-enhancing drugs.','Sports organizations ban performance-enhancing drugs.','Using performance-enhancing drugs can result in serious long-term health consequences.']},
+{cat:'sportsmed',w:'injury prevention',pos:'phrase',en:'strategies and practices used to reduce the risk of physical injury',th:'การป้องกันการบาดเจ็บ',use:'ใช้กับ focus on, strategy',ex:['Coaches focus on injury prevention.','Stretching supports injury prevention.','Effective injury prevention programs can significantly reduce time lost to training.']},
+{cat:'sportsmed',w:'recovery time',pos:'phrase',en:'the period needed for the body to heal after injury or intense exertion',th:'ระยะเวลาในการฟื้นตัว',use:'ใช้กับ shorten, require',ex:['The injury required a long recovery time.','Rest shortens recovery time.','Recovery time varies significantly depending on the severity of the injury.']},
+{cat:'sportsmed',w:'immobilize',pos:'v.',en:'to prevent a body part from moving, often to allow an injury to heal',th:'ทำให้เคลื่อนไหวไม่ได้ (เพื่อรักษา)',use:'ใช้กับ joint, cast',ex:['A cast immobilizes the arm.','Doctors immobilized the injured knee.','Immobilizing the joint prevents further damage while the injury heals.']},
+{cat:'sportsmed',w:'physiotherapist',pos:'n.',en:'a healthcare professional who treats injuries using physical methods such as exercise',th:'นักกายภาพบำบัด',use:'ใช้กับ see a, recommend',ex:['She sees a physiotherapist weekly.','The doctor recommended a physiotherapist.','A skilled physiotherapist can significantly speed up an athlete’s recovery.']},
+{cat:'sportsmed',w:'range of motion',pos:'phrase',en:'the full extent to which a joint can move in various directions',th:'ช่วงการเคลื่อนไหวของข้อต่อ',use:'ใช้กับ improve, limited',ex:['The injury limited his range of motion.','Stretching improves range of motion.','Physical therapy gradually restored her knee’s full range of motion.']},
+{cat:'sportsmed',w:'chronic pain',pos:'phrase',en:'pain that persists over a long period, often lasting months or longer',th:'อาการปวดเรื้อรัง',use:'ใช้กับ suffer from, manage',ex:['He suffers from chronic pain.','Doctors help manage chronic pain.','Chronic pain can significantly affect an athlete’s ability to train consistently.']},
+{cat:'sportsmed',w:'inflammation',pos:'n.',en:'the body’s response to injury, marked by redness, swelling, and heat',th:'การอักเสบ',use:'ใช้กับ reduce, cause',ex:['Ice reduces inflammation.','The injury caused visible inflammation.','Persistent inflammation can slow down the overall healing process.']},
+{cat:'sportsmed',w:'RICE method',pos:'phrase',en:'a first-aid technique for minor injuries involving Rest, Ice, Compression, and Elevation',th:'วิธี RICE (พัก ประคบเย็น กดพัน ยกสูง)',use:'ใช้กับ apply, recommend',ex:['He applied the RICE method immediately.','Trainers recommend the RICE method.','The RICE method is often the first step in treating a minor sports injury.']},
+{cat:'sportsmed',w:'return to play',pos:'phrase',en:'the process and decision of allowing an injured athlete to resume competitive activity',th:'การกลับมาลงแข่งขันหลังบาดเจ็บ',use:'ใช้กับ clear for, protocol',ex:['Doctors cleared him for return to play.','The team follows a strict return to play protocol.','Rushing return to play too soon can significantly increase the risk of re-injury.']},
+{cat:'sportsmed',w:'hydration',pos:'n.',en:'the process of maintaining an adequate level of fluid in the body',th:'การได้รับน้ำอย่างเพียงพอ',use:'ใช้กับ maintain, importance of',ex:['Athletes must maintain hydration.','Coaches stress the importance of hydration.','Proper hydration significantly affects both athletic performance and recovery.']},
+];
+
+let currentIndex = 0;
+let currentList = vocab.map((v,i)=>i);
+let activeCat = 'all';
+let flipped = false;
+
+const tabsEl = document.getElementById('tabs');
+const cardEl = document.getElementById('card');
+const faceFront = document.getElementById('faceFront');
+const faceBack = document.getElementById('faceBack');
+const counterEl = document.getElementById('counter');
+const metaLine = document.getElementById('metaLine');
+const searchInput = document.getElementById('searchInput');
+
+function catInfo(id){ return categories.find(c=>c.id===id); }
+
+function buildTabs(){
+  const all = document.createElement('button');
+  all.className = 'tab' + (activeCat==='all' ? ' active':'');
+  all.textContent = `ทั้งหมด (${vocab.length})`;
+  all.style.background = '#8A8577';
+  all.onclick = ()=>{ activeCat='all'; applyFilter(); };
+  tabsEl.appendChild(all);
+  categories.forEach(c=>{
+    const count = vocab.filter(v=>v.cat===c.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (activeCat===c.id ? ' active':'');
+    btn.textContent = `${c.name} (${count})`;
+    btn.style.background = c.color;
+    btn.onclick = ()=>{ activeCat=c.id; applyFilter(); };
+    tabsEl.appendChild(btn);
+  });
+}
+
+function applyFilter(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentList = vocab
+    .map((v,i)=>i)
+    .filter(i=>{
+      const v = vocab[i];
+      const matchCat = activeCat==='all' || v.cat===activeCat;
+      const matchSearch = !q || v.w.toLowerCase().includes(q) || v.th.includes(q);
+      return matchCat && matchSearch;
+    });
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  Array.from(tabsEl.children).forEach((el,idx)=>{
+    el.classList.remove('active');
+  });
+  Array.from(tabsEl.children).forEach((el)=>{
+    const isAll = el.textContent.startsWith('ทั้งหมด');
+    if(activeCat==='all' && isAll) el.classList.add('active');
+  });
+  categories.forEach((c,idx)=>{
+    const el = tabsEl.children[idx+1];
+    if(activeCat===c.id) el.classList.add('active');
+  });
+  render();
+}
+
+function render(){
+  if(currentList.length===0){
+    faceFront.innerHTML = '<div class="empty-state">ไม่พบคำศัพท์ที่ค้นหา</div>';
+    faceBack.innerHTML = '';
+    counterEl.innerHTML = '';
+    metaLine.textContent = '';
+    document.getElementById('prevBtn').disabled = true;
+    document.getElementById('nextBtn').disabled = true;
+    return;
+  }
+  const v = vocab[currentList[currentIndex]];
+  const c = catInfo(v.cat);
+  document.documentElement.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent', c.color);
+  cardEl.style.setProperty('--accent-light', c.light);
+
+  faceFront.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-front">${v.w}</div>
+    <div class="pos">${v.pos}</div>
+    <div class="flip-hint">แตะการ์ดเพื่อดูความหมาย และตัวอย่างประโยค</div>
+  `;
+  faceBack.innerHTML = `
+    <div class="cat-chip">${c.name}</div>
+    <div class="word-back">${v.w} <span style="font-size:13px;color:var(--ink-soft);font-weight:400;font-style:italic;">${v.pos}</span></div>
+    <div class="en-def"><span class="en-def-label">EN</span>${v.en}</div>
+    <div class="th-meaning"><span class="th-meaning-label">TH</span>${v.th}</div>
+    <div class="usage"><b>วิธีใช้:</b> ${v.use}</div>
+    <div class="ex-label">ตัวอย่างประโยค (ง่าย → ซับซ้อน)</div>
+    <ul class="ex-list">
+      ${v.ex.map((s,i)=>`<li data-n="${i+1}">${s}</li>`).join('')}
+    </ul>
+  `;
+  counterEl.innerHTML = `การ์ดที่ <b>${currentIndex+1}</b> จาก <b>${currentList.length}</b>`;
+  metaLine.textContent = `รวมทั้งหมด ${vocab.length} คำ · 6 หมวดหมู่`;
+  document.getElementById('prevBtn').disabled = currentIndex===0;
+  document.getElementById('nextBtn').disabled = currentIndex===currentList.length-1;
+}
+
+cardEl.addEventListener('click', ()=>{
+  if(currentList.length===0) return;
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+});
+
+document.getElementById('prevBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex>0){ currentIndex--; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('nextBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  if(currentIndex<currentList.length-1){ currentIndex++; flipped=false; cardEl.classList.remove('flipped'); render(); }
+});
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  for(let i=currentList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [currentList[i],currentList[j]] = [currentList[j],currentList[i]];
+  }
+  currentIndex = 0;
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  render();
+});
+searchInput.addEventListener('input', applyFilter);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='ArrowRight') document.getElementById('nextBtn').click();
+  if(e.key==='ArrowLeft') document.getElementById('prevBtn').click();
+  if(e.key===' '){ e.preventDefault(); cardEl.click(); }
+});
+
+buildTabs();
+applyFilter();
+</script>
+</body>
+</html>
